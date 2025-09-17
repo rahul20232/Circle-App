@@ -1,40 +1,49 @@
-from decouple import Config as DecoupleConfig, RepositoryEnv
-from dotenv import load_dotenv
 import os
 from enum import Enum
+from dotenv import load_dotenv
 
+# Load environment variables
 env = os.getenv("ENVIRONMENT", "development")
 env_file = f".env.{env}"
 
-# Load into environment
+# Load .env file if it exists
 if os.path.exists(env_file):
     load_dotenv(env_file)
-    config = DecoupleConfig(RepositoryEnv(env_file))
-else:
-    # Fall back to environment variables directly
-    config = DecoupleConfig()
 
 class Environment(str, Enum):
     DEVELOPMENT = "development"
     STAGING = "staging" 
     PRODUCTION = "production"
 
+def get_env_var(key: str, default=None, cast_type=str):
+    """Get environment variable with optional casting"""
+    value = os.getenv(key, default)
+    if value is None:
+        return None
+    
+    if cast_type == bool:
+        return value.lower() in ('true', '1', 'yes', 'on')
+    elif cast_type == int:
+        return int(value)
+    else:
+        return value
+
 class Settings:
     def __init__(self):
-        self.ENVIRONMENT = Environment(config("ENVIRONMENT", default="development"))
+        self.ENVIRONMENT = Environment(get_env_var("ENVIRONMENT", "development"))
         
         # App Info
-        self.APP_NAME = config("APP_NAME", default="TimeLeft Clone")
-        self.APP_VERSION = config("APP_VERSION", default="1.0.0")
-        self.DEBUG = config("DEBUG", default=self.ENVIRONMENT == Environment.DEVELOPMENT, cast=bool)
+        self.APP_NAME = get_env_var("APP_NAME", "TimeLeft Clone")
+        self.APP_VERSION = get_env_var("APP_VERSION", "1.0.0")
+        self.DEBUG = get_env_var("DEBUG", self.ENVIRONMENT == Environment.DEVELOPMENT, bool)
         
         # Security
-        self.SECRET_KEY = config("SECRET_KEY")
-        self.ALGORITHM = config("ALGORITHM", default="HS256")
-        self.ACCESS_TOKEN_EXPIRE_MINUTES = config("ACCESS_TOKEN_EXPIRE_MINUTES", default=43200, cast=int)
+        self.SECRET_KEY = get_env_var("SECRET_KEY")
+        self.ALGORITHM = get_env_var("ALGORITHM", "HS256")
+        self.ACCESS_TOKEN_EXPIRE_MINUTES = get_env_var("ACCESS_TOKEN_EXPIRE_MINUTES", 43200, int)
         
         # Database
-        self.DATABASE_URL = config("DATABASE_URL")
+        self.DATABASE_URL = get_env_var("DATABASE_URL")
         
         # CORS - Environment specific
         if self.ENVIRONMENT == Environment.PRODUCTION:
@@ -55,32 +64,32 @@ class Settings:
             ]
         
         # Email settings
-        self.SMTP_SERVER = config("SMTP_SERVER", default="smtp.gmail.com")
-        self.SMTP_PORT = config("SMTP_PORT", default=587, cast=int)
-        self.SENDER_EMAIL = config("SENDER_EMAIL", default="")
-        self.SENDER_PASSWORD = config("SENDER_PASSWORD", default="")
-        self.FRONTEND_URL = config("FRONTEND_URL", default="http://localhost:8000")
+        self.SMTP_SERVER = get_env_var("SMTP_SERVER", "smtp.gmail.com")
+        self.SMTP_PORT = get_env_var("SMTP_PORT", 587, int)
+        self.SENDER_EMAIL = get_env_var("SENDER_EMAIL", "")
+        self.SENDER_PASSWORD = get_env_var("SENDER_PASSWORD", "")
+        self.FRONTEND_URL = get_env_var("FRONTEND_URL", "http://localhost:8000")
         
         # AWS S3 settings
-        self.AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID", default="")
-        self.AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY", default="")
-        self.AWS_REGION = config("AWS_REGION", default="us-east-1")
-        self.S3_BUCKET_NAME = config("S3_BUCKET_NAME", default="")
+        self.AWS_ACCESS_KEY_ID = get_env_var("AWS_ACCESS_KEY_ID", "")
+        self.AWS_SECRET_ACCESS_KEY = get_env_var("AWS_SECRET_ACCESS_KEY", "")
+        self.AWS_REGION = get_env_var("AWS_REGION", "us-east-1")
+        self.S3_BUCKET_NAME = get_env_var("S3_BUCKET_NAME", "")
         
         # Firebase
-        self.FIREBASE_PROJECT_ID = config("FIREBASE_PROJECT_ID", default="")
-        self.FIREBASE_PRIVATE_KEY_ID = config("FIREBASE_PRIVATE_KEY_ID", default="")
-        self.FIREBASE_PRIVATE_KEY = config("FIREBASE_PRIVATE_KEY", default="")
-        self.FIREBASE_CLIENT_EMAIL = config("FIREBASE_CLIENT_EMAIL", default="")
-        self.FIREBASE_CLIENT_ID = config("FIREBASE_CLIENT_ID", default="")
+        self.FIREBASE_PROJECT_ID = get_env_var("FIREBASE_PROJECT_ID", "")
+        self.FIREBASE_PRIVATE_KEY_ID = get_env_var("FIREBASE_PRIVATE_KEY_ID", "")
+        self.FIREBASE_PRIVATE_KEY = get_env_var("FIREBASE_PRIVATE_KEY", "")
+        self.FIREBASE_CLIENT_EMAIL = get_env_var("FIREBASE_CLIENT_EMAIL", "")
+        self.FIREBASE_CLIENT_ID = get_env_var("FIREBASE_CLIENT_ID", "")
         
         # Google Services
-        self.GOOGLE_GEOCODING_API_KEY = config("GOOGLE_GEOCODING_API_KEY", default="")
+        self.GOOGLE_GEOCODING_API_KEY = get_env_var("GOOGLE_GEOCODING_API_KEY", "")
         
         # Environment-specific settings
         if self.ENVIRONMENT == Environment.PRODUCTION:
             # Shorter token expiry in production for security
-            self.ACCESS_TOKEN_EXPIRE_MINUTES = config("ACCESS_TOKEN_EXPIRE_MINUTES", default=720, cast=int)  # 12 hours
+            self.ACCESS_TOKEN_EXPIRE_MINUTES = get_env_var("ACCESS_TOKEN_EXPIRE_MINUTES", 720, int)  # 12 hours
 
 # Helper functions
 def is_development() -> bool:
