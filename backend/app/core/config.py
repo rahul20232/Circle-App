@@ -17,10 +17,13 @@ class Environment(str, Enum):
 
 def get_env_var(key: str, default=None, cast_type=str):
     """Get environment variable with optional casting"""
-    value = os.getenv(key, default)
-    if value is None:
-        return None
+    value = os.getenv(key)
     
+    # If environment variable doesn't exist, return default
+    if value is None:
+        return default
+    
+    # Cast the string value from environment
     if cast_type == bool:
         return value.lower() in ('true', '1', 'yes', 'on')
     elif cast_type == int:
