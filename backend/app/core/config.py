@@ -1,4 +1,4 @@
-from decouple import Config, RepositoryEnv
+from decouple import Config as DecoupleConfig, RepositoryEnv
 from dotenv import load_dotenv
 import os
 from enum import Enum
@@ -9,10 +9,10 @@ env_file = f".env.{env}"
 # Load into environment
 if os.path.exists(env_file):
     load_dotenv(env_file)
-    config = Config(RepositoryEnv(env_file))
+    config = DecoupleConfig(RepositoryEnv(env_file))
 else:
     # Fall back to environment variables directly
-    config = Config()
+    config = DecoupleConfig()
 
 class Environment(str, Enum):
     DEVELOPMENT = "development"
