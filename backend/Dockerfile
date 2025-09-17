@@ -18,13 +18,13 @@ RUN apt-get update \
 # Set work directory
 WORKDIR /app
 
-# Install Python dependencies
-COPY requirements.txt .
+# Install Python dependencies - CHANGED: Copy from backend/requirements.txt
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
-COPY . .
+# Copy application code - CHANGED: Copy from backend/ directory
+COPY backend/ .
 
 # Create non-root user for security
 RUN adduser --disabled-password --gecos '' --shell /bin/bash appuser \
