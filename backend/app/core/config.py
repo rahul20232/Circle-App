@@ -57,15 +57,15 @@ class Settings:
         # Email settings
         self.SMTP_SERVER = config("SMTP_SERVER", default="smtp.gmail.com")
         self.SMTP_PORT = config("SMTP_PORT", default=587, cast=int)
-        self.SENDER_EMAIL = config("SENDER_EMAIL")
-        self.SENDER_PASSWORD = config("SENDER_PASSWORD")
-        self.FRONTEND_URL = config("FRONTEND_URL")
+        self.SENDER_EMAIL = config("SENDER_EMAIL", default="")
+        self.SENDER_PASSWORD = config("SENDER_PASSWORD", default="")
+        self.FRONTEND_URL = config("FRONTEND_URL", default="http://localhost:8000")
         
         # AWS S3 settings
-        self.AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
-        self.AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+        self.AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID", default="")
+        self.AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY", default="")
         self.AWS_REGION = config("AWS_REGION", default="us-east-1")
-        self.S3_BUCKET_NAME = config("S3_BUCKET_NAME")
+        self.S3_BUCKET_NAME = config("S3_BUCKET_NAME", default="")
         
         # Firebase
         self.FIREBASE_PROJECT_ID = config("FIREBASE_PROJECT_ID", default="")
