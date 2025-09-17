@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "991660504042",
+    "project_id": "timeleft-f60fd",
+    "storage_bucket": "timeleft-f60fd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991660504042:android:abc38969748157034b3893",
+        "android_client_info": {
+          "package_name": "com.example.timeleft_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991660504042-t0cp4eb2025a0u0pd1h3p3t5eirchqpe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQjQEsI9MlE6ZQbkyp08VrmzjuYu9oZ8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991660504042-t0cp4eb2025a0u0pd1h3p3t5eirchqpe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "991660504042-3a834ic9vo7ppuddk2a7thd5s28g4ltu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.timeleftClone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
