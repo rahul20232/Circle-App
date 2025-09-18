@@ -92,8 +92,11 @@ async def register(user: UserCreate, db: Session = Depends(get_db)):
 
 @router.post("/login", response_model=Token)
 async def login(user_credentials: UserLogin, db: Session = Depends(get_db)):
+
+    print(f"DEBUG: Login attempt for email: {user_credentials.email}")
     # Get user from database
     db_user = get_user_by_email(db, user_credentials.email)
+    print(f"DEBUG: User found: {db_user is not None}")
     
     if not db_user or not verify_password(user_credentials.password, db_user.password_hash):
         raise HTTPException(
