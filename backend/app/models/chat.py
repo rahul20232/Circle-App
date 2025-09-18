@@ -17,8 +17,8 @@ class Chat(Base):
     is_active = Column(Boolean, default=True, nullable=False)
     
     # Relationships
-    user1 = relationship("User", foreign_keys=[user1_id], passive_deletes=True)
-    user2 = relationship("User", foreign_keys=[user2_id], passive_deletes=True)
+    user1 = relationship("User", foreign_keys=[user1_id], passive_deletes=True, overlaps="chats_as_user1")
+    user2 = relationship("User", foreign_keys=[user2_id], passive_deletes=True, overlaps="chats_as_user2")
     messages = relationship("Message", back_populates="chat", cascade="all, delete-orphan", passive_deletes=True)
     
     def get_other_user_id(self, current_user_id: int) -> int:
