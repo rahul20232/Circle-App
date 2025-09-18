@@ -1,3 +1,4 @@
+import os
 from app.models.booking import Booking
 from app.models.notification import Notification
 from app.models.connection import Connection
@@ -27,6 +28,8 @@ router = APIRouter(prefix="/auth", tags=["authentication"])
 
 class FCMTokenRequest(BaseModel):
     token: str
+
+SKIP_EMAIL_VERIFICATION = os.getenv("SKIP_EMAIL_VERIFICATION", "false").lower() == "true"
 
 @router.post("/fcm-token")
 async def update_fcm_token(
@@ -104,6 +107,9 @@ async def login(user_credentials: UserLogin, db: Session = Depends(get_db)):
             detail="Incorrect email or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
+
+    if SKIP_EMAIL_VERIFICATION:
+        db_user.is_verified = True
     
     if not db_user.is_verified:
         raise HTTPException(
