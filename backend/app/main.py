@@ -13,71 +13,20 @@ import os
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("timeleft_api")
 
-print("=== STARTING IMPORT PHASE ===")
+from .database import engine
+from .models import user
+from .routers import auth, gemini, imagegen, gemini_image_edit, dinner, notification, rating, websocket, chat, connection
+from .core.config import settings, is_development, is_production
+from .core.health import HealthChecker
+from .core.exceptions import (
+    custom_http_exception_handler, 
+    custom_timeleft_exception_handler,
+    sqlalchemy_exception_handler,
+    TimeleftException
+)
 
-try:
-    from .database import engine
-    print("✓ Database imported")
-except Exception as e:
-    print(f"✗ Database import failed: {e}")
-    raise
-
-try:
-    from .models import user
-    print("✓ Models imported")
-except Exception as e:
-    print(f"✗ Models import failed: {e}")
-    raise
-
-try:
-    from .routers import auth, gemini, imagegen, gemini_image_edit, dinner, notification, rating, websocket, chat, connection
-    print("✓ Routers imported")
-except Exception as e:
-    print(f"✗ Routers import failed: {e}")
-    raise
-
-try:
-    from .core.config import settings, is_development, is_production
-    print("✓ Config imported")
-except Exception as e:
-    print(f"✗ Config import failed: {e}")
-    raise
-
-try:
-    from .core.health import HealthChecker
-    print("✓ Health checker imported")
-except Exception as e:
-    print(f"✗ Health checker import failed: {e}")
-    raise
-
-try:
-    from .core.exceptions import (
-        custom_http_exception_handler, 
-        custom_timeleft_exception_handler,
-        sqlalchemy_exception_handler,
-        TimeleftException
-    )
-    print("✓ Exceptions imported")
-except Exception as e:
-    print(f"✗ Exceptions import failed: {e}")
-    raise
-
-try:
-    from .middleware import RequestLoggingMiddleware, SecurityHeadersMiddleware, RateLimitMiddleware
-    print("✓ Middleware imported")
-except Exception as e:
-    print(f"✗ Middleware import failed: {e}")
-    raise
-
-try:
-    from app.services.background_service import BackgroundTaskService
-    print("✓ Background service imported")
-except Exception as e:
-    print(f"✗ Background service import failed: {e}")
-    # Don't fail for this - make it optional
-    BackgroundTaskService = None
-
-print("=== IMPORT PHASE COMPLETE ===")
+from .middleware import RequestLoggingMiddleware, SecurityHeadersMiddleware, RateLimitMiddleware
+from app.services.background_service import BackgroundTaskService
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
