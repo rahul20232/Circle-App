@@ -25,4 +25,4 @@ RUN pip install --no-cache-dir --upgrade pip \
 COPY backend/ .
 
 # Run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080", "--log-level", "info"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "3000", "--log-level", "info"]
