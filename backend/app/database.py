@@ -15,13 +15,11 @@ engine = create_engine(
     poolclass=QueuePool,
     pool_size=5,
     max_overflow=10,
-    pool_pre_ping=True,  # Validates connections before use
-    pool_recycle=3600,   # Recycle connections after 1 hour
+    pool_pre_ping=True,  
+    pool_recycle=3600,   
     connect_args={
         "connect_timeout": 60,
-        "server_settings": {
-            "application_name": "TimeLeft-API",
-        }
+        "application_name": "TimeLeft-API",
     }
 )
 
