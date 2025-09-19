@@ -408,52 +408,52 @@ async def get_users_from_dinner(
         "users": user_list
     }
 
-@router.get("/{dinner_id}/users")
-async def get_users_from_dinner(
-    dinner_id: int,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
-):
-    """Get all users who have bookings for a specific dinner (only if dinner is max 1 day old)"""
+# @router.get("/{dinner_id}/users")
+# async def get_users_from_dinner(
+#     dinner_id: int,
+#     db: Session = Depends(get_db),
+#     current_user: User = Depends(get_current_user)
+# ):
+#     """Get all users who have bookings for a specific dinner (only if dinner is max 1 day old)"""
     
-    # Check if dinner exists
-    dinner = db.query(Dinner).filter(Dinner.id == dinner_id).first()
-    if not dinner:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Dinner not found"
-        )
+#     # Check if dinner exists
+#     dinner = db.query(Dinner).filter(Dinner.id == dinner_id).first()
+#     if not dinner:
+#         raise HTTPException(
+#             status_code=status.HTTP_404_NOT_FOUND,
+#             detail="Dinner not found"
+#         )
     
-    # Check if dinner is maximum 1 day old
-    one_day_ago = datetime.utcnow() - timedelta(days=1)
-    if dinner.date < one_day_ago:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Cannot access attendee information for dinners older than 1 day"
-        )
+#     # Check if dinner is maximum 1 day old
+#     one_day_ago = datetime.utcnow() - timedelta(days=1)
+#     if dinner.date < one_day_ago:
+#         raise HTTPException(
+#             status_code=status.HTTP_403_FORBIDDEN,
+#             detail="Cannot access attendee information for dinners older than 1 day"
+#         )
     
-    # Get users with confirmed/pending bookings
-    users = db.query(User).join(Booking).filter(
-        Booking.dinner_id == dinner_id,
-        Booking.status.in_([BookingStatus.CONFIRMED, BookingStatus.PENDING])
-    ).all()
+#     # Get users with confirmed/pending bookings
+#     users = db.query(User).join(Booking).filter(
+#         Booking.dinner_id == dinner_id,
+#         Booking.status.in_([BookingStatus.CONFIRMED, BookingStatus.PENDING])
+#     ).all()
     
-    # Format response
-    user_list = []
-    for user in users:
-        user_list.append({
-            "id": user.id,
-            "display_name": user.display_name,
-            "email": user.email,
-            "profile_picture_url": user.profile_picture_url
-        })
+#     # Format response
+#     user_list = []
+#     for user in users:
+#         user_list.append({
+#             "id": user.id,
+#             "display_name": user.display_name,
+#             "email": user.email,
+#             "profile_picture_url": user.profile_picture_url
+#         })
     
-    return {
-        "dinner_id": dinner_id,
-        "dinner_title": dinner.title,
-        "total_users": len(user_list),
-        "users": user_list
-    }
+#     return {
+#         "dinner_id": dinner_id,
+#         "dinner_title": dinner.title,
+#         "total_users": len(user_list),
+#         "users": user_list
+#     }
 
 @router.get("/user/recent-dinner-attendees")
 async def get_recent_dinner_attendees(
