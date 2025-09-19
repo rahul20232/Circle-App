@@ -23,6 +23,35 @@ from ..services.geocoding_service import GeocodingService
 
 router = APIRouter(prefix="/dinners", tags=["dinners"])
 
+@router.post("/seed-dinners-no-auth")
+async def seed_dinners_no_auth(db: Session = Depends(get_db)):
+    """Create test dinners WITHOUT authentication (temporary)"""
+    from app.models.dinner import Dinner
+    from datetime import datetime, timedelta
+    
+    test_dinners = [
+        Dinner(
+            title="Italian Night at Mario's",
+            description="Authentic Italian cuisine with wine pairing",
+            date=datetime.now() + timedelta(days=2),
+            location="Mario's Restaurant, Downtown",
+            max_attendees=6
+        ),
+        Dinner(
+            title="Sushi & Sake Experience", 
+            description="Fresh sushi with premium sake tasting",
+            date=datetime.now() + timedelta(days=5),
+            location="Sakura Sushi Bar",
+            max_attendees=4
+        )
+    ]
+    
+    for dinner in test_dinners:
+        db.add(dinner)
+    db.commit()
+    
+    return {"message": f"Created {len(test_dinners)} test dinners"}
+
 
 @router.get("/", response_model=List[DinnerListResponse])
 async def get_available_dinners(
