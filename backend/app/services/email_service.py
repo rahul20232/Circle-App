@@ -1,7 +1,6 @@
-import smtplib
 import secrets
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 from datetime import datetime, timedelta, timezone
 from ..core.config import settings
 
@@ -12,45 +11,29 @@ class EmailService:
     
     @staticmethod
     def _send_email(to_email: str, subject: str, html_content: str = None, text_content: str = None):
-        """Internal method to send emails"""
+        """Internal method to send emails using SendGrid"""
         try:
-            # Email configuration
-            smtp_server = settings.SMTP_SERVER
-            smtp_port = settings.SMTP_PORT
-            sender_email = settings.SENDER_EMAIL
-            sender_password = settings.SENDER_PASSWORD
+            message = Mail(
+                from_email=settings.SENDER_EMAIL,  # Use your verified sender email
+                to_emails=to_email,
+                subject=subject,
+                html_content=html_content,
+                plain_text_content=text_content
+            )
             
-            # Create message
-            msg = MIMEMultipart('alternative')
-            msg['From'] = sender_email
-            msg['To'] = to_email
-            msg['Subject'] = subject
-            
-            # Add text content
-            if text_content:
-                msg.attach(MIMEText(text_content, 'plain'))
-            
-            # Add HTML content
-            if html_content:
-                msg.attach(MIMEText(html_content, 'html'))
-            
-            # Send email
-            server = smtplib.SMTP(smtp_server, smtp_port)
-            server.starttls()
-            server.login(sender_email, sender_password)
-            server.send_message(msg)
-            server.quit()
-            
+            sg = SendGridAPIClient(api_key=settings.SENDGRID_API_KEY)
+            response = sg.send(message)
+            print(f"Email sent successfully. Status code: {response.status_code}")
             return True
+            
         except Exception as e:
-            print(f"Email sending failed: {e}")
+            print(f"SendGrid email sending failed: {e}")
             raise e
     
     @staticmethod
     def send_verification_email(email: str, display_name: str, token: str):
         try:
-            # Email body
-            verification_link = f"https://5923997ed36c.ngrok-free.app/verify-email?token={token}"
+            verification_link = f"https://circle-app-production-0a7b.up.railway.app/verify-email?token={token}"
             
             text_content = f"""
             Hi {display_name},
@@ -107,7 +90,6 @@ class EmailService:
     def is_verification_token_expired(sent_at: datetime):
         if not sent_at:
             return True
-        # make both datetimes aware in UTC
         now = datetime.now(timezone.utc)
         return now - sent_at > timedelta(hours=24)
     

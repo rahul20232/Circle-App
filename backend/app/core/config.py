@@ -88,6 +88,8 @@ class Settings:
         
         # Google Services
         self.GOOGLE_GEOCODING_API_KEY = get_env_var("GOOGLE_GEOCODING_API_KEY", "")
+
+        self.SENDGRID_API_KEY: str = get_env_var("SENDGRID_API_KEY", "")
         
         # Environment-specific settings
         if self.ENVIRONMENT == Environment.PRODUCTION:
