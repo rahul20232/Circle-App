@@ -245,18 +245,18 @@ async def resend_verification(email: str, db: Session = Depends(get_db)):
             detail="Email already verified"
         )
     
-    # Check if we can resend (avoid spam)
-    if (db_user.verification_sent_at and 
-        datetime.utcnow() - db_user.verification_sent_at < timedelta(minutes=5)):
-        raise HTTPException(
-            status_code=429,
-            detail="Please wait 5 minutes before requesting another verification email"
-        )
+    # Remove rate limiting for development/testing
+    # if (db_user.verification_sent_at and 
+    #     datetime.now(timezone.utc) - db_user.verification_sent_at < timedelta(minutes=5)):
+    #     raise HTTPException(
+    #         status_code=429,
+    #         detail="Please wait 5 minutes before requesting another verification email"
+    #     )
     
     # Generate new token and resend
     verification_token = EmailService.generate_verification_token()
     db_user.verification_token = verification_token
-    db_user.verification_sent_at = datetime.utcnow()
+    db_user.verification_sent_at = datetime.now(timezone.utc)  # Fix timezone here too
     db.commit()
     
     EmailService.send_verification_email(
@@ -277,20 +277,20 @@ async def forgot_password(request: PasswordResetRequest, db: Session = Depends(g
         if not db_user:
             return {"message": "If the email exists, a password reset link has been sent."}
         
-        # Check rate limiting - FIX: Use timezone-aware datetime
-        if (db_user.password_reset_sent_at and 
-            datetime.now(timezone.utc) - db_user.password_reset_sent_at < timedelta(minutes=5)):
-            raise HTTPException(
-                status_code=429,
-                detail="Please wait 5 minutes before requesting another reset email"
-            )
+        # Remove rate limiting for development/testing
+        # if (db_user.password_reset_sent_at and 
+        #     datetime.now(timezone.utc) - db_user.password_reset_sent_at < timedelta(minutes=5)):
+        #     raise HTTPException(
+        #         status_code=429,
+        #         detail="Please wait 5 minutes before requesting another reset email"
+        #     )
         
         # Generate reset token and save to database
         reset_token = EmailService.generate_verification_token()
         print(f"DEBUG: Generated reset token: {reset_token}")
         
         db_user.password_reset_token = reset_token
-        db_user.password_reset_sent_at = datetime.now(timezone.utc)  # FIX: Use timezone-aware datetime
+        db_user.password_reset_sent_at = datetime.now(timezone.utc)
         db.commit()
         print(f"DEBUG: Saved reset token to database")
         
@@ -310,7 +310,7 @@ async def forgot_password(request: PasswordResetRequest, db: Session = Depends(g
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
-
+    
 @router.put("/preferences", response_model=UserResponse)
 async def update_preferences(
     preferences_update: UserPreferencesUpdate,
