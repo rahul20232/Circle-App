@@ -7,7 +7,7 @@ from ..services.user_service import update_user_profile
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy import or_
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime, timezone
 from typing import Annotated
 import json
 from fastapi import UploadFile, File
@@ -260,9 +260,9 @@ async def forgot_password(request: PasswordResetRequest, db: Session = Depends(g
         if not db_user:
             return {"message": "If the email exists, a password reset link has been sent."}
         
-        # Check rate limiting
+        # Check rate limiting - FIX: Use timezone-aware datetime
         if (db_user.password_reset_sent_at and 
-            datetime.utcnow() - db_user.password_reset_sent_at < timedelta(minutes=5)):
+            datetime.now(timezone.utc) - db_user.password_reset_sent_at < timedelta(minutes=5)):
             raise HTTPException(
                 status_code=429,
                 detail="Please wait 5 minutes before requesting another reset email"
@@ -273,7 +273,7 @@ async def forgot_password(request: PasswordResetRequest, db: Session = Depends(g
         print(f"DEBUG: Generated reset token: {reset_token}")
         
         db_user.password_reset_token = reset_token
-        db_user.password_reset_sent_at = datetime.utcnow()
+        db_user.password_reset_sent_at = datetime.now(timezone.utc)  # FIX: Use timezone-aware datetime
         db.commit()
         print(f"DEBUG: Saved reset token to database")
         
@@ -376,9 +376,9 @@ async def reset_password(reset_data: PasswordReset, db: Session = Depends(get_db
             detail="Invalid reset token"
         )
     
-    # Check if reset token is expired (24 hours)
+    # Check if reset token is expired (24 hours) - FIX: Use timezone-aware datetime
     if (db_user.password_reset_sent_at and 
-        datetime.utcnow() - db_user.password_reset_sent_at > timedelta(hours=24)):
+        datetime.now(timezone.utc) - db_user.password_reset_sent_at > timedelta(hours=24)):
         raise HTTPException(
             status_code=400,
             detail="Reset token has expired"
