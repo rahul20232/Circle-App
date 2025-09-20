@@ -133,6 +133,23 @@ async def login(user_credentials: UserLogin, db: Session = Depends(get_db)):
         user=user_response
     )
 
+@router.post("/test-sendgrid")
+async def test_sendgrid():
+    try:
+        print(f"DEBUG: Testing SendGrid with API key: {settings.SENDGRID_API_KEY[:10]}...")
+        print(f"DEBUG: Sender email: {settings.SENDER_EMAIL}")
+        
+        EmailService._send_email(
+            to_email="rahul20232@iiitd.ac.in",
+            subject="Test Email from SendGrid",
+            text_content="This is a test email from SendGrid",
+            html_content="<p>This is a test email from SendGrid</p>"
+        )
+        return {"message": "Test email sent successfully"}
+    except Exception as e:
+        print(f"DEBUG: SendGrid test failed: {str(e)}")
+        return {"error": str(e), "api_key_prefix": settings.SENDGRID_API_KEY[:10] if settings.SENDGRID_API_KEY else "None"}
+
 @router.post("/verify-email")
 async def verify_email(verification: EmailVerification, db: Session = Depends(get_db)):
     # Find user by verification token
