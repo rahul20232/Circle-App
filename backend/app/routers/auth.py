@@ -254,34 +254,45 @@ async def resend_verification(email: str, db: Session = Depends(get_db)):
 
 @router.post("/forgot-password")
 async def forgot_password(request: PasswordResetRequest, db: Session = Depends(get_db)):
-    db_user = get_user_by_email(db, request.email)
-    
-    if not db_user:
-        # Don't reveal if email exists or not for security
+    try:
+        db_user = get_user_by_email(db, request.email)
+        
+        if not db_user:
+            return {"message": "If the email exists, a password reset link has been sent."}
+        
+        # Check rate limiting
+        if (db_user.password_reset_sent_at and 
+            datetime.utcnow() - db_user.password_reset_sent_at < timedelta(minutes=5)):
+            raise HTTPException(
+                status_code=429,
+                detail="Please wait 5 minutes before requesting another reset email"
+            )
+        
+        # Generate reset token and save to database
+        reset_token = EmailService.generate_verification_token()
+        print(f"DEBUG: Generated reset token: {reset_token}")
+        
+        db_user.password_reset_token = reset_token
+        db_user.password_reset_sent_at = datetime.utcnow()
+        db.commit()
+        print(f"DEBUG: Saved reset token to database")
+        
+        # Send password reset email
+        print(f"DEBUG: Attempting to send email to {db_user.email}")
+        EmailService.send_password_reset_email(
+            db_user.email,
+            db_user.display_name,
+            reset_token
+        )
+        print(f"DEBUG: Email sent successfully")
+        
         return {"message": "If the email exists, a password reset link has been sent."}
     
-    # Check if we can send reset email (avoid spam)
-    if (db_user.password_reset_sent_at and 
-        datetime.utcnow() - db_user.password_reset_sent_at < timedelta(minutes=5)):
-        raise HTTPException(
-            status_code=429,
-            detail="Please wait 5 minutes before requesting another reset email"
-        )
-    
-    # Generate reset token and save to database
-    reset_token = EmailService.generate_verification_token()  # Reuse existing method
-    db_user.password_reset_token = reset_token
-    db_user.password_reset_sent_at = datetime.utcnow()
-    db.commit()
-    
-    # Send password reset email
-    EmailService.send_password_reset_email(
-        db_user.email,
-        db_user.display_name,
-        reset_token
-    )
-    
-    return {"message": "If the email exists, a password reset link has been sent."}
+    except Exception as e:
+        print(f"ERROR in forgot_password: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
 @router.put("/preferences", response_model=UserResponse)
 async def update_preferences(
