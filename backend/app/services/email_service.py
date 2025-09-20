@@ -33,7 +33,7 @@ class EmailService:
     @staticmethod
     def send_verification_email(email: str, display_name: str, token: str):
         try:
-            verification_link = f"https://circle-app-production-0a7b.up.railway.app/verify-email?token={token}"
+            verification_link = f"https://circle-app-web-production.up.railway.app/verify-email?token={token}"
             
             text_content = f"""
             Hi {display_name},
@@ -97,7 +97,7 @@ class EmailService:
     def send_password_reset_email(email: str, display_name: str, reset_token: str):
         """Send password reset email"""
         try:
-            reset_url = f"https://circle-app-production-0a7b.up.railway.app/reset-password?token={reset_token}"
+            reset_url = f"https://circle-app-web-production.up.railway.app/reset-password?token={reset_token}"
             
             html_content = f"""
             <html>
