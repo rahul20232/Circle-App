@@ -9,7 +9,9 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
 
-class UserGoogleAuth(UserBase):
+class UserGoogleAuth(BaseModel):
+    email: str
+    display_name: str
     google_id: str
     profile_picture_url: Optional[str] = None
 
