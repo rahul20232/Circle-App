@@ -149,21 +149,111 @@ async def google_auth(google_data: UserGoogleAuth, db: Session = Depends(get_db)
         )
 @router.post("/register", response_model=dict)
 async def register(user: UserCreate, db: Session = Depends(get_db)):
-    # Check if user already exists
-    db_user = get_user_by_email(db, user.email)
-    if db_user:
+    """Register user with complete onboarding data"""
+    try:
+        print(f"DEBUG: Registration request for email: {user.email}")
+        print(f"DEBUG: Has personality data: {user.personality_data is not None}")
+        print(f"DEBUG: Has identity data: {user.identity_data is not None}")
+        print(f"DEBUG: Phone number: {user.phone_number}")
+        
+        # Check if user already exists
+        db_user = get_user_by_email(db, user.email)
+        if db_user:
+            raise HTTPException(
+                status_code=400,
+                detail="Email already registered"
+            )
+        
+        # Create new user with enhanced data
+        db_user = create_user_with_onboarding_data(db, user)
+        
+        return {
+            "message": "Registration successful! Please check your email to verify your account.",
+            "user_id": db_user.id
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"DEBUG: Registration exception: {str(e)}")
         raise HTTPException(
-            status_code=400,
-            detail="Email already registered"
+            status_code=500,
+            detail=f"Registration failed: {str(e)}"
         )
+
+def create_user_with_onboarding_data(db: Session, user: UserCreate):
+    """Create user with complete onboarding data"""
+    hashed_password = get_password_hash(user.password)
+    verification_token = EmailService.generate_verification_token()
     
-    # Create new user
-    db_user = create_user(db, user)
+    # Process identity data to extract user information
+    country = None
+    relationship_status = None
+    children_status = None
+    industry = None
+    birth_date = None
     
-    return {
-        "message": "Registration successful! Please check your email to verify your account.",
-        "user_id": db_user.id
-    }
+    if user.identity_data:
+        # Extract structured data from identity responses
+        country = user.identity_data.get('What country are you from?')
+        relationship_status = user.identity_data.get('What is your relationship status?')
+        children_status = user.identity_data.get('Do you have children?')
+        industry = user.identity_data.get("If you're working, what industry do you work in?")
+        
+        # Parse birthday if provided
+        birthday_str = user.identity_data.get('When is your birthday?')
+        if birthday_str:
+            try:
+                # Parse MM/DD/YYYY format
+                from datetime import datetime
+                birth_date = datetime.strptime(birthday_str, '%m/%d/%Y').date()
+            except ValueError:
+                print(f"DEBUG: Could not parse birthday: {birthday_str}")
+    
+    # Clean up country data (remove flag emojis)
+    if country:
+        country = country.split(' ')[0]  # Take first part before emoji
+    
+    db_user = User(
+        email=user.email,
+        password_hash=hashed_password,
+        display_name=user.display_name,
+        phone_number=user.phone_number,
+        verification_token=verification_token,
+        verification_sent_at=datetime.utcnow(),
+        
+        # Identity data
+        country=country,
+        relationship_status=relationship_status,
+        children_status=children_status,
+        industry=industry,
+        birth_date=birth_date,
+        
+        # Store raw onboarding data as JSON
+        personality_data=json.dumps(user.personality_data) if user.personality_data else None,
+        identity_data=json.dumps(user.identity_data) if user.identity_data else None,
+    )
+    
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    
+    # Send verification email
+    EmailService.send_verification_email(
+        user.email, 
+        user.display_name, 
+        verification_token
+    )
+    
+    print(f"DEBUG: Created user with onboarding data:")
+    print(f"  - Country: {country}")
+    print(f"  - Relationship: {relationship_status}")
+    print(f"  - Children: {children_status}")
+    print(f"  - Industry: {industry}")
+    print(f"  - Phone: {user.phone_number}")
+    print(f"  - Birth date: {birth_date}")
+    
+    return db_user
 
 @router.post("/login", response_model=Token)
 async def login(user_credentials: UserLogin, db: Session = Depends(get_db)):

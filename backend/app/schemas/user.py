@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional, List
+from typing import Dict, Optional, List
 from datetime import datetime
 
 class UserBase(BaseModel):
@@ -7,7 +7,12 @@ class UserBase(BaseModel):
     display_name: str
 
 class UserCreate(UserBase):
+    email: str
     password: str
+    display_name: str
+    phone_number: Optional[str] = None
+    personality_data: Optional[Dict[str, str]] = None
+    identity_data: Optional[Dict[str, str]] = None
 
 class UserGoogleAuth(BaseModel):
     email: str

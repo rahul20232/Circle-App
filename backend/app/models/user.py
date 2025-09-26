@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, Boolean, Text
+from sqlalchemy import Column, Integer, String, DateTime, Boolean, Text, Date
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from ..database import Base
@@ -26,6 +26,12 @@ class User(Base):
     children_status = Column(String, nullable=True)  # 'no_children', 'has_children', etc.
     industry = Column(String, nullable=True)  # 'tech', 'finance', etc.
     country = Column(String, nullable=True)  # Country code like 'US', 'UK', etc.
+
+    birth_date = Column(Date, nullable=True)  # Parsed from birthday question
+    
+    # Raw onboarding data stored as JSON strings
+    personality_data = Column(Text, nullable=True)  # JSON string of personality responses
+    identity_data = Column(Text, nullable=True) 
 
     # User Preferences
     dinner_languages = Column(Text, nullable=True)  # JSON string of languages
