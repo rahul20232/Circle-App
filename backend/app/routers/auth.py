@@ -77,11 +77,10 @@ def create_user(db: Session, user: UserCreate):
 
 @router.post("/google", response_model=Token)
 async def google_auth(google_data: UserGoogleAuth, db: Session = Depends(get_db)):
-    """Authenticate or register user via Google OAuth"""
+    """Authenticate EXISTING users via Google OAuth - NO new user creation"""
     try:
         print(f"DEBUG: Google auth attempt for email: {google_data.email}")
         print(f"DEBUG: Google ID: {google_data.google_id}")
-        print(f"DEBUG: Display name: {google_data.display_name}")
         
         # First, try to find user by Google ID
         db_user = get_user_by_google_id(db, google_data.google_id)
@@ -91,36 +90,28 @@ async def google_auth(google_data: UserGoogleAuth, db: Session = Depends(get_db)
         if not db_user:
             db_user = get_user_by_email(db, google_data.email)
             print(f"DEBUG: User found by email: {db_user is not None}")
-            
-            # If user exists with email but no Google ID, link the accounts
-            if db_user:
-                print(f"DEBUG: Linking existing email account to Google")
-                db_user.google_id = google_data.google_id
-                if google_data.profile_picture_url:
-                    db_user.profile_picture_url = google_data.profile_picture_url
-                if not db_user.is_verified:
-                    db_user.is_verified = True  # Auto-verify Google users
-                db.commit()
-                db.refresh(db_user)
-                print(f"DEBUG: Successfully linked account")
         
-        # If still no user found, create a new one
+        # If still no user found, REJECT instead of creating new user
         if not db_user:
-            print(f"DEBUG: Creating new Google user")
-            db_user = User(
-                email=google_data.email,
-                display_name=google_data.display_name,
-                google_id=google_data.google_id,
-                is_verified=True,  # Auto-verify Google users
-                profile_picture_url=google_data.profile_picture_url,
-                password_hash=None  # Google users don't have passwords
+            print(f"DEBUG: No existing user found - rejecting Google sign in")
+            raise HTTPException(
+                status_code=404,
+                detail="No account found with this Google account. Please sign up using email first."
             )
-            db.add(db_user)
+        
+        # User exists - link Google account if not already linked
+        if not db_user.google_id:
+            print(f"DEBUG: Linking existing email account to Google")
+            db_user.google_id = google_data.google_id
+            if google_data.profile_picture_url:
+                db_user.profile_picture_url = google_data.profile_picture_url
+            if not db_user.is_verified:
+                db_user.is_verified = True  # Auto-verify when linking Google
             db.commit()
             db.refresh(db_user)
-            print(f"DEBUG: Created new user with ID: {db_user.id}")
-        else:
-            print(f"DEBUG: Using existing user with ID: {db_user.id}")
+            print(f"DEBUG: Successfully linked account")
+        
+        print(f"DEBUG: Using existing user with ID: {db_user.id}")
         
         # Create access token
         access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -129,9 +120,7 @@ async def google_auth(google_data: UserGoogleAuth, db: Session = Depends(get_db)
         )
         print(f"DEBUG: Created access token")
         
-        # Use the custom from_orm method to handle JSON parsing
         user_response = UserResponse.from_orm(db_user)
-        print(f"DEBUG: Created user response")
         
         return Token(
             access_token=access_token,
@@ -139,6 +128,9 @@ async def google_auth(google_data: UserGoogleAuth, db: Session = Depends(get_db)
             user=user_response
         )
         
+    except HTTPException:
+        # Re-raise HTTP exceptions as-is (like 404 for no user found)
+        raise
     except Exception as e:
         print(f"DEBUG: Google auth exception: {str(e)}")
         import traceback
@@ -147,6 +139,7 @@ async def google_auth(google_data: UserGoogleAuth, db: Session = Depends(get_db)
             status_code=500,
             detail=f"Google authentication failed: {str(e)}"
         )
+    
 @router.post("/register", response_model=dict)
 async def register(user: UserCreate, db: Session = Depends(get_db)):
     """Register user with complete onboarding data"""
