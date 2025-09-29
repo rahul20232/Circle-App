@@ -181,6 +181,22 @@ async def register(user: UserCreate, db: Session = Depends(get_db)):
             detail=f"Registration failed: {str(e)}"
         )
 
+@router.get("/check-user-exists")
+async def check_user_exists(email: str, db: Session = Depends(get_db)):
+    """Check if a user exists with the given email"""
+    try:
+        user = db.query(User).filter(User.email == email).first()
+        return {
+            "exists": user is not None,
+            "email": email
+        }
+    except Exception as e:
+        print(f"Error checking user existence: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to check user existence"
+        )
+
 def create_user_with_onboarding_data(db: Session, user: UserCreate):
     """Create user with complete onboarding data"""
     hashed_password = get_password_hash(user.password)
