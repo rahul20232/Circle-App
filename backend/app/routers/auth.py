@@ -15,7 +15,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from ..database import get_db
 from ..models.user import User
-from ..schemas.user import PasswordReset, PasswordResetRequest, UserCreate, UserLogin, UserGoogleAuth, Token, UserPreferencesUpdate, UserResponse, EmailVerification, UserSubscriptionUpdate, UserUpdate
+from ..schemas.user import PasswordReset, PasswordResetRequest, UserCreate, UserGoogleAuthWithOnboarding, UserLogin, UserGoogleAuth, Token, UserPreferencesUpdate, UserResponse, EmailVerification, UserSubscriptionUpdate, UserUpdate
 from ..core.security import get_current_user, verify_password, get_password_hash, create_access_token
 from ..core.config import settings
 from ..services.email_service import EmailService
@@ -140,9 +140,9 @@ async def google_auth(google_data: UserGoogleAuth, db: Session = Depends(get_db)
             detail=f"Google authentication failed: {str(e)}"
         )
     
-@router.post("/google-signup", response_model=Token)
-async def google_signup(google_data: UserGoogleAuth, db: Session = Depends(get_db)):
-    """Create NEW user via Google OAuth"""
+@router.post("/google-signup")
+async def google_signup(google_data: UserGoogleAuthWithOnboarding, db: Session = Depends(get_db)):
+    """Create NEW user via Google OAuth with onboarding data"""
     try:
         print(f"DEBUG: Google sign up attempt for email: {google_data.email}")
         
@@ -154,34 +154,50 @@ async def google_signup(google_data: UserGoogleAuth, db: Session = Depends(get_d
                 detail="Email already registered. Please sign in instead."
             )
         
-        # Create new user with Google data
-        print(f"DEBUG: Creating new Google user")
+        # Extract identity data (same logic as email signup)
+        country = None
+        relationship_status = None
+        children_status = None
+        industry = None
+        
+        if google_data.identity_data:
+            country = google_data.identity_data.get('What country are you from?')
+            relationship_status = google_data.identity_data.get('What is your relationship status?')
+            children_status = google_data.identity_data.get('Do you have children?')
+            industry = google_data.identity_data.get("If you're working, what industry do you work in?")
+            
+            if country:
+                country = country.split(' ')[0]  # Remove flag emoji
+        
+        # Create new user with Google data + onboarding data
+        print(f"DEBUG: Creating new Google user with onboarding data")
         db_user = User(
             email=google_data.email,
             display_name=google_data.display_name,
             google_id=google_data.google_id,
-            is_verified=True,  # Auto-verify Google users
+            is_verified=True,
             profile_picture_url=google_data.profile_picture_url,
-            password_hash=None  # Google users don't have passwords
+            password_hash=None,
+            
+            # Onboarding data
+            country=country,
+            relationship_status=relationship_status,
+            children_status=children_status,
+            industry=industry,
+            personality_data=json.dumps(google_data.personality_data) if google_data.personality_data else None,
+            identity_data=json.dumps(google_data.identity_data) if google_data.identity_data else None,
         )
         db.add(db_user)
         db.commit()
         db.refresh(db_user)
-        print(f"DEBUG: Created new user with ID: {db_user.id}")
         
-        # Create access token
-        access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-        access_token = create_access_token(
-            data={"sub": str(db_user.id)}, expires_delta=access_token_expires
-        )
+        print(f"DEBUG: Created Google user with personality data: {bool(google_data.personality_data)}")
+        print(f"DEBUG: Created Google user with identity data: {bool(google_data.identity_data)}")
         
-        user_response = UserResponse.from_orm(db_user)
-        
-        return Token(
-            access_token=access_token,
-            token_type="bearer",
-            user=user_response
-        )
+        return {
+            "message": "Account created successfully",
+            "user_id": db_user.id
+        }
         
     except HTTPException:
         raise

@@ -118,6 +118,14 @@ class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
+class UserGoogleAuthWithOnboarding(BaseModel):
+    email: str
+    display_name: str
+    google_id: str
+    profile_picture_url: Optional[str] = None
+    personality_data: Optional[Dict[str, str]] = None
+    identity_data: Optional[Dict[str, str]] = None
+
 class UserUpdate(BaseModel):
     display_name: Optional[str] = None
     phone_number: Optional[str] = None
