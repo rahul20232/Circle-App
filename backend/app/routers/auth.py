@@ -140,6 +140,60 @@ async def google_auth(google_data: UserGoogleAuth, db: Session = Depends(get_db)
             detail=f"Google authentication failed: {str(e)}"
         )
     
+@router.post("/google-signup", response_model=Token)
+async def google_signup(google_data: UserGoogleAuth, db: Session = Depends(get_db)):
+    """Create NEW user via Google OAuth"""
+    try:
+        print(f"DEBUG: Google sign up attempt for email: {google_data.email}")
+        
+        # Check if user already exists
+        existing_user = get_user_by_email(db, google_data.email)
+        if existing_user:
+            raise HTTPException(
+                status_code=400,
+                detail="Email already registered. Please sign in instead."
+            )
+        
+        # Create new user with Google data
+        print(f"DEBUG: Creating new Google user")
+        db_user = User(
+            email=google_data.email,
+            display_name=google_data.display_name,
+            google_id=google_data.google_id,
+            is_verified=True,  # Auto-verify Google users
+            profile_picture_url=google_data.profile_picture_url,
+            password_hash=None  # Google users don't have passwords
+        )
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+        print(f"DEBUG: Created new user with ID: {db_user.id}")
+        
+        # Create access token
+        access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+        access_token = create_access_token(
+            data={"sub": str(db_user.id)}, expires_delta=access_token_expires
+        )
+        
+        user_response = UserResponse.from_orm(db_user)
+        
+        return Token(
+            access_token=access_token,
+            token_type="bearer",
+            user=user_response
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"DEBUG: Google sign up exception: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail=f"Google sign up failed: {str(e)}"
+        )
+    
 @router.post("/register", response_model=dict)
 async def register(user: UserCreate, db: Session = Depends(get_db)):
     """Register user with complete onboarding data"""
