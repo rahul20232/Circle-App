@@ -150,8 +150,8 @@ async def google_signup(google_data: UserGoogleAuthWithOnboarding, db: Session =
         existing_user = get_user_by_email(db, google_data.email)
         if existing_user:
             raise HTTPException(
-                status_code=400,
-                detail="Email already registered. Please sign in instead."
+                status_code=409,  # Changed from 400 to 409 Conflict
+                detail="ACCOUNT_EXISTS"  # Special code for Flutter to detect
             )
         
         # Extract identity data (same logic as email signup)
