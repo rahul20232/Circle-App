@@ -13,6 +13,8 @@ import json
 from fastapi import UploadFile, File
 from sqlalchemy.exc import SQLAlchemyError 
 
+from supabase import create_client, Client
+
 from ..database import get_db
 from ..models.user import User
 from ..schemas.user import PasswordReset, PasswordResetRequest, UserCreate, UserGoogleAuthWithOnboarding, UserLogin, UserGoogleAuth, Token, UserPreferencesUpdate, UserResponse, EmailVerification, UserSubscriptionUpdate, UserUpdate
@@ -697,7 +699,28 @@ async def upload_profile_photo(
             status_code=500,
             detail=f"Photo upload failed: {str(e)}"
         )
-    
+
+def get_supabase_admin() -> Client:
+    """Get Supabase client with admin privileges"""
+    if not settings.SUPABASE_SERVICE_KEY:
+        print("WARNING: SUPABASE_SERVICE_KEY not set - cannot delete Supabase users")
+        return None
+    return create_client(settings.SUPABASE_URL, settings.SUPABASE_SERVICE_KEY)
+ 
+from supabase import create_client, Client
+import os
+
+# Add Supabase admin client at the top of the file
+SUPABASE_URL = os.getenv("SUPABASE_URL", "https://vdsymjzmfrqzvetomswx.supabase.co")
+SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY")  # You need the service role key, not anon key
+
+def get_supabase_admin() -> Client:
+    """Get Supabase client with admin privileges"""
+    if not SUPABASE_SERVICE_KEY:
+        print("WARNING: SUPABASE_SERVICE_KEY not set - cannot delete Supabase users")
+        return None
+    return create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+
 @router.post("/delete-account")
 async def delete_account(
     deletion_request: AccountDeletionRequest,
@@ -722,35 +745,47 @@ async def delete_account(
             )
         
         user_id = current_user.id
+        google_id = current_user.google_id  # Save this before deleting
         
         try:
-            # 1. Delete profile picture from S3 if exists
+            # 1. Delete from Supabase if it's a Google user
+            if google_id:
+                try:
+                    supabase_admin = get_supabase_admin()
+                    if supabase_admin:
+                        # Delete user from Supabase Auth
+                        supabase_admin.auth.admin.delete_user(google_id)
+                        print(f"Successfully deleted user {google_id} from Supabase")
+                    else:
+                        print("WARNING: Could not delete from Supabase - service key not configured")
+                except Exception as supabase_error:
+                    print(f"Failed to delete user from Supabase: {supabase_error}")
+                    # Continue with deletion even if Supabase fails
+            
+            # 2. Delete profile picture from S3 if exists
             if current_user.profile_picture_url:
                 try:
                     s3_service = S3Service()
                     s3_service.delete_profile_image(current_user.profile_picture_url)
                 except Exception as s3_error:
                     print(f"Failed to delete profile picture from S3: {s3_error}")
-                    # Continue with account deletion even if S3 cleanup fails
             
-            # 2. Cancel active subscriptions with payment providers
+            # 3. Cancel active subscriptions
             if current_user.subscription_plan_id and current_user.is_subscribed:
                 try:
-                    # Cancel subscription with Stripe/PayPal/etc
-                    # Example: stripe.Subscription.delete(current_user.subscription_plan_id)
+                    # Cancel subscription with payment provider
                     pass
                 except Exception as sub_error:
                     print(f"Failed to cancel subscription: {sub_error}")
             
-            # 3. Delete the user record - this will cascade delete all related data
-            # Thanks to properly configured foreign key constraints and relationships
+            # 4. Delete the user record from database
             db.delete(current_user)
             db.commit()
             
             return {
                 "message": "Account and all associated data successfully deleted"
             }
-
+            
         except Exception as deletion_error:
             db.rollback()
             raise HTTPException(
@@ -766,7 +801,6 @@ async def delete_account(
             status_code=500,
             detail=f"Failed to delete account: {str(e)}"
         )
-    
     
 @router.put("/subscription", response_model=UserResponse)
 async def update_subscription(

@@ -47,6 +47,9 @@ class Settings:
         
         # Database
         self.DATABASE_URL = get_env_var("DATABASE_URL")
+
+        self.SUPABASE_URL = get_env_var("SUPABASE_URL", "https://vdsymjzmfrqzvetomswx.supabase.co")
+        self.SUPABASE_SERVICE_KEY = get_env_var("SUPABASE_SERVICE_KEY", "")
         
         # CORS - Environment specific
         if self.ENVIRONMENT == Environment.PRODUCTION:
