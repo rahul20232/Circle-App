@@ -195,6 +195,7 @@ async def google_signup(google_data: UserGoogleAuthWithOnboarding, db: Session =
             children_status=children_status,
             industry=industry,
             birth_date=birth_date,
+            
             personality_data=json.dumps(google_data.personality_data) if google_data.personality_data else None,
             identity_data=json.dumps(google_data.identity_data) if google_data.identity_data else None,
         )
