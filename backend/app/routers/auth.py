@@ -168,13 +168,14 @@ async def google_signup(google_data: UserGoogleAuthWithOnboarding, db: Session =
             relationship_status = google_data.identity_data.get('What is your relationship status?')
             children_status = google_data.identity_data.get('Do you have children?')
             industry = google_data.identity_data.get("If you're working, what industry do you work in?")
-            birthday_str = google_data.identity_data.get('When is your birthday?') if google_data.identity_data else None
+            birthday_str = google_data.identity_data.get('When is your birthday?')
 
             if birthday_str:
                 try:
                     birth_date = datetime.strptime(birthday_str, '%m/%d/%Y').date()
                 except ValueError:
                     print(f"DEBUG: Could not parse birthday: {birthday_str}")
+                    birth_date = None
             
             if country:
                 country = country.split(' ')[0]  # Remove flag emoji

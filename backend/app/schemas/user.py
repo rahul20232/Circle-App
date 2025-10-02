@@ -92,6 +92,7 @@ class UserResponse(BaseModel):
             children_status=user.children_status,
             industry=user.industry,
             country=user.country,
+            birth_date=user.birth_date,
             dinner_languages=dinner_languages,
             dinner_budget=user.dinner_budget,
             has_dietary_restrictions=user.has_dietary_restrictions or False,
