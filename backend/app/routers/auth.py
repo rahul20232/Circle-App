@@ -161,12 +161,20 @@ async def google_signup(google_data: UserGoogleAuthWithOnboarding, db: Session =
         relationship_status = None
         children_status = None
         industry = None
+        birth_date = None
         
         if google_data.identity_data:
             country = google_data.identity_data.get('What country are you from?')
             relationship_status = google_data.identity_data.get('What is your relationship status?')
             children_status = google_data.identity_data.get('Do you have children?')
             industry = google_data.identity_data.get("If you're working, what industry do you work in?")
+            birthday_str = google_data.identity_data.get('When is your birthday?') if google_data.identity_data else None
+
+            if birthday_str:
+                try:
+                    birth_date = datetime.strptime(birthday_str, '%m/%d/%Y').date()
+                except ValueError:
+                    print(f"DEBUG: Could not parse birthday: {birthday_str}")
             
             if country:
                 country = country.split(' ')[0]  # Remove flag emoji
@@ -186,6 +194,7 @@ async def google_signup(google_data: UserGoogleAuthWithOnboarding, db: Session =
             relationship_status=relationship_status,
             children_status=children_status,
             industry=industry,
+            birth_date=birth_date,
             personality_data=json.dumps(google_data.personality_data) if google_data.personality_data else None,
             identity_data=json.dumps(google_data.identity_data) if google_data.identity_data else None,
         )
