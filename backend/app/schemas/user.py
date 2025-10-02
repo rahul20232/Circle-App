@@ -34,6 +34,7 @@ class UserResponse(BaseModel):
     children_status: Optional[str] = None
     industry: Optional[str] = None
     country: Optional[str] = None
+    birth_date: Optional[datetime] = None 
     
     # Preferences
     dinner_languages: Optional[List[str]] = None
