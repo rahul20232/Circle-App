@@ -54,11 +54,13 @@ class Settings:
         # CORS - Environment specific
         if self.ENVIRONMENT == Environment.PRODUCTION:
             self.ALLOWED_ORIGINS = [
+                "https://circle-app-web-production.up.railway.app",
                 "https://yourdomain.com",
                 "https://www.yourdomain.com"
             ]
         elif self.ENVIRONMENT == Environment.STAGING:
             self.ALLOWED_ORIGINS = [
+                "https://circle-app-web-production.up.railway.app",
                 "https://staging.yourdomain.com"
             ]
         else:  # Development
