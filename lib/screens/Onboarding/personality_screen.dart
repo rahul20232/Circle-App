@@ -1,9 +1,9 @@
 // Updated personality_screen.dart
 // lib/screens/Onboarding/personality_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Onboarding/controllers/personality_controller.dart';
-import 'package:timeleft_clone/screens/Onboarding/components/personality_components.dart';
-import 'package:timeleft_clone/screens/Onboarding/components/unified_progress_component.dart';
+import 'package:circle_app/screens/Onboarding/controllers/personality_controller.dart';
+import 'package:circle_app/screens/Onboarding/components/personality_components.dart';
+import 'package:circle_app/screens/Onboarding/components/unified_progress_component.dart';
 
 class PersonalityScreen extends StatefulWidget {
   final VoidCallback? onComplete;

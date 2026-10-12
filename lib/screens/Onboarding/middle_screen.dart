@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/components/Cards/OnboardingCard.dart';
+import 'package:circle_app/components/Cards/OnboardingCard.dart';
 
 class MiddleScreen extends StatefulWidget {
   final VoidCallback? onNext;

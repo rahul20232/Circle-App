@@ -1,7 +1,7 @@
 // lib/screens/Onboarding/pre_registration_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Onboarding/initial_onboarding_screen.dart';
-import 'package:timeleft_clone/screens/Onboarding/controllers/pre_registration_controller.dart';
+import 'package:circle_app/screens/Onboarding/initial_onboarding_screen.dart';
+import 'package:circle_app/screens/Onboarding/controllers/pre_registration_controller.dart';
 
 class PreRegistrationScreen extends StatefulWidget {
   final VoidCallback? onEmailSignup;
@@ -234,7 +234,7 @@ class _PreRegistrationScreenState extends State<PreRegistrationScreen>
       duration: Duration(milliseconds: 800),
       curve: Curves.easeOut,
       child: Text(
-        'timeleft',
+        'circle',
         style: TextStyle(
           fontSize: 48,
           fontWeight: FontWeight.w800,

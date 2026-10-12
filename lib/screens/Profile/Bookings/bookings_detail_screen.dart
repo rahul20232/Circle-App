@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:timeleft_clone/models/dinner_model.dart';
-import 'package:timeleft_clone/screens/main_screen.dart';
-import 'package:timeleft_clone/services/api_service.dart';
-import 'package:timeleft_clone/services/dinner_service.dart';
+import 'package:circle_app/models/dinner_model.dart';
+import 'package:circle_app/screens/main_screen.dart';
+import 'package:circle_app/services/api_service.dart';
+import 'package:circle_app/services/dinner_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vibration/vibration.dart';
 

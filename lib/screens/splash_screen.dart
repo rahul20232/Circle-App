@@ -74,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen>
               return Opacity(
                 opacity: _logoFadeAnimation.value,
                 child: Text(
-                  'timeleft',
+                  'circle',
                   style: TextStyle(
                     fontSize: 64,
                     fontWeight: FontWeight.w800,

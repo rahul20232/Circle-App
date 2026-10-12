@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/services/api_service.dart';
-import 'package:timeleft_clone/services/notification_service.dart';
+import 'package:circle_app/services/api_service.dart';
+import 'package:circle_app/services/notification_service.dart';
 import 'Home/home_screen_content.dart';
 import 'Notifications/notifications_screen_content.dart';
 import 'Connect/connect_screen_content.dart';

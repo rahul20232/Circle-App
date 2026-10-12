@@ -1,6 +1,6 @@
 // lib/screens/Account/account_details_components.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/controllers/account_details_controller.dart';
+import 'package:circle_app/screens/Profile/EditProfile/controllers/account_details_controller.dart';
 
 class AccountDetailsComponents {
   final AccountDetailsController controller;

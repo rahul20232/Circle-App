@@ -3,14 +3,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/forgot_password_screen.dart';
-import 'package:timeleft_clone/screens/main_screen.dart';
-import 'package:timeleft_clone/screens/splash_screen.dart'; // ADD THIS
-import 'package:timeleft_clone/screens/Onboarding/initial_onboarding_screen.dart';
-import 'package:timeleft_clone/services/core/token_manager.dart';
-import 'package:timeleft_clone/services/deep_link_handler.dart';
-import 'package:timeleft_clone/services/push_notification_service.dart';
-import 'package:timeleft_clone/services/supabase_service.dart';
+import 'package:circle_app/screens/Profile/EditProfile/forgot_password_screen.dart';
+import 'package:circle_app/screens/main_screen.dart';
+import 'package:circle_app/screens/splash_screen.dart'; // ADD THIS
+import 'package:circle_app/screens/Onboarding/initial_onboarding_screen.dart';
+import 'package:circle_app/services/core/token_manager.dart';
+import 'package:circle_app/services/deep_link_handler.dart';
+import 'package:circle_app/services/push_notification_service.dart';
+import 'package:circle_app/services/supabase_service.dart';
 import 'firebase_options.dart';
 import 'services/auth_service.dart';
 import 'screens/Auth/login_screen.dart';
@@ -118,7 +118,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
-      title: 'TimeLeft Clone',
+      title: 'Circle',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         useMaterial3: true,

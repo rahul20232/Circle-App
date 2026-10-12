@@ -1,6 +1,6 @@
 // lib/screens/Profile/Settings/settings_components.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/controllers/settings_controller.dart';
+import 'package:circle_app/screens/Profile/Settings/controllers/settings_controller.dart';
 
 class SettingsComponents {
   final SettingsController controller;
@@ -102,7 +102,7 @@ class SettingsComponents {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Subscribe to Timeleft",
+              "Subscribe to Circle",
               style: TextStyle(fontSize: 16, color: Colors.black),
             ),
             controller.isLoading

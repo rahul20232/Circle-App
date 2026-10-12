@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:timeleft_clone/services/api_service.dart';
+import 'package:circle_app/services/api_service.dart';
 import '../models/notification_model.dart';
 import 'core/token_manager.dart';
 

@@ -1,6 +1,6 @@
 // lib/screens/Auth/components/login_components.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Auth/controllers/login_controller.dart';
+import 'package:circle_app/screens/Auth/controllers/login_controller.dart';
 
 class LoginComponents {
   final LoginController controller;

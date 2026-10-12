@@ -5,8 +5,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz_data;
-import 'package:timeleft_clone/services/api_service.dart';
-import 'package:timeleft_clone/services/notification_service.dart';
+import 'package:circle_app/services/api_service.dart';
+import 'package:circle_app/services/notification_service.dart';
 
 class PushNotificationService {
   static final FirebaseMessaging _firebaseMessaging =
@@ -308,8 +308,8 @@ class PushNotificationService {
             ?.createNotificationChannel(
               const AndroidNotificationChannel(
                 'timeleft_notifications',
-                'TimeLeft Notifications',
-                description: 'Notifications for TimeLeft app',
+                'Circle Notifications',
+                description: 'Notifications for Circle',
                 importance: Importance.high,
               ),
             );
@@ -362,8 +362,8 @@ class PushNotificationService {
       const AndroidNotificationDetails androidDetails =
           AndroidNotificationDetails(
         'timeleft_notifications',
-        'TimeLeft Notifications',
-        channelDescription: 'Notifications for TimeLeft app',
+        'Circle Notifications',
+        channelDescription: 'Notifications for Circle',
         importance: Importance.high,
         priority: Priority.high,
       );
@@ -381,7 +381,7 @@ class PushNotificationService {
 
       await _localNotifications.show(
         message.hashCode,
-        message.notification?.title ?? 'TimeLeft',
+        message.notification?.title ?? 'Circle',
         message.notification?.body ?? 'You have a new notification',
         details,
         payload: message.data.toString(),
@@ -422,8 +422,8 @@ class PushNotificationService {
       const AndroidNotificationDetails androidDetails =
           AndroidNotificationDetails(
         'timeleft_notifications',
-        'TimeLeft Notifications',
-        channelDescription: 'Notifications for TimeLeft app',
+        'Circle Notifications',
+        channelDescription: 'Notifications for Circle',
         importance: Importance.high,
         priority: Priority.high,
         showWhen: true,
@@ -545,7 +545,7 @@ class PushNotificationService {
         NotificationDetails(
           android: AndroidNotificationDetails(
             'timeleft_notifications',
-            'TimeLeft Notifications',
+            'Circle Notifications',
             importance: Importance.high,
             priority: Priority.high,
           ),
@@ -575,7 +575,7 @@ class PushNotificationService {
         NotificationDetails(
           android: AndroidNotificationDetails(
             'timeleft_notifications',
-            'TimeLeft Notifications',
+            'Circle Notifications',
             importance: Importance.high,
             priority: Priority.high,
           ),
@@ -622,7 +622,7 @@ class PushNotificationService {
         const NotificationDetails(
           android: AndroidNotificationDetails(
             'timeleft_notifications',
-            'TimeLeft Notifications',
+            'Circle Notifications',
             importance: Importance.high,
             priority: Priority.high,
             icon: '@mipmap/ic_launcher',

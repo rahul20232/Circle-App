@@ -1,6 +1,6 @@
 // lib/screens/Profile/Settings/marketing_alert_components.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/controllers/marketing_alert_controller.dart';
+import 'package:circle_app/screens/Profile/Settings/controllers/marketing_alert_controller.dart';
 
 class MarketingAlertComponents {
   final MarketingAlertController controller;
@@ -9,7 +9,7 @@ class MarketingAlertComponents {
 
   Widget buildDescriptionText() {
     return Text(
-      'Receive exclusive news about Timeleft, including the opening of registrations, our promotions and much more.',
+      'Receive exclusive news about Circle, including the opening of registrations, our promotions and much more.',
       style: TextStyle(
         fontSize: 16,
         color: Colors.black87,

@@ -1,9 +1,9 @@
 // lib/screens/Profile/EditProfile/edit_profile_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/controllers/edit_profile_controller.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/components/edit_profile_components.dart';
-import 'package:timeleft_clone/models/user_model.dart';
-import 'package:timeleft_clone/services/auth_service.dart';
+import 'package:circle_app/screens/Profile/EditProfile/controllers/edit_profile_controller.dart';
+import 'package:circle_app/screens/Profile/EditProfile/components/edit_profile_components.dart';
+import 'package:circle_app/models/user_model.dart';
+import 'package:circle_app/services/auth_service.dart';
 
 class EditProfileScreen extends StatefulWidget {
   @override

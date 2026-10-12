@@ -1,7 +1,7 @@
 // lib/screens/Profile/Settings/subscription_components.dart
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/controllers/subscription_controller.dart';
+import 'package:circle_app/screens/Profile/Settings/controllers/subscription_controller.dart';
 import '../../../../components/Cards/PricingCard.dart';
 
 class SubscriptionComponents {

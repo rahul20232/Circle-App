@@ -1,7 +1,7 @@
 // lib/components/Cards/ConnectionNotificationCard.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/services/connection_service.dart';
-import 'package:timeleft_clone/services/notification_service.dart';
+import 'package:circle_app/services/connection_service.dart';
+import 'package:circle_app/services/notification_service.dart';
 import '../../services/api_service.dart';
 
 class ConnectionNotificationCard extends StatefulWidget {

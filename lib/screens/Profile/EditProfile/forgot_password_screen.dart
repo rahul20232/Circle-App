@@ -1,7 +1,7 @@
 // lib/screens/Auth/forgot_password_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/controllers/forgot_password_controller.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/components/forgot_password_components.dart';
+import 'package:circle_app/screens/Profile/EditProfile/controllers/forgot_password_controller.dart';
+import 'package:circle_app/screens/Profile/EditProfile/components/forgot_password_components.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   final String email;

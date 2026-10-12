@@ -1,10 +1,10 @@
 // lib/screens/Onboarding/initial_onboarding_screen.dart
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'package:timeleft_clone/components/Modals/onboarding_modal.dart';
-import 'package:timeleft_clone/screens/Onboarding/onboarding_flow.dart';
-import 'package:timeleft_clone/screens/Auth/login_screen.dart';
-import 'package:timeleft_clone/services/onboarding_state_service.dart';
+import 'package:circle_app/components/Modals/onboarding_modal.dart';
+import 'package:circle_app/screens/Onboarding/onboarding_flow.dart';
+import 'package:circle_app/screens/Auth/login_screen.dart';
+import 'package:circle_app/services/onboarding_state_service.dart';
 
 class InitialOnboardingScreen extends StatefulWidget {
   final bool clearProgress;

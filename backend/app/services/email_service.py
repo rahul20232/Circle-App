@@ -47,7 +47,7 @@ class EmailService:
             If you didn't create an account, you can safely ignore this email.
             
             Best regards,
-            TimeLeft Clone Team
+            The Circle Team
             """
             
             html_content = f"""
@@ -76,7 +76,7 @@ class EmailService:
             
             EmailService._send_email(
                 to_email=email,
-                subject="Verify your email - TimeLeft Clone",
+                subject="Verify your email - Circle",
                 html_content=html_content,
                 text_content=text_content
             )
@@ -142,7 +142,7 @@ class EmailService:
             
             EmailService._send_email(
                 to_email=email,
-                subject="Password Reset Request - TimeLeft Clone",
+                subject="Password Reset Request - Circle",
                 html_content=html_content,
                 text_content=text_content
             )

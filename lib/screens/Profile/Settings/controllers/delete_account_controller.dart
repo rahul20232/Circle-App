@@ -1,8 +1,8 @@
 // lib/screens/Profile/Settings/controllers/delete_account_controller.dart
 
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/services/auth_service.dart';
-import 'package:timeleft_clone/screens/Onboarding/initial_onboarding_screen.dart'; // Changed from LoginScreen
+import 'package:circle_app/services/auth_service.dart';
+import 'package:circle_app/screens/Onboarding/initial_onboarding_screen.dart'; // Changed from LoginScreen
 
 class DeleteAccountController {
   final VoidCallback onStateChanged;

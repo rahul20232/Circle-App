@@ -1,7 +1,7 @@
 // lib/screens/Profile/Settings/update_subscription_controller.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/components/Modals/payment_modal.dart';
-import 'package:timeleft_clone/services/auth_service.dart';
+import 'package:circle_app/components/Modals/payment_modal.dart';
+import 'package:circle_app/services/auth_service.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class UpdateSubscriptionController {

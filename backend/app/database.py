@@ -19,7 +19,7 @@ engine = create_engine(
     pool_recycle=3600,   
     connect_args={
         "connect_timeout": 60,
-        "application_name": "TimeLeft-API",
+        "application_name": "Circle-API",
     }
 )
 

@@ -1,8 +1,8 @@
 // lib/screens/Auth/controllers/login_controller.dart
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:timeleft_clone/screens/main_screen.dart';
-import 'package:timeleft_clone/services/supabase_service.dart';
+import 'package:circle_app/screens/main_screen.dart';
+import 'package:circle_app/services/supabase_service.dart';
 import '../../../services/auth_service.dart';
 
 class LoginController {

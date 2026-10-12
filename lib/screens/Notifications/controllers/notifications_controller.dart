@@ -1,8 +1,8 @@
 // lib/screens/Notifications/notifications_controller.dart
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/models/notification_model.dart';
-import 'package:timeleft_clone/services/notification_service.dart';
+import 'package:circle_app/models/notification_model.dart';
+import 'package:circle_app/services/notification_service.dart';
 
 class NotificationsController {
   final TickerProvider vsync;

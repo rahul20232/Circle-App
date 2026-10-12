@@ -34,8 +34,8 @@ async def lifespan(app: FastAPI):
     print("=== STARTING LIFESPAN STARTUP ===")
     
     try:
-        logger.info("Starting up TimeLeft API...")
-        print("Starting up TimeLeft API...")
+        logger.info("Starting up Circle API...")
+        print("Starting up Circle API...")
         
         # Create database tables
         try:
@@ -93,7 +93,7 @@ app = FastAPI(
     debug=settings.DEBUG,
     docs_url="/docs" if not is_production() else None,
     redoc_url="/redoc" if not is_production() else None,
-    description="TimeLeft Clone API with comprehensive logging and security"
+    description="Circle API with comprehensive logging and security"
 )
 
 print("✓ FastAPI app created")

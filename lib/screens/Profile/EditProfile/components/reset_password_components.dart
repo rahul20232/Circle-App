@@ -1,6 +1,6 @@
 // lib/screens/Auth/reset_password_components.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/controllers/reset_password_controller.dart';
+import 'package:circle_app/screens/Profile/EditProfile/controllers/reset_password_controller.dart';
 
 class ResetPasswordComponents {
   final ResetPasswordController controller;

@@ -1,8 +1,8 @@
 // lib/screens/Onboarding/controllers/pre_registration_controller.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/services/supabase_service.dart';
-import 'package:timeleft_clone/services/auth_service.dart';
-import 'package:timeleft_clone/screens/Auth/login_screen.dart';
+import 'package:circle_app/services/supabase_service.dart';
+import 'package:circle_app/services/auth_service.dart';
+import 'package:circle_app/screens/Auth/login_screen.dart';
 
 class PreRegistrationController {
   final BuildContext context;

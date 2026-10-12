@@ -1,7 +1,7 @@
 // lib/screens/Profile/EditProfile/identity_components.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/controllers/identity_controller.dart';
-import 'package:timeleft_clone/components/Cards/IdentityCard.dart';
+import 'package:circle_app/screens/Profile/EditProfile/controllers/identity_controller.dart';
+import 'package:circle_app/components/Cards/IdentityCard.dart';
 
 class IdentityComponents {
   final IdentityController controller;

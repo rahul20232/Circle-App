@@ -1,9 +1,9 @@
 // lib/screens/Auth/login_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Auth/controllers/login_controller.dart';
-import 'package:timeleft_clone/screens/Auth/components/login_components.dart';
-import 'package:timeleft_clone/screens/Onboarding/initial_onboarding_screen.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/forgot_password_screen.dart';
+import 'package:circle_app/screens/Auth/controllers/login_controller.dart';
+import 'package:circle_app/screens/Auth/components/login_components.dart';
+import 'package:circle_app/screens/Onboarding/initial_onboarding_screen.dart';
+import 'package:circle_app/screens/Profile/EditProfile/forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback? onClose;

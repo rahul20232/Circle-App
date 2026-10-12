@@ -1,6 +1,6 @@
 // lib/screens/Onboarding/controllers/personality_controller.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/services/onboarding_state_service.dart';
+import 'package:circle_app/services/onboarding_state_service.dart';
 
 class PersonalityController {
   final VoidCallback onStateChanged;

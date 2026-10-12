@@ -1,11 +1,11 @@
 // lib/screens/Profile/EditProfile/edit_profile_components.dart
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/controllers/edit_profile_controller.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/account_details_screen.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/forgot_password_screen.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/identity_screen.dart';
-import 'package:timeleft_clone/models/user_model.dart';
+import 'package:circle_app/screens/Profile/EditProfile/controllers/edit_profile_controller.dart';
+import 'package:circle_app/screens/Profile/EditProfile/account_details_screen.dart';
+import 'package:circle_app/screens/Profile/EditProfile/forgot_password_screen.dart';
+import 'package:circle_app/screens/Profile/EditProfile/identity_screen.dart';
+import 'package:circle_app/models/user_model.dart';
 
 class EditProfileComponents {
   final EditProfileController controller;

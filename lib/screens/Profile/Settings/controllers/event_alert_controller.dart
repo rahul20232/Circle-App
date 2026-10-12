@@ -1,7 +1,7 @@
 // lib/screens/Profile/Settings/event_alert_controller.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/models/user_model.dart';
-import 'package:timeleft_clone/services/api_service.dart';
+import 'package:circle_app/models/user_model.dart';
+import 'package:circle_app/services/api_service.dart';
 
 class EventAlertController {
   final VoidCallback onStateChanged;

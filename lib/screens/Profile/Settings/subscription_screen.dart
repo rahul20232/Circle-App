@@ -1,7 +1,7 @@
 // lib/screens/Profile/Settings/subscription_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/controllers/subscription_controller.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/components/subscription_components.dart';
+import 'package:circle_app/screens/Profile/Settings/controllers/subscription_controller.dart';
+import 'package:circle_app/screens/Profile/Settings/components/subscription_components.dart';
 
 class SubscriptionScreen extends StatefulWidget {
   final VoidCallback? onSubscribed;

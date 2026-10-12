@@ -1,4 +1,4 @@
-# Timeleft Clone Backend
+# Circle Backend
 
 ## Setup
 

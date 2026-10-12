@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:timeleft_clone/screens/Profile/Bookings/controllers/booking_details_controller.dart';
+import 'package:circle_app/screens/Profile/Bookings/controllers/booking_details_controller.dart';
 
 class BookingDetailsComponents {
   final BookingDetailsController controller;

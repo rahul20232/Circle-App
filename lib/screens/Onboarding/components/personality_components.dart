@@ -1,7 +1,7 @@
 // lib/screens/Onboarding/components/personality_components.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/components/Cards/IdentityCard.dart';
-import 'package:timeleft_clone/screens/Onboarding/controllers/personality_controller.dart';
+import 'package:circle_app/components/Cards/IdentityCard.dart';
+import 'package:circle_app/screens/Onboarding/controllers/personality_controller.dart';
 
 class PersonalityComponents {
   final PersonalityController controller;

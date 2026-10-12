@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:timeleft_clone/services/api_service.dart';
-import 'package:timeleft_clone/services/deep_link_handler.dart';
+import 'package:circle_app/services/api_service.dart';
+import 'package:circle_app/services/deep_link_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SupabaseService {

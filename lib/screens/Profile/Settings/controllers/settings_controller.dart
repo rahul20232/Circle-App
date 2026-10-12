@@ -1,14 +1,14 @@
 // lib/screens/Profile/Settings/settings_controller.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Onboarding/initial_onboarding_screen.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/delete_account_confirm_screen.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/last_minute_booking_preferences_screen.dart';
-import 'package:timeleft_clone/screens/Auth/login_screen.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/marketing_preferences_screen.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/private_policy_screen.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/update_subscription_screen.dart';
-import 'package:timeleft_clone/services/auth_service.dart';
-import 'package:timeleft_clone/services/onboarding_state_service.dart';
+import 'package:circle_app/screens/Onboarding/initial_onboarding_screen.dart';
+import 'package:circle_app/screens/Profile/Settings/delete_account_confirm_screen.dart';
+import 'package:circle_app/screens/Profile/Settings/last_minute_booking_preferences_screen.dart';
+import 'package:circle_app/screens/Auth/login_screen.dart';
+import 'package:circle_app/screens/Profile/Settings/marketing_preferences_screen.dart';
+import 'package:circle_app/screens/Profile/Settings/private_policy_screen.dart';
+import 'package:circle_app/screens/Profile/Settings/update_subscription_screen.dart';
+import 'package:circle_app/services/auth_service.dart';
+import 'package:circle_app/services/onboarding_state_service.dart';
 import '../subscription_screen.dart';
 import '../event_alert_screen.dart';
 
@@ -168,7 +168,7 @@ class SettingsController {
       ];
 
   List<String> get subscriptionItems => [
-        "Subscribe to Timeleft",
+        "Subscribe to Circle",
       ];
 
   List<String> get legalItems => [

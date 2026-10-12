@@ -1,8 +1,8 @@
 // lib/screens/Onboarding/onboarding_identity_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Onboarding/controllers/onboarding_identity_controller.dart';
-import 'package:timeleft_clone/screens/Onboarding/components/onboarding_identity_components.dart';
-import 'package:timeleft_clone/screens/Onboarding/components/unified_progress_component.dart';
+import 'package:circle_app/screens/Onboarding/controllers/onboarding_identity_controller.dart';
+import 'package:circle_app/screens/Onboarding/components/onboarding_identity_components.dart';
+import 'package:circle_app/screens/Onboarding/components/unified_progress_component.dart';
 
 class OnboardingIdentityScreen extends StatefulWidget {
   final VoidCallback? onComplete;

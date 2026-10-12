@@ -36,7 +36,7 @@ class Settings:
         self.ENVIRONMENT = Environment(get_env_var("ENVIRONMENT", "development"))
         
         # App Info
-        self.APP_NAME = get_env_var("APP_NAME", "TimeLeft Clone")
+        self.APP_NAME = get_env_var("APP_NAME", "Circle")
         self.APP_VERSION = get_env_var("APP_VERSION", "1.0.0")
         self.DEBUG = get_env_var("DEBUG", self.ENVIRONMENT == Environment.DEVELOPMENT, bool)
         

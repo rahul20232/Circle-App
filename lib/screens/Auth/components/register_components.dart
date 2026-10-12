@@ -1,6 +1,6 @@
 // lib/screens/Auth/register_components.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Auth/controllers/register_controller.dart';
+import 'package:circle_app/screens/Auth/controllers/register_controller.dart';
 
 class RegisterComponents {
   final RegisterController controller;

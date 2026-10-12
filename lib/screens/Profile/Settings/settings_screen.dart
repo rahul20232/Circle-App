@@ -1,7 +1,7 @@
 // lib/screens/Profile/Settings/settings_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/controllers/settings_controller.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/components/settings_components.dart';
+import 'package:circle_app/screens/Profile/Settings/controllers/settings_controller.dart';
+import 'package:circle_app/screens/Profile/Settings/components/settings_components.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override

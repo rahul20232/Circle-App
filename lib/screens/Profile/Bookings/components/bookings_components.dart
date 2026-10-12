@@ -1,8 +1,8 @@
 // lib/screens/Profile/Bookings/bookings_components.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/Bookings/controllers/bookings_controller.dart';
-import 'package:timeleft_clone/components/Cards/SwipableBookingCard.dart';
-import 'package:timeleft_clone/services/push_notification_service.dart';
+import 'package:circle_app/screens/Profile/Bookings/controllers/bookings_controller.dart';
+import 'package:circle_app/components/Cards/SwipableBookingCard.dart';
+import 'package:circle_app/services/push_notification_service.dart';
 
 class BookingsComponents {
   final BookingsController controller;

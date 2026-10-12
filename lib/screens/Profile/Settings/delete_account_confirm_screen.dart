@@ -1,7 +1,7 @@
 // lib/screens/Profile/Settings/delete_account_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/controllers/delete_account_controller.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/components/delete_account_components.dart';
+import 'package:circle_app/screens/Profile/Settings/controllers/delete_account_controller.dart';
+import 'package:circle_app/screens/Profile/Settings/components/delete_account_components.dart';
 
 class DeleteAccountScreen extends StatefulWidget {
   @override

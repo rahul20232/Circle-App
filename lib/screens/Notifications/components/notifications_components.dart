@@ -1,7 +1,7 @@
 // lib/screens/Notifications/notifications_components.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/components/Cards/SwipableNotificationCard.dart';
-import 'package:timeleft_clone/models/notification_model.dart';
+import 'package:circle_app/components/Cards/SwipableNotificationCard.dart';
+import 'package:circle_app/models/notification_model.dart';
 import '../controllers/notifications_controller.dart';
 import '../../../components/Cards/NotifictionCard.dart';
 import '../../../components/Cards/ConnectionNotificationCard.dart';

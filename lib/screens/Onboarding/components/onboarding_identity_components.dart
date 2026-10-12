@@ -1,8 +1,8 @@
 // lib/screens/Onboarding/components/onboarding_identity_components.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:timeleft_clone/screens/Onboarding/controllers/onboarding_identity_controller.dart';
-import 'package:timeleft_clone/components/Cards/IdentityCard.dart';
+import 'package:circle_app/screens/Onboarding/controllers/onboarding_identity_controller.dart';
+import 'package:circle_app/components/Cards/IdentityCard.dart';
 
 class OnboardingIdentityComponents {
   final OnboardingIdentityController controller;

@@ -1,6 +1,6 @@
 // lib/screens/Profile/Settings/subscription_controller.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/components/Modals/payment_modal.dart';
+import 'package:circle_app/components/Modals/payment_modal.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class SubscriptionController {

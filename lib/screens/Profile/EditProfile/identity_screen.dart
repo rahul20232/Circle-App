@@ -1,7 +1,7 @@
 // lib/screens/Profile/EditProfile/identity_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/controllers/identity_controller.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/components/identity_components.dart';
+import 'package:circle_app/screens/Profile/EditProfile/controllers/identity_controller.dart';
+import 'package:circle_app/screens/Profile/EditProfile/components/identity_components.dart';
 
 class IdentityScreen extends StatefulWidget {
   final String title; // AppBar title

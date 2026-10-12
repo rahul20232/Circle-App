@@ -1,6 +1,6 @@
 // lib/screens/Home/home_screen_content.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/components/Cards/NewCard.dart';
+import 'package:circle_app/components/Cards/NewCard.dart';
 import './controllers/home_screen_controller.dart';
 import './components/home_screen_components.dart';
 

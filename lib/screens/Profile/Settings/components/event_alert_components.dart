@@ -1,6 +1,6 @@
 // lib/screens/Profile/Settings/event_alert_components.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/controllers/event_alert_controller.dart';
+import 'package:circle_app/screens/Profile/Settings/controllers/event_alert_controller.dart';
 
 class EventAlertComponents {
   final EventAlertController controller;

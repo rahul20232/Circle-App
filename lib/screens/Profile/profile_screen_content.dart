@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:timeleft_clone/models/user_model.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/edit_profile_screen.dart';
-import 'package:timeleft_clone/screens/Profile/webview_screen.dart';
+import 'package:circle_app/models/user_model.dart';
+import 'package:circle_app/screens/Profile/EditProfile/edit_profile_screen.dart';
+import 'package:circle_app/screens/Profile/webview_screen.dart';
 import '../../services/auth_service.dart';
 import 'Bookings/bookings_screen.dart';
 import 'Settings/settings_screen.dart';

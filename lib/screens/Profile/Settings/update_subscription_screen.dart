@@ -1,7 +1,7 @@
 // lib/screens/Profile/Settings/update_subscription_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/controllers/update_subscription_controller.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/components/update_subscription_components.dart';
+import 'package:circle_app/screens/Profile/Settings/controllers/update_subscription_controller.dart';
+import 'package:circle_app/screens/Profile/Settings/components/update_subscription_components.dart';
 
 class UpdateSubscriptionScreen extends StatefulWidget {
   @override

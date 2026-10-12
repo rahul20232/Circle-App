@@ -1,6 +1,6 @@
 // lib/screens/Profile/Settings/last_minute_booking_components.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/controllers/last_minute_booking_controller.dart';
+import 'package:circle_app/screens/Profile/Settings/controllers/last_minute_booking_controller.dart';
 
 class LastMinuteBookingComponents {
   final LastMinuteBookingController controller;

@@ -1,9 +1,9 @@
 // lib/screens/Onboarding/onboarding_account_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:timeleft_clone/screens/Onboarding/components/unified_progress_component.dart';
-import 'package:timeleft_clone/services/auth_service.dart';
-import 'package:timeleft_clone/services/onboarding_state_service.dart';
+import 'package:circle_app/screens/Onboarding/components/unified_progress_component.dart';
+import 'package:circle_app/services/auth_service.dart';
+import 'package:circle_app/services/onboarding_state_service.dart';
 
 class OnboardingAccountScreen extends StatefulWidget {
   final VoidCallback? onComplete;

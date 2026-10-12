@@ -1,8 +1,8 @@
 // lib/screens/Profile/Bookings/bookings_controller.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/Bookings/bookings_detail_screen.dart';
-import 'package:timeleft_clone/services/dinner_service.dart';
-import 'package:timeleft_clone/models/dinner_model.dart';
+import 'package:circle_app/screens/Profile/Bookings/bookings_detail_screen.dart';
+import 'package:circle_app/services/dinner_service.dart';
+import 'package:circle_app/models/dinner_model.dart';
 import '../../../../screens/main_screen.dart';
 
 class BookingsController {

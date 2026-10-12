@@ -1,7 +1,7 @@
 // lib/screens/Auth/register_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Auth/controllers/register_controller.dart';
-import 'package:timeleft_clone/screens/Auth/components/register_components.dart';
+import 'package:circle_app/screens/Auth/controllers/register_controller.dart';
+import 'package:circle_app/screens/Auth/components/register_components.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override

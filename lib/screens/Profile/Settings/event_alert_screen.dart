@@ -1,7 +1,7 @@
 // lib/screens/Profile/Settings/event_alert_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/controllers/event_alert_controller.dart';
-import 'package:timeleft_clone/screens/Profile/Settings/components/event_alert_components.dart';
+import 'package:circle_app/screens/Profile/Settings/controllers/event_alert_controller.dart';
+import 'package:circle_app/screens/Profile/Settings/components/event_alert_components.dart';
 
 class EventAlertScreen extends StatefulWidget {
   @override

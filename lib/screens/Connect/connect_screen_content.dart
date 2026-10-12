@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/components/Cards/ChatCard.dart';
-import 'package:timeleft_clone/components/Cards/SwipableChatCard.dart';
-import 'package:timeleft_clone/components/Modals/connection_modal.dart';
-import 'package:timeleft_clone/screens/main_screen.dart';
-import 'package:timeleft_clone/screens/Connect/chat_detail_screen.dart';
-import 'package:timeleft_clone/services/api_service.dart';
-import 'package:timeleft_clone/services/chat_service.dart';
-import 'package:timeleft_clone/models/chat_model.dart';
-import 'package:timeleft_clone/services/connection_service.dart';
-import 'package:timeleft_clone/services/dinner_service.dart';
-import 'package:timeleft_clone/services/notification_service.dart';
+import 'package:circle_app/components/Cards/ChatCard.dart';
+import 'package:circle_app/components/Cards/SwipableChatCard.dart';
+import 'package:circle_app/components/Modals/connection_modal.dart';
+import 'package:circle_app/screens/main_screen.dart';
+import 'package:circle_app/screens/Connect/chat_detail_screen.dart';
+import 'package:circle_app/services/api_service.dart';
+import 'package:circle_app/services/chat_service.dart';
+import 'package:circle_app/models/chat_model.dart';
+import 'package:circle_app/services/connection_service.dart';
+import 'package:circle_app/services/dinner_service.dart';
+import 'package:circle_app/services/notification_service.dart';
 
 class ConnectScreenContent extends StatefulWidget {
   final int? dinnerIdForAttendees; // Add this parameter

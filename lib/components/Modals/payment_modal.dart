@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:timeleft_clone/components/card_scanner.dart'; // Import the new component
-import 'package:timeleft_clone/formatters/payment_formatter.dart';
-import 'package:timeleft_clone/main.dart' show cameras;
-import 'package:timeleft_clone/services/auth_service.dart';
-import 'package:timeleft_clone/screens/Home/booking_success_screen.dart';
+import 'package:circle_app/components/card_scanner.dart'; // Import the new component
+import 'package:circle_app/formatters/payment_formatter.dart';
+import 'package:circle_app/main.dart' show cameras;
+import 'package:circle_app/services/auth_service.dart';
+import 'package:circle_app/screens/Home/booking_success_screen.dart';
 
 class PaymentModal extends StatefulWidget {
   final String price;
@@ -372,7 +372,7 @@ class _PaymentModalState extends State<PaymentModal> {
                           // Terms text
                           if (!isVerySmallScreen)
                             Text(
-                              'By providing your card information, you allow Timeleft to charge your card for future payments in accordance with their terms.',
+                              'By providing your card information, you allow Circle to charge your card for future payments in accordance with their terms.',
                               style: TextStyle(
                                   fontSize: 10,
                                   color: Colors.grey[600],

@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:timeleft_clone/models/dinner_model.dart';
-import 'package:timeleft_clone/models/notification_model.dart';
-import 'package:timeleft_clone/models/rating_model.dart';
-import 'package:timeleft_clone/services/core/api_cache.dart';
+import 'package:circle_app/models/dinner_model.dart';
+import 'package:circle_app/models/notification_model.dart';
+import 'package:circle_app/models/rating_model.dart';
+import 'package:circle_app/services/core/api_cache.dart';
 import '../models/user_model.dart';
 import 'core/token_manager.dart';
 

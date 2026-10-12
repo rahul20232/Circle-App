@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:timeleft_clone/screens/Profile/EditProfile/reset_password_screen.dart';
+import 'package:circle_app/screens/Profile/EditProfile/reset_password_screen.dart';
 
 class DeepLinkHandler {
   static final _appLinks = AppLinks();

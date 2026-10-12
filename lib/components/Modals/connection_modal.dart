@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/services/api_service.dart';
-import 'package:timeleft_clone/services/connection_service.dart';
-import 'package:timeleft_clone/services/notification_service.dart';
+import 'package:circle_app/services/api_service.dart';
+import 'package:circle_app/services/connection_service.dart';
+import 'package:circle_app/services/notification_service.dart';
 
 class ConnectionModal extends StatefulWidget {
   final List<dynamic> attendees;

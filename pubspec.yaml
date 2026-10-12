@@ -1,5 +1,5 @@
-name: timeleft_clone
-description: "A new Flutter project."
+name: circle_app
+description: "Circle — meet new people over dinner in small, well-matched groups."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

@@ -1,7 +1,7 @@
 // lib/screens/Notifications/notifications_screen.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Notifications/controllers/notifications_controller.dart';
-import 'package:timeleft_clone/screens/Notifications/components/notifications_components.dart';
+import 'package:circle_app/screens/Notifications/controllers/notifications_controller.dart';
+import 'package:circle_app/screens/Notifications/components/notifications_components.dart';
 
 class NotificationsScreenContent extends StatefulWidget {
   final Function(int)? onUnreadCountChanged;

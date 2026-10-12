@@ -1,13 +1,13 @@
 // Updated section of lib/screens/Onboarding/onboarding_flow.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/screens/Onboarding/personality_screen.dart';
-import 'package:timeleft_clone/screens/Onboarding/middle_screen.dart';
-import 'package:timeleft_clone/screens/Onboarding/onboarding_identity_screen.dart';
-import 'package:timeleft_clone/screens/Auth/login_screen.dart';
-import 'package:timeleft_clone/screens/Onboarding/initial_onboarding_screen.dart';
-import 'package:timeleft_clone/screens/Onboarding/onboarding_account_screen.dart';
-import 'package:timeleft_clone/screens/Onboarding/pre_registration_screen.dart';
-import 'package:timeleft_clone/services/onboarding_state_service.dart';
+import 'package:circle_app/screens/Onboarding/personality_screen.dart';
+import 'package:circle_app/screens/Onboarding/middle_screen.dart';
+import 'package:circle_app/screens/Onboarding/onboarding_identity_screen.dart';
+import 'package:circle_app/screens/Auth/login_screen.dart';
+import 'package:circle_app/screens/Onboarding/initial_onboarding_screen.dart';
+import 'package:circle_app/screens/Onboarding/onboarding_account_screen.dart';
+import 'package:circle_app/screens/Onboarding/pre_registration_screen.dart';
+import 'package:circle_app/services/onboarding_state_service.dart';
 
 class OnboardingFlow extends StatefulWidget {
   final Map<String, String>? initialPersonalityData;

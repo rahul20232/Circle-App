@@ -1,7 +1,7 @@
 // lib/screens/Profile/Settings/marketing_alert_controller.dart
 import 'package:flutter/material.dart';
-import 'package:timeleft_clone/models/user_model.dart';
-import 'package:timeleft_clone/services/api_service.dart';
+import 'package:circle_app/models/user_model.dart';
+import 'package:circle_app/services/api_service.dart';
 
 class MarketingAlertController {
   final VoidCallback onStateChanged;
@@ -121,9 +121,9 @@ class MarketingAlertController {
 
   String getPrivacyStatus() {
     if (_email) {
-      return 'You will receive marketing communications from Timeleft.';
+      return 'You will receive marketing communications from Circle.';
     } else {
-      return 'You will not receive marketing communications from Timeleft.';
+      return 'You will not receive marketing communications from Circle.';
     }
   }
 
