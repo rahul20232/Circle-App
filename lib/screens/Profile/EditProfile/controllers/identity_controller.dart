@@ -1,5 +1,6 @@
 // lib/screens/Profile/EditProfile/identity_controller.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/utils/text_utils.dart';
 
 class IdentityController {
   final String initialValue;
@@ -11,7 +12,7 @@ class IdentityController {
     required this.initialValue,
     required this.onStateChanged,
   }) {
-    _selectedValue = initialValue.isEmpty ? null : initialValue;
+    _selectedValue = initialValue.isEmpty ? null : stripEmoji(initialValue);
   }
 
   // Getters
@@ -45,17 +46,17 @@ class IdentityController {
   ];
 
   final List<String> countryOptions = [
-    'India 🇮🇳',
-    'USA 🇺🇸',
-    "Australia 🇦🇺",
-    "Canada 🇨🇦",
-    "UK 🇬🇧",
-    "Germany 🇩🇪",
-    "France 🇫🇷",
-    "Italy 🇮🇹",
-    "Spain 🇪🇸",
-    "Japan 🇯🇵",
-    "China 🇨🇳",
+    'India',
+    'USA',
+    "Australia",
+    "Canada",
+    "UK",
+    "Germany",
+    "France",
+    "Italy",
+    "Spain",
+    "Japan",
+    "China",
   ];
 
   void dispose() {

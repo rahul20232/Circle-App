@@ -1,5 +1,6 @@
 // lib/screens/Auth/register_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Auth/controllers/register_controller.dart';
 
 class RegisterComponents {
@@ -13,15 +14,15 @@ class RegisterComponents {
         Icon(
           Icons.person_add,
           size: 64,
-          color: Colors.green.shade600,
+          color: AppColors.success,
         ),
         SizedBox(height: 24),
         Text(
           'Create Account',
           style: TextStyle(
             fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey.shade800,
+            fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+            color: AppColors.grey800,
           ),
         ),
         SizedBox(height: 8),
@@ -29,7 +30,7 @@ class RegisterComponents {
           'Join us today',
           style: TextStyle(
             fontSize: 16,
-            color: Colors.grey.shade600,
+            color: AppColors.grey600,
           ),
         ),
       ],
@@ -81,7 +82,7 @@ class RegisterComponents {
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 14,
-            color: Colors.grey.shade700,
+            color: AppColors.grey700,
           ),
         ),
         SizedBox(height: 8),
@@ -94,18 +95,18 @@ class RegisterComponents {
             prefixIcon: Icon(prefixIcon, size: 20),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey.shade300),
+              borderSide: BorderSide(color: AppColors.grey300),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey.shade300),
+              borderSide: BorderSide(color: AppColors.grey300),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.green.shade600),
+              borderSide: BorderSide(color: AppColors.success),
             ),
             filled: true,
-            fillColor: Colors.grey.shade50,
+            fillColor: AppColors.grey50,
           ),
         ),
       ],
@@ -120,8 +121,8 @@ class RegisterComponents {
             ? null
             : () => controller.registerWithEmail(context),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.green.shade600,
-          foregroundColor: Colors.white,
+          backgroundColor: AppColors.success,
+          foregroundColor: AppColors.surface,
           padding: EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -134,7 +135,7 @@ class RegisterComponents {
                 width: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.surface),
                 ),
               )
             : Text(
@@ -156,7 +157,7 @@ class RegisterComponents {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             'or',
-            style: TextStyle(color: Colors.grey.shade500),
+            style: TextStyle(color: AppColors.grey500),
           ),
         ),
         Expanded(child: Divider()),
@@ -170,11 +171,11 @@ class RegisterComponents {
   //     width: double.infinity,
   //     child: OutlinedButton.icon(
   //       onPressed: controller.isLoading ? null : () => controller.signInWithGoogle(context),
-  //       icon: Icon(Icons.login, color: Colors.red.shade600),
+  //       icon: Icon(Icons.login, color: AppColors.danger),
   //       label: Text(
   //         'Continue with Google',
   //         style: TextStyle(
-  //           color: Colors.red.shade600,
+  //           color: AppColors.danger,
   //           fontWeight: FontWeight.w500,
   //           fontSize: 16,
   //         ),
@@ -184,7 +185,7 @@ class RegisterComponents {
   //         shape: RoundedRectangleBorder(
   //           borderRadius: BorderRadius.circular(8),
   //         ),
-  //         side: BorderSide(color: Colors.red.shade600),
+  //         side: BorderSide(color: AppColors.danger),
   //       ),
   //     ),
   //   );
@@ -196,14 +197,14 @@ class RegisterComponents {
       children: [
         Text(
           'Already have an account? ',
-          style: TextStyle(color: Colors.grey.shade600),
+          style: TextStyle(color: AppColors.grey600),
         ),
         GestureDetector(
           onTap: () => controller.navigateToLogin(context),
           child: Text(
             'Sign In',
             style: TextStyle(
-              color: Colors.green.shade600,
+              color: AppColors.success,
               fontWeight: FontWeight.w600,
             ),
           ),

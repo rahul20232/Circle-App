@@ -1,18 +1,21 @@
 import 'dart:convert';
+import 'package:circle_app/services/core/backend_config.dart';
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
 import '../models/chat_model.dart';
 import 'api_service.dart';
+import '../demo/demo_mode.dart';
 
 class ChatService {
   static const String baseUrl =
-      'https://circle-app-production-09eb.up.railway.app/api';
+      BackendConfig.apiUrl;
   static const String wsUrl =
-      'wss://circle-app-production-09eb.up.railway.app/api';
+      BackendConfig.wsUrl;
 
   WebSocketChannel? _channel;
+  DemoSocket? _demoSocket; // demo builds: fake socket instead of a real connection
   StreamController<WebSocketMessage>? _messageController;
   Timer? _heartbeatTimer;
   Timer? _reconnectTimer;
@@ -52,6 +55,13 @@ class ChatService {
     try {
       _currentUserId = userId;
       _messageController = StreamController<WebSocketMessage>.broadcast();
+
+      if (kDemoMode) {
+        _demoSocket = DemoSocket((type, data) =>
+            _messageController?.add(WebSocketMessage(type: type, data: data)));
+        _isConnected = true;
+        return;
+      }
 
       final token = await ApiService.getAuthToken();
       if (token == null) {
@@ -162,6 +172,10 @@ class ChatService {
 
   // Send message via WebSocket
   void _sendWebSocketMessage(String type, Map<String, dynamic> data) {
+    if (kDemoMode) {
+      _demoSocket?.send(type, data);
+      return;
+    }
     if (_channel != null && _isConnected) {
       try {
         final message = WebSocketMessage(type: type, data: data);

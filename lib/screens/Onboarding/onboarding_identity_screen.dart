@@ -1,5 +1,6 @@
 // lib/screens/Onboarding/onboarding_identity_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Onboarding/controllers/onboarding_identity_controller.dart';
 import 'package:circle_app/screens/Onboarding/components/onboarding_identity_components.dart';
 import 'package:circle_app/screens/Onboarding/components/unified_progress_component.dart';
@@ -74,23 +75,23 @@ class OnboardingIdentityScreenState extends State<OnboardingIdentityScreen>
     final personalityData = widget.personalityData ?? {};
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         elevation: 0,
         title: Text(
           'Identity',
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.ink,
           ),
         ),
         centerTitle: true,
         leading: _controller.isFirstQuestion
             ? null
             : IconButton(
-                icon: const Icon(Icons.arrow_back, color: Colors.black),
+                icon: const Icon(Icons.arrow_back, color: AppColors.ink),
                 onPressed: _controller.goToPreviousQuestion,
               ),
       ),

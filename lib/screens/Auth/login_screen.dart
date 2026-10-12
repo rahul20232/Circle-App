@@ -1,5 +1,6 @@
 // lib/screens/Auth/login_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Auth/controllers/login_controller.dart';
 import 'package:circle_app/screens/Auth/components/login_components.dart';
 import 'package:circle_app/screens/Onboarding/initial_onboarding_screen.dart';
@@ -41,14 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            icon: Icon(Icons.close, color: Colors.black, size: 28),
+            icon: Icon(Icons.close, color: AppColors.ink, size: 28),
             onPressed: () {
               Navigator.of(context).pushAndRemoveUntil(
                 PageRouteBuilder(
@@ -95,8 +96,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       'Sign in',
                       style: TextStyle(
                         fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+                        color: AppColors.ink,
                       ),
                     ),
                     const SizedBox(height: 40),
@@ -114,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               SnackBar(
                                 content: Text(
                                     'Please enter your email address first'),
-                                backgroundColor: Colors.red,
+                                backgroundColor: AppColors.danger,
                               ),
                             );
                             return;
@@ -131,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Forgot your password?',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.black,
+                            color: AppColors.ink,
                             decoration: TextDecoration.underline,
                             fontWeight: FontWeight.w500,
                           ),

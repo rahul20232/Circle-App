@@ -1,5 +1,6 @@
 // lib/screens/Profile/Settings/delete_account_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/Settings/controllers/delete_account_controller.dart';
 
 class DeleteAccountComponents {
@@ -11,23 +12,23 @@ class DeleteAccountComponents {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.red.shade50,
+        color: AppColors.dangerSoft,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.red.shade200),
+        border: Border.all(color: AppColors.dangerSoft),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(Icons.warning, color: Colors.red.shade600),
+              Icon(Icons.warning, color: AppColors.danger),
               const SizedBox(width: 8),
               Text(
                 "Warning",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.red.shade600,
+                  color: AppColors.danger,
                 ),
               ),
             ],
@@ -37,7 +38,7 @@ class DeleteAccountComponents {
             "This action cannot be undone. Deleting your account will permanently remove:\n\n• Your profile and all personal information\n• Your booking history\n• Your preferences and settings\n• All associated data",
             style: TextStyle(
               fontSize: 14,
-              color: Colors.red.shade700,
+              color: AppColors.danger,
               height: 1.4,
             ),
           ),
@@ -60,7 +61,7 @@ class DeleteAccountComponents {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Colors.grey.shade700,
+            color: AppColors.grey700,
           ),
         ),
         const SizedBox(height: 10),
@@ -70,25 +71,25 @@ class DeleteAccountComponents {
           decoration: InputDecoration(
             hintText: "Password",
             filled: true,
-            fillColor: Colors.white,
+            fillColor: AppColors.surface,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.shade300),
+              borderSide: BorderSide(color: AppColors.grey300),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.shade300),
+              borderSide: BorderSide(color: AppColors.grey300),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.black),
+              borderSide: BorderSide(color: AppColors.ink),
             ),
             suffixIcon: IconButton(
               icon: Icon(
                 controller.showPassword
                     ? Icons.visibility
                     : Icons.visibility_off,
-                color: Colors.grey.shade600,
+                color: AppColors.grey600,
               ),
               onPressed: controller.togglePasswordVisibility,
             ),
@@ -107,7 +108,7 @@ class DeleteAccountComponents {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Colors.grey.shade700,
+            color: AppColors.grey700,
           ),
         ),
         const SizedBox(height: 10),
@@ -116,18 +117,18 @@ class DeleteAccountComponents {
           decoration: InputDecoration(
             hintText: "delete my account",
             filled: true,
-            fillColor: Colors.white,
+            fillColor: AppColors.surface,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.shade300),
+              borderSide: BorderSide(color: AppColors.grey300),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.shade300),
+              borderSide: BorderSide(color: AppColors.grey300),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.black),
+              borderSide: BorderSide(color: AppColors.ink),
             ),
           ),
         ),
@@ -148,8 +149,8 @@ class DeleteAccountComponents {
                   ? null
                   : () => controller.deleteAccount(context),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
+                backgroundColor: AppColors.danger,
+                foregroundColor: AppColors.surface,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -162,7 +163,7 @@ class DeleteAccountComponents {
                       width: 20,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        color: Colors.white,
+                        color: AppColors.surface,
                       ),
                     )
                   : Text(
@@ -170,7 +171,7 @@ class DeleteAccountComponents {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                        color: AppColors.surface,
                       ),
                     ),
             ),
@@ -184,17 +185,17 @@ class DeleteAccountComponents {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: isError ? Colors.red.shade50 : Colors.green.shade50,
+        color: isError ? AppColors.dangerSoft : AppColors.successSoft,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: isError ? Colors.red.shade200 : Colors.green.shade200,
+          color: isError ? AppColors.dangerSoft : AppColors.successSoft,
         ),
       ),
       child: Row(
         children: [
           Icon(
             isError ? Icons.error_outline : Icons.check_circle_outline,
-            color: isError ? Colors.red.shade600 : Colors.green.shade600,
+            color: isError ? AppColors.danger : AppColors.success,
             size: 16,
           ),
           SizedBox(width: 8),
@@ -202,7 +203,7 @@ class DeleteAccountComponents {
             child: Text(
               message,
               style: TextStyle(
-                color: isError ? Colors.red.shade700 : Colors.green.shade700,
+                color: isError ? AppColors.danger : AppColors.success,
                 fontSize: 12,
               ),
             ),
@@ -216,23 +217,23 @@ class DeleteAccountComponents {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.blue.shade50,
+        color: AppColors.infoSoft,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.blue.shade200),
+        border: Border.all(color: AppColors.infoSoft),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(Icons.info_outline, color: Colors.blue.shade600, size: 20),
+              Icon(Icons.info_outline, color: AppColors.info, size: 20),
               SizedBox(width: 8),
               Text(
                 'Security Information',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.blue.shade800,
+                  color: AppColors.info,
                 ),
               ),
             ],
@@ -242,7 +243,7 @@ class DeleteAccountComponents {
             'Account deletion requires your password for security verification. This ensures only you can delete your account.',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.blue.shade700,
+              color: AppColors.info,
             ),
           ),
         ],
@@ -278,7 +279,7 @@ class DeleteAccountComponents {
         children: [
           Icon(
             isCorrect ? Icons.check_circle : Icons.cancel,
-            color: isCorrect ? Colors.green : Colors.red,
+            color: isCorrect ? AppColors.success : AppColors.danger,
             size: 16,
           ),
           SizedBox(width: 6),
@@ -287,7 +288,7 @@ class DeleteAccountComponents {
                 ? 'Confirmation text is correct'
                 : 'Please type exactly: "${controller.requiredConfirmationText}"',
             style: TextStyle(
-              color: isCorrect ? Colors.green.shade700 : Colors.red.shade700,
+              color: isCorrect ? AppColors.success : AppColors.danger,
               fontSize: 12,
             ),
           ),
@@ -298,13 +299,13 @@ class DeleteAccountComponents {
 
   Widget buildDeleteConfirmationDialog(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       title: Text(
         'Final Confirmation',
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w600,
-          color: Colors.red.shade700,
+          color: AppColors.danger,
         ),
       ),
       content: Column(
@@ -320,7 +321,7 @@ class DeleteAccountComponents {
             'This will permanently delete all your data and cannot be reversed.',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.red.shade600,
+              color: AppColors.danger,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -332,7 +333,7 @@ class DeleteAccountComponents {
           child: Text(
             'Cancel',
             style: TextStyle(
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -345,7 +346,7 @@ class DeleteAccountComponents {
           child: Text(
             'Delete Forever',
             style: TextStyle(
-              color: Colors.red,
+              color: AppColors.danger,
               fontWeight: FontWeight.w600,
             ),
           ),

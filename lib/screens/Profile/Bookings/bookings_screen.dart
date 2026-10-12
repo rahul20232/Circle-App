@@ -1,5 +1,6 @@
 // lib/screens/Profile/Bookings/bookings_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/Bookings/controllers/bookings_controller.dart';
 import 'package:circle_app/screens/Profile/Bookings/components/bookings_components.dart';
 import 'package:circle_app/services/push_notification_service.dart';
@@ -45,12 +46,12 @@ class _BookingsScreenState extends State<BookingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: AppColors.ink),
           onPressed: () => _controller.navigateToMainScreen(context),
         ),
         title: Text(
@@ -58,18 +59,18 @@ class _BookingsScreenState extends State<BookingsScreen> {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.ink,
           ),
         ),
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications_outlined, color: Colors.black),
+            icon: Icon(Icons.notifications_outlined, color: AppColors.ink),
             onPressed: () => _components.showNotificationTestDialog(context),
             tooltip: 'Test Notification',
           ),
           IconButton(
-            icon: Icon(Icons.refresh, color: Colors.black),
+            icon: Icon(Icons.refresh, color: AppColors.ink),
             onPressed: _controller.loadUserBookings,
           ),
         ],
@@ -81,7 +82,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
   Widget _buildBody() {
     if (_controller.isLoading) {
       return Center(
-        child: CircularProgressIndicator(color: Color(0xFF6B46C1)),
+        child: CircularProgressIndicator(color: AppColors.accent),
       );
     }
 

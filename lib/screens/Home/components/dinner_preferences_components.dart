@@ -1,5 +1,6 @@
 // lib/components/dinner_preferences_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import '../../../models/dinner_model.dart';
 
 class DinnerPreferencesComponents {
@@ -9,9 +10,9 @@ class DinnerPreferencesComponents {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade300, width: 1),
+        border: Border.all(color: AppColors.grey300, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,7 +21,7 @@ class DinnerPreferencesComponents {
             'Selected Dinner',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -30,7 +31,7 @@ class DinnerPreferencesComponents {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: AppColors.ink,
             ),
           ),
           const SizedBox(height: 4),
@@ -38,7 +39,7 @@ class DinnerPreferencesComponents {
             '${dinner.formattedDate} at ${dinner.formattedTime}',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
             ),
           ),
           const SizedBox(height: 4),
@@ -47,7 +48,7 @@ class DinnerPreferencesComponents {
               Icon(
                 Icons.location_on_outlined,
                 size: 14,
-                color: Colors.grey.shade600,
+                color: AppColors.grey600,
               ),
               const SizedBox(width: 4),
               Expanded(
@@ -55,7 +56,7 @@ class DinnerPreferencesComponents {
                   dinner.location,
                   style: TextStyle(
                     fontSize: 14,
-                    color: Colors.grey.shade600,
+                    color: AppColors.grey600,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -74,7 +75,7 @@ class DinnerPreferencesComponents {
       style: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w600,
-        color: Colors.black,
+        color: AppColors.ink,
       ),
     );
   }
@@ -98,9 +99,9 @@ class DinnerPreferencesComponents {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300, width: 1),
+        border: Border.all(color: AppColors.grey300, width: 1),
       ),
       child: Column(
         children: availableLanguages.map((language) {
@@ -116,7 +117,7 @@ class DinnerPreferencesComponents {
                     language,
                     style: const TextStyle(
                       fontSize: 16,
-                      color: Colors.black,
+                      color: AppColors.ink,
                     ),
                   ),
                   buildCheckbox(isSelected),
@@ -137,9 +138,9 @@ class DinnerPreferencesComponents {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300, width: 1),
+        border: Border.all(color: AppColors.grey300, width: 1),
       ),
       child: Column(
         children: budgetOptions.asMap().entries.map((entry) {
@@ -162,7 +163,7 @@ class DinnerPreferencesComponents {
                         budget,
                         style: const TextStyle(
                           fontSize: 16,
-                          color: Colors.black,
+                          color: AppColors.ink,
                         ),
                       ),
                       buildCheckbox(isSelected),
@@ -173,7 +174,7 @@ class DinnerPreferencesComponents {
               if (!isLast)
                 Divider(
                   height: 1,
-                  color: Colors.grey.shade300,
+                  color: AppColors.grey300,
                   indent: 16,
                   endIndent: 16,
                 ),
@@ -191,9 +192,9 @@ class DinnerPreferencesComponents {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300, width: 1),
+        border: Border.all(color: AppColors.grey300, width: 1),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Row(
@@ -204,7 +205,7 @@ class DinnerPreferencesComponents {
               'I have dietary restrictions (Optional)',
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.black,
+                color: AppColors.ink,
               ),
               overflow: TextOverflow.ellipsis,
             ),
@@ -212,10 +213,10 @@ class DinnerPreferencesComponents {
           Switch(
             value: hasDietaryRestrictions,
             onChanged: onToggle,
-            activeColor: Colors.white,
-            activeTrackColor: Color(0xFF00C853),
-            inactiveThumbColor: Colors.white,
-            inactiveTrackColor: Colors.grey.shade400,
+            activeColor: AppColors.surface,
+            activeTrackColor: AppColors.success,
+            inactiveThumbColor: AppColors.surface,
+            inactiveTrackColor: AppColors.grey400,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ],
@@ -231,9 +232,9 @@ class DinnerPreferencesComponents {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300, width: 1),
+        border: Border.all(color: AppColors.grey300, width: 1),
       ),
       child: Column(
         children: dietaryOptions.asMap().entries.map((entry) {
@@ -256,7 +257,7 @@ class DinnerPreferencesComponents {
                         option,
                         style: const TextStyle(
                           fontSize: 16,
-                          color: Colors.black,
+                          color: AppColors.ink,
                         ),
                       ),
                       buildCheckbox(isSelected),
@@ -267,7 +268,7 @@ class DinnerPreferencesComponents {
               if (!isLast)
                 Divider(
                   height: 1,
-                  color: Colors.grey.shade300,
+                  color: AppColors.grey300,
                   indent: 16,
                   endIndent: 16,
                 ),
@@ -284,12 +285,12 @@ class DinnerPreferencesComponents {
       width: 24,
       height: 24,
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black, width: 2),
+        border: Border.all(color: AppColors.ink, width: 2),
         borderRadius: BorderRadius.circular(4),
-        color: isSelected ? Colors.black : Colors.transparent,
+        color: isSelected ? AppColors.ink : Colors.transparent,
       ),
       child: isSelected
-          ? const Icon(Icons.check, color: Colors.white, size: 16)
+          ? const Icon(Icons.check, color: AppColors.surface, size: 16)
           : null,
     );
   }
@@ -306,8 +307,8 @@ class DinnerPreferencesComponents {
         child: ElevatedButton(
           onPressed: canContinue ? onPressed : null,
           style: ElevatedButton.styleFrom(
-            backgroundColor: canContinue ? Colors.black : Colors.grey,
-            foregroundColor: Colors.white,
+            backgroundColor: canContinue ? AppColors.ink : AppColors.grey500,
+            foregroundColor: AppColors.surface,
             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
@@ -335,9 +336,9 @@ class DinnerPreferencesComponents {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade300, width: 1),
+        border: Border.all(color: AppColors.grey300, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -361,7 +362,7 @@ class DinnerPreferencesComponents {
           title,
           style: TextStyle(
             fontSize: 14,
-            color: Colors.grey.shade600,
+            color: AppColors.grey600,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -370,7 +371,7 @@ class DinnerPreferencesComponents {
           value,
           style: const TextStyle(
             fontSize: 16,
-            color: Colors.black,
+            color: AppColors.ink,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -386,8 +387,8 @@ class DinnerPreferencesComponents {
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),
-          side: const BorderSide(color: Colors.black, width: 1.5),
-          backgroundColor: Colors.white,
+          side: const BorderSide(color: AppColors.ink, width: 1.5),
+          backgroundColor: AppColors.surface,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -396,7 +397,7 @@ class DinnerPreferencesComponents {
           'Edit my preferences',
           style: TextStyle(
             fontSize: 16,
-            color: Colors.black,
+            color: AppColors.ink,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -416,8 +417,8 @@ class DinnerPreferencesComponents {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.white,
+            backgroundColor: AppColors.ink,
+            foregroundColor: AppColors.surface,
             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
@@ -431,7 +432,7 @@ class DinnerPreferencesComponents {
                       width: 20,
                       height: 20,
                       child: CircularProgressIndicator(
-                        color: Colors.white,
+                        color: AppColors.surface,
                         strokeWidth: 2,
                       ),
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 
 class SwipeableBookingCard extends StatefulWidget {
   final String title;
@@ -188,7 +189,7 @@ class _SwipeableBookingCardState extends State<SwipeableBookingCard>
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: const Color(0xFFFEF1DE),
+          backgroundColor: AppColors.background,
           title: const Text('Remove Booking'),
           content: Text(
             'Are you sure you want to remove your booking for "${widget.title}"? This action cannot be undone.',
@@ -199,7 +200,7 @@ class _SwipeableBookingCardState extends State<SwipeableBookingCard>
               child: Text(
                 'Keep Booking',
                 style: TextStyle(
-                  color: Colors.grey.shade600,
+                  color: AppColors.grey600,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -209,7 +210,7 @@ class _SwipeableBookingCardState extends State<SwipeableBookingCard>
                 Navigator.of(context).pop();
                 widget.onCancel();
               },
-              style: TextButton.styleFrom(foregroundColor: Colors.red),
+              style: TextButton.styleFrom(foregroundColor: AppColors.danger),
               child: const Text(
                 'Remove Booking',
                 style: TextStyle(fontWeight: FontWeight.w600),
@@ -222,16 +223,16 @@ class _SwipeableBookingCardState extends State<SwipeableBookingCard>
   }
 
   Color get _statusColor {
-    if (widget.isPastDinner) return Colors.orange.shade600;
+    if (widget.isPastDinner) return AppColors.warning;
     switch (widget.status.toLowerCase()) {
       case 'confirmed':
-        return Colors.green.shade600;
+        return AppColors.success;
       case 'pending':
-        return Colors.orange.shade600;
+        return AppColors.warning;
       case 'cancelled':
-        return Colors.red.shade600;
+        return AppColors.danger;
       default:
-        return Colors.grey.shade600;
+        return AppColors.grey600;
     }
   }
 
@@ -262,7 +263,7 @@ class _SwipeableBookingCardState extends State<SwipeableBookingCard>
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.red,
+                    color: AppColors.danger,
                   ),
                   child: Align(
                     alignment: Alignment.centerRight,
@@ -276,7 +277,7 @@ class _SwipeableBookingCardState extends State<SwipeableBookingCard>
                                     widget.status.toLowerCase() == 'cancelled'
                                 ? Icons.delete_outline
                                 : Icons.cancel_outlined,
-                            color: Colors.white,
+                            color: AppColors.surface,
                             size: 28,
                           ),
                           const SizedBox(height: 4),
@@ -286,7 +287,7 @@ class _SwipeableBookingCardState extends State<SwipeableBookingCard>
                                 ? 'Remove'
                                 : 'Cancel',
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: AppColors.surface,
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
                             ),
@@ -340,11 +341,11 @@ class _SwipeableBookingCardState extends State<SwipeableBookingCard>
                               height: 140,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
-                                color: Colors.black,
+                                color: AppColors.ink,
                                 // Add shadow effect that changes with press
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(
+                                    color: AppColors.ink.withOpacity(
                                         0.1 * _shadowAnimation.value),
                                     blurRadius: 8 * _shadowAnimation.value,
                                     offset:
@@ -389,8 +390,8 @@ class _SwipeableBookingCardState extends State<SwipeableBookingCard>
                                                   widget.title,
                                                   style: TextStyle(
                                                     color: widget.isPastDinner
-                                                        ? Colors.grey.shade700
-                                                        : Colors.black,
+                                                        ? AppColors.grey700
+                                                        : AppColors.ink,
                                                     fontFamily: 'Inter',
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w600,
@@ -428,7 +429,7 @@ class _SwipeableBookingCardState extends State<SwipeableBookingCard>
                                           Text(
                                             '${widget.date} at ${widget.time}',
                                             style: TextStyle(
-                                              color: Colors.grey.shade600,
+                                              color: AppColors.grey600,
                                               fontFamily: 'Inter',
                                               fontSize: 13,
                                               fontWeight: FontWeight.w500,
@@ -440,14 +441,14 @@ class _SwipeableBookingCardState extends State<SwipeableBookingCard>
                                               Icon(
                                                 Icons.location_on_outlined,
                                                 size: 12,
-                                                color: Colors.grey.shade600,
+                                                color: AppColors.grey600,
                                               ),
                                               const SizedBox(width: 4),
                                               Expanded(
                                                 child: Text(
                                                   widget.location,
                                                   style: TextStyle(
-                                                    color: Colors.grey.shade600,
+                                                    color: AppColors.grey600,
                                                     fontFamily: 'Inter',
                                                     fontSize: 12,
                                                   ),

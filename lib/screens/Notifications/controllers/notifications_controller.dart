@@ -1,5 +1,6 @@
 // lib/screens/Notifications/notifications_controller.dart
 import 'dart:async';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:circle_app/models/notification_model.dart';
 import 'package:circle_app/services/notification_service.dart';
@@ -173,7 +174,7 @@ class NotificationsController {
         SnackBar(
           content: Text('Notification cleared'),
           duration: Duration(seconds: 2),
-          backgroundColor: Colors.red.shade600,
+          backgroundColor: AppColors.danger,
         ),
       );
     } catch (e) {
@@ -183,7 +184,7 @@ class NotificationsController {
         SnackBar(
           content: Text('Failed to clear notification'),
           duration: Duration(seconds: 2),
-          backgroundColor: Colors.red.shade600,
+          backgroundColor: AppColors.danger,
         ),
       );
     }

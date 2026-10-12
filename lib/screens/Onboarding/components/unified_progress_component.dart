@@ -1,5 +1,6 @@
 // lib/screens/Onboarding/components/unified_progress_component.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 
 class UnifiedProgressComponent extends StatefulWidget {
   final int totalPersonalityQuestions;
@@ -128,7 +129,7 @@ class _UnifiedProgressComponentState extends State<UnifiedProgressComponent>
           width: double.infinity,
           height: 4,
           decoration: BoxDecoration(
-            color: Colors.grey.shade300,
+            color: AppColors.grey300,
             borderRadius: BorderRadius.circular(2),
           ),
           child: ClipRRect(
@@ -139,7 +140,7 @@ class _UnifiedProgressComponentState extends State<UnifiedProgressComponent>
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.orange, Colors.pink],
+                    colors: [AppColors.warning, Colors.pink],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),

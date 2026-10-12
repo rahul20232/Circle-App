@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 
 class Identitycard extends StatelessWidget {
   final String text;
@@ -29,7 +30,7 @@ class Identitycard extends StatelessWidget {
                 height: 130,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.black,
+                  color: AppColors.ink,
                 ),
               ),
 
@@ -43,8 +44,8 @@ class Identitycard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(13),
                     color: isSelected
-                        ? Colors.black
-                        : Color.fromRGBO(250, 250, 250, 1),
+                        ? AppColors.ink
+                        : AppColors.surface,
                   ),
                 ),
               ),
@@ -60,7 +61,7 @@ class Identitycard extends StatelessWidget {
                     child: Icon(
                       Icons.check,
                       size: 40,
-                      color: Colors.white,
+                      color: AppColors.surface,
                     ),
                   ),
                 ),
@@ -82,7 +83,7 @@ class Identitycard extends StatelessWidget {
                           .center, // Changed from left to center for better responsive behavior
                       style: TextStyle(
                         color: isSelected
-                            ? Colors.white
+                            ? AppColors.surface
                             : Color.fromRGBO(0, 0, 0, 1),
                         fontFamily: 'Arial',
                         fontSize: 20,

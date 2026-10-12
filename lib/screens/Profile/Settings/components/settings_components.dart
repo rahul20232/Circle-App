@@ -1,5 +1,6 @@
 // lib/screens/Profile/Settings/settings_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/Settings/controllers/settings_controller.dart';
 
 class SettingsComponents {
@@ -52,7 +53,7 @@ class SettingsComponents {
         style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w700,
-          color: Colors.black,
+          color: AppColors.ink,
         ),
       ),
     );
@@ -61,9 +62,9 @@ class SettingsComponents {
   Widget buildSettingsCard(List<Widget> children) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade400, width: 1),
+        border: Border.all(color: AppColors.grey400, width: 1),
       ),
       child: Column(
         children: children,
@@ -82,9 +83,9 @@ class SettingsComponents {
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 16, color: Colors.black),
+              style: TextStyle(fontSize: 16, color: AppColors.ink),
             ),
-            Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black),
+            Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.ink),
           ],
         ),
       ),
@@ -103,7 +104,7 @@ class SettingsComponents {
           children: [
             Text(
               "Subscribe to Circle",
-              style: TextStyle(fontSize: 16, color: Colors.black),
+              style: TextStyle(fontSize: 16, color: AppColors.ink),
             ),
             controller.isLoading
                 ? SizedBox(
@@ -111,10 +112,10 @@ class SettingsComponents {
                     height: 16,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.ink),
                     ),
                   )
-                : Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black),
+                : Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.ink),
           ],
         ),
       ),
@@ -129,7 +130,7 @@ class SettingsComponents {
             controller.isLoading ? null : () => controller.logout(context),
         style: OutlinedButton.styleFrom(
           padding: EdgeInsets.symmetric(vertical: 14),
-          side: BorderSide(color: Colors.black, width: 1.5),
+          side: BorderSide(color: AppColors.ink, width: 1.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -140,14 +141,14 @@ class SettingsComponents {
                 width: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.ink),
                 ),
               )
             : Text(
                 "Log out",
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.black,
+                  color: AppColors.ink,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -162,8 +163,8 @@ class SettingsComponents {
         onPressed: () => controller.navigateToDeleteAccount(context),
         style: OutlinedButton.styleFrom(
           padding: EdgeInsets.symmetric(vertical: 14),
-          backgroundColor: Colors.white,
-          side: BorderSide(color: Colors.red, width: 1.5),
+          backgroundColor: AppColors.surface,
+          side: BorderSide(color: AppColors.danger, width: 1.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -172,7 +173,7 @@ class SettingsComponents {
           "Delete my account",
           style: TextStyle(
             fontSize: 16,
-            color: Colors.red,
+            color: AppColors.danger,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -186,7 +187,7 @@ class SettingsComponents {
         controller.getFormattedVersion(),
         style: TextStyle(
           fontSize: 14,
-          color: Colors.grey.shade700,
+          color: AppColors.grey700,
         ),
       ),
     );
@@ -196,15 +197,15 @@ class SettingsComponents {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: AppColors.grey300),
       ),
       child: Row(
         children: [
           CircleAvatar(
-            backgroundColor: Colors.grey.shade300,
-            child: Icon(Icons.person, color: Colors.grey.shade600),
+            backgroundColor: AppColors.grey300,
+            child: Icon(Icons.person, color: AppColors.grey600),
           ),
           SizedBox(width: 12),
           Expanded(
@@ -216,20 +217,20 @@ class SettingsComponents {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                    color: AppColors.ink,
                   ),
                 ),
                 Text(
                   'View Profile',
                   style: TextStyle(
                     fontSize: 14,
-                    color: Colors.grey.shade600,
+                    color: AppColors.grey600,
                   ),
                 ),
               ],
             ),
           ),
-          Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black),
+          Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.ink),
         ],
       ),
     );
@@ -239,10 +240,10 @@ class SettingsComponents {
     if (!controller.isLoading) return SizedBox.shrink();
 
     return Container(
-      color: Colors.black.withOpacity(0.3),
+      color: AppColors.ink.withOpacity(0.3),
       child: Center(
         child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          valueColor: AlwaysStoppedAnimation<Color>(AppColors.surface),
         ),
       ),
     );
@@ -258,7 +259,7 @@ class SettingsComponents {
         itemsWithDividers.add(
           Divider(
             height: 1,
-            color: Colors.grey.shade300,
+            color: AppColors.grey300,
             indent: 16,
             endIndent: 16,
           ),
@@ -284,17 +285,17 @@ class SettingsComponents {
           children: [
             Icon(
               icon,
-              color: iconColor ?? Colors.grey.shade600,
+              color: iconColor ?? AppColors.grey600,
               size: 20,
             ),
             SizedBox(width: 12),
             Expanded(
               child: Text(
                 title,
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: TextStyle(fontSize: 16, color: AppColors.ink),
               ),
             ),
-            Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black),
+            Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.ink),
           ],
         ),
       ),
@@ -317,14 +318,14 @@ class SettingsComponents {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  style: TextStyle(fontSize: 16, color: AppColors.ink),
                 ),
                 if (subtitle != null)
                   Text(
                     subtitle,
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey.shade600,
+                      color: AppColors.grey600,
                     ),
                   ),
               ],
@@ -333,10 +334,10 @@ class SettingsComponents {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: Colors.white,
-            activeTrackColor: Color(0xFF00C853),
-            inactiveThumbColor: Colors.white,
-            inactiveTrackColor: Colors.grey.shade400,
+            activeColor: AppColors.surface,
+            activeTrackColor: AppColors.success,
+            inactiveThumbColor: AppColors.surface,
+            inactiveTrackColor: AppColors.grey400,
           ),
         ],
       ),
@@ -348,7 +349,7 @@ class SettingsComponents {
     String title,
     String badge,
     VoidCallback onTap, {
-    Color badgeColor = Colors.red,
+    Color badgeColor = AppColors.danger,
   }) {
     return InkWell(
       onTap: onTap,
@@ -360,7 +361,7 @@ class SettingsComponents {
             Expanded(
               child: Text(
                 title,
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: TextStyle(fontSize: 16, color: AppColors.ink),
               ),
             ),
             Row(
@@ -375,14 +376,14 @@ class SettingsComponents {
                   child: Text(
                     badge,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppColors.surface,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
                 SizedBox(width: 8),
-                Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black),
+                Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.ink),
               ],
             ),
           ],

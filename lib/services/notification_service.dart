@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:circle_app/services/core/backend_config.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:circle_app/services/api_service.dart';
@@ -7,7 +8,7 @@ import 'core/token_manager.dart';
 
 class NotificationEventService {
   static const String baseUrl =
-      'https://circle-app-production-09eb.up.railway.app/api';
+      BackendConfig.apiUrl;
 
   static final NotificationEventService _instance =
       NotificationEventService._internal();

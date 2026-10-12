@@ -1,5 +1,6 @@
 // lib/components/home_screen_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import '../../../models/dinner_model.dart';
 import '../../../models/rating_model.dart';
 import '../../../components/star_rating.dart';
@@ -14,8 +15,8 @@ class HomeScreenComponents {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xFF6B46C1), // Purple
-            Color(0xFF9333EA), // Lighter purple
+            AppColors.accent, // Purple
+            AppColors.accentDeep, // Lighter purple
           ],
         ),
       ),
@@ -36,22 +37,15 @@ class HomeScreenComponents {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          const SizedBox(height: 10),
-          // Rating stars or icon
-          const Icon(
-            Icons.star_border_rounded,
-            color: Colors.white,
-            size: 40,
-          ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 4),
           // Rate your dinner title
           const Text(
             'Rate your dinner',
             style: TextStyle(
-              color: Colors.white,
+              color: AppColors.surface,
               fontSize: 24,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1.2,
+              fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+              letterSpacing: -0.2,
             ),
           ),
           const SizedBox(height: 8),
@@ -59,7 +53,7 @@ class HomeScreenComponents {
           Text(
             ratableBooking.dinnerTitle,
             style: TextStyle(
-              color: Colors.white.withOpacity(0.9),
+              color: AppColors.surface.withOpacity(0.9),
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
@@ -70,8 +64,8 @@ class HomeScreenComponents {
           InteractiveStarRating(
             initialRating: currentRating,
             size: 35,
-            activeColor: Colors.amber,
-            inactiveColor: Colors.white.withOpacity(0.3),
+            activeColor: AppColors.surface,
+            inactiveColor: AppColors.surface.withOpacity(0.3),
             onRatingChanged: onRatingChanged,
           ),
 
@@ -83,8 +77,8 @@ class HomeScreenComponents {
               child: ElevatedButton(
                 onPressed: isSubmittingRating ? null : onSubmitRating,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: const Color(0xFF6B46C1),
+                  backgroundColor: AppColors.surface,
+                  foregroundColor: AppColors.accent,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -98,7 +92,7 @@ class HomeScreenComponents {
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
                           valueColor: AlwaysStoppedAnimation<Color>(
-                            Color(0xFF6B46C1),
+                            AppColors.accent,
                           ),
                         ),
                       )
@@ -120,7 +114,7 @@ class HomeScreenComponents {
             child: OutlinedButton(
               onPressed: onStartConnecting,
               style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: Colors.white, width: 2),
+                side: const BorderSide(color: AppColors.surface, width: 2),
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -131,7 +125,7 @@ class HomeScreenComponents {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.white,
+                  color: AppColors.surface,
                 ),
               ),
             ),
@@ -151,19 +145,19 @@ class HomeScreenComponents {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: AppColors.surface.withOpacity(0.2),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Colors.white.withOpacity(0.3)),
+              border: Border.all(color: AppColors.surface.withOpacity(0.3)),
             ),
             child: const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.location_on, color: Colors.white, size: 16),
+                Icon(Icons.location_on, color: AppColors.surface, size: 16),
                 SizedBox(width: 8),
                 Text(
                   'Bangalore',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AppColors.surface,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
@@ -176,10 +170,10 @@ class HomeScreenComponents {
           const Text(
             'CENTRAL BANGALORE',
             style: TextStyle(
-              color: Colors.white,
+              color: AppColors.surface,
               fontSize: 24,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1.2,
+              fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+              letterSpacing: -0.2,
             ),
           ),
           const SizedBox(height: 8),
@@ -190,7 +184,7 @@ class HomeScreenComponents {
               Text(
                 'Change location',
                 style: TextStyle(
-                  color: Colors.white.withOpacity(0.8),
+                  color: AppColors.surface.withOpacity(0.8),
                   fontSize: 14,
                   decoration: TextDecoration.underline,
                 ),
@@ -198,7 +192,7 @@ class HomeScreenComponents {
               const SizedBox(width: 4),
               Icon(
                 Icons.refresh,
-                color: Colors.white.withOpacity(0.8),
+                color: AppColors.surface.withOpacity(0.8),
                 size: 16,
               ),
             ],
@@ -214,7 +208,7 @@ class HomeScreenComponents {
       child: Padding(
         padding: EdgeInsets.all(50),
         child: CircularProgressIndicator(
-          color: Color(0xFF6B46C1),
+          color: AppColors.accent,
         ),
       ),
     );
@@ -230,18 +224,18 @@ class HomeScreenComponents {
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.symmetric(vertical: 20),
       decoration: BoxDecoration(
-        color: Colors.red.shade50,
+        color: AppColors.dangerSoft,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.red.shade200),
+        border: Border.all(color: AppColors.dangerSoft),
       ),
       child: Column(
         children: [
-          Icon(Icons.error_outline, color: Colors.red.shade600, size: 40),
+          Icon(Icons.error_outline, color: AppColors.danger, size: 40),
           const SizedBox(height: 10),
           Text(
             errorMessage,
             style: TextStyle(
-              color: Colors.red.shade600,
+              color: AppColors.danger,
               fontSize: 16,
             ),
             textAlign: TextAlign.center,
@@ -252,8 +246,8 @@ class HomeScreenComponents {
             icon: const Icon(Icons.refresh),
             label: const Text('Retry'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red.shade600,
-              foregroundColor: Colors.white,
+              backgroundColor: AppColors.danger,
+              foregroundColor: AppColors.surface,
             ),
           ),
         ],
@@ -271,7 +265,7 @@ class HomeScreenComponents {
           Icon(
             Icons.restaurant_menu_outlined,
             size: 80,
-            color: Colors.grey.shade400,
+            color: AppColors.grey400,
           ),
           const SizedBox(height: 20),
           Text(
@@ -279,7 +273,7 @@ class HomeScreenComponents {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
             ),
           ),
           const SizedBox(height: 10),
@@ -287,7 +281,7 @@ class HomeScreenComponents {
             'Check back soon for new dining opportunities!',
             style: TextStyle(
               fontSize: 16,
-              color: Colors.grey.shade500,
+              color: AppColors.grey500,
             ),
             textAlign: TextAlign.center,
           ),
@@ -336,13 +330,15 @@ class HomeScreenComponents {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: canBook ? Colors.black : Colors.grey.shade400,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          // The screen's one key action gets the accent.
+          backgroundColor: canBook ? AppColors.accent : AppColors.grey300,
+          foregroundColor: AppColors.surface,
+          padding: const EdgeInsets.symmetric(vertical: 18),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(999),
           ),
-          elevation: 2,
+          elevation: 0,
+          shadowColor: Colors.transparent,
         ),
         child: Text(
           buttonText,
@@ -368,8 +364,8 @@ class HomeScreenComponents {
           title,
           style: TextStyle(
             fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey.shade800,
+            fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+            color: AppColors.grey800,
           ),
         ),
         const SizedBox(height: 8),
@@ -377,7 +373,7 @@ class HomeScreenComponents {
           subtitle,
           style: TextStyle(
             fontSize: 16,
-            color: Colors.grey.shade600,
+            color: AppColors.grey600,
           ),
         ),
         const SizedBox(height: 20),
@@ -393,7 +389,7 @@ class HomeScreenComponents {
   }) {
     return Container(
       decoration: const BoxDecoration(
-        color: Color(0xFFFEF1DE),
+        color: AppColors.background,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(24),
           topRight: Radius.circular(24),

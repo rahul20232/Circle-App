@@ -1,5 +1,6 @@
 // lib/screens/Profile/Bookings/booking_details_controller.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:circle_app/models/dinner_model.dart';
@@ -115,18 +116,18 @@ class BookingDetailsController {
   // Helper method to get status color
   Color getStatusColor(String status) {
     if (isPastDinner) {
-      return Colors.orange.shade600; // Orange for past dinners
+      return AppColors.warning; // Orange for past dinners
     }
 
     switch (status.toLowerCase()) {
       case 'confirmed':
-        return Colors.green;
+        return AppColors.success;
       case 'pending':
-        return Colors.orange;
+        return AppColors.warning;
       case 'cancelled':
-        return Colors.red;
+        return AppColors.danger;
       default:
-        return Colors.grey;
+        return AppColors.grey500;
     }
   }
 
@@ -216,7 +217,7 @@ class BookingDetailsController {
           scaffoldMessenger.showSnackBar(
             SnackBar(
               content: Text('Booking cancelled successfully'),
-              backgroundColor: Colors.green,
+              backgroundColor: AppColors.success,
             ),
           );
         } catch (e) {
@@ -228,7 +229,7 @@ class BookingDetailsController {
           scaffoldMessenger.showSnackBar(
             SnackBar(
               content: Text('Failed to cancel booking'),
-              backgroundColor: Colors.red,
+              backgroundColor: AppColors.danger,
             ),
           );
         } catch (e) {
@@ -247,7 +248,7 @@ class BookingDetailsController {
         scaffoldMessenger.showSnackBar(
           SnackBar(
             content: Text('Error: ${e.toString()}'),
-            backgroundColor: Colors.red,
+            backgroundColor: AppColors.danger,
           ),
         );
       } catch (snackError) {

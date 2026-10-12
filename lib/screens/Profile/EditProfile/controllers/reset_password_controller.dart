@@ -1,5 +1,6 @@
 // lib/screens/Auth/reset_password_controller.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import '../../../../services/auth_service.dart';
 
 class ResetPasswordController {
@@ -76,7 +77,7 @@ class ResetPasswordController {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: isError ? Colors.red : Colors.green,
+        backgroundColor: isError ? AppColors.danger : AppColors.success,
         duration: Duration(seconds: isError ? 3 : 4),
       ),
     );

@@ -1,5 +1,6 @@
 // lib/screens/Profile/Settings/event_alert_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/Settings/controllers/event_alert_controller.dart';
 
 class EventAlertComponents {
@@ -21,9 +22,9 @@ class EventAlertComponents {
   Widget buildNotificationOptions() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300, width: 1),
+        border: Border.all(color: AppColors.grey300, width: 1),
       ),
       child: Column(
         children: [
@@ -67,17 +68,17 @@ class EventAlertComponents {
             title,
             style: TextStyle(
               fontSize: 16,
-              color: Colors.black,
+              color: AppColors.ink,
               fontWeight: FontWeight.w400,
             ),
           ),
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: Colors.white,
-            activeTrackColor: Color(0xFF00C853),
-            inactiveThumbColor: Colors.white,
-            inactiveTrackColor: Colors.grey.shade400,
+            activeColor: AppColors.surface,
+            activeTrackColor: AppColors.success,
+            inactiveThumbColor: AppColors.surface,
+            inactiveTrackColor: AppColors.grey400,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ],
@@ -88,7 +89,7 @@ class EventAlertComponents {
   Widget buildDivider() {
     return Divider(
       height: 1,
-      color: Colors.grey.shade300,
+      color: AppColors.grey300,
       indent: 16,
       endIndent: 16,
     );
@@ -102,8 +103,8 @@ class EventAlertComponents {
         child: ElevatedButton(
           onPressed: () => controller.saveAndNavigateBack(context),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.white,
+            backgroundColor: AppColors.ink,
+            foregroundColor: AppColors.surface,
             padding: EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
@@ -126,15 +127,15 @@ class EventAlertComponents {
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.blue.shade50,
+        color: AppColors.infoSoft,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.blue.shade200),
+        border: Border.all(color: AppColors.infoSoft),
       ),
       child: Row(
         children: [
           Icon(
             Icons.info_outline,
-            color: Colors.blue.shade600,
+            color: AppColors.info,
             size: 16,
           ),
           SizedBox(width: 8),
@@ -142,7 +143,7 @@ class EventAlertComponents {
             child: Text(
               controller.getNotificationSummary(),
               style: TextStyle(
-                color: Colors.blue.shade700,
+                color: AppColors.info,
                 fontSize: 14,
               ),
             ),
@@ -156,9 +157,9 @@ class EventAlertComponents {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: AppColors.grey50,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: AppColors.grey200),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -212,15 +213,15 @@ class EventAlertComponents {
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.orange.shade50,
+        color: AppColors.warningSoft,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.orange.shade200),
+        border: Border.all(color: AppColors.warningSoft),
       ),
       child: Row(
         children: [
           Icon(
             Icons.warning_outlined,
-            color: Colors.orange.shade600,
+            color: AppColors.warning,
             size: 16,
           ),
           SizedBox(width: 8),
@@ -228,7 +229,7 @@ class EventAlertComponents {
             child: Text(
               'You won\'t receive any event notifications with all options disabled.',
               style: TextStyle(
-                color: Colors.orange.shade700,
+                color: AppColors.warning,
                 fontSize: 12,
               ),
             ),
@@ -243,7 +244,7 @@ class EventAlertComponents {
       padding: EdgeInsets.all(12),
       margin: EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: AppColors.grey50,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -262,7 +263,7 @@ class EventAlertComponents {
             description,
             style: TextStyle(
               fontSize: 12,
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
             ),
           ),
         ],
@@ -308,9 +309,9 @@ class EventAlertComponents {
       width: double.infinity,
       padding: padding ?? EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300, width: 1),
+        border: Border.all(color: AppColors.grey300, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

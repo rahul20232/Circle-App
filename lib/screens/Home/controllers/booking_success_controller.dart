@@ -57,6 +57,6 @@ class BookingSuccessController {
   }
 
   static String getSuccessMessage() {
-    return 'Your dinner reservation has been successfully booked. You\'ll receive a confirmation email shortly.';
+    return 'We\'ll match you with a small group and reveal the restaurant on the morning of the dinner.';
   }
 }

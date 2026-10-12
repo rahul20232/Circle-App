@@ -1,5 +1,6 @@
 // lib/screens/Onboarding/middle_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 
 // Custom StatsOnboardingCard for the statistics display
 class StatsOnboardingCard extends StatelessWidget {
@@ -18,7 +19,7 @@ class StatsOnboardingCard extends StatelessWidget {
             height: 250,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Colors.black,
+              color: AppColors.ink,
             ),
           ),
           // Inner content container
@@ -30,7 +31,7 @@ class StatsOnboardingCard extends StatelessWidget {
               height: 239,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(13),
-                color: Color.fromRGBO(250, 250, 250, 1),
+                color: AppColors.surface,
               ),
             ),
           ),
@@ -50,7 +51,7 @@ class StatsOnboardingCard extends StatelessWidget {
                     '♦',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.black,
+                      color: AppColors.ink,
                     ),
                   ),
 
@@ -60,9 +61,9 @@ class StatsOnboardingCard extends StatelessWidget {
                   Text(
                     '96%',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: AppColors.ink,
                       fontSize: 80,
-                      fontWeight: FontWeight.w900,
+                      fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
                       height: 0.8,
                     ),
                   ),
@@ -74,7 +75,7 @@ class StatsOnboardingCard extends StatelessWidget {
                     'The percentage of our dinner groups that rate themselves as compatible',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: AppColors.ink,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       height: 1.4,
@@ -92,7 +93,7 @@ class StatsOnboardingCard extends StatelessWidget {
                         '♦',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.black,
+                          color: AppColors.ink,
                         ),
                       ),
                     ),

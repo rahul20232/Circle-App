@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import '../../models/chat_model.dart';
 
 class ChatCard extends StatelessWidget {
@@ -29,7 +30,7 @@ class ChatCard extends StatelessWidget {
                 height: 100,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.black,
+                  color: AppColors.ink,
                 ),
               ),
               // Inner white container
@@ -41,7 +42,7 @@ class ChatCard extends StatelessWidget {
                   height: 90,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(13),
-                    color: Color.fromRGBO(250, 250, 250, 1),
+                    color: AppColors.surface,
                   ),
                   padding: EdgeInsets.all(16),
                   child: Row(
@@ -79,13 +80,13 @@ class ChatCard extends StatelessWidget {
                                       vertical: 4,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Color(0xFF6B46C1),
+                                      color: AppColors.accent,
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     child: Text(
                                       chat.unreadCount.toString(),
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: AppColors.surface,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -111,7 +112,7 @@ class ChatCard extends StatelessWidget {
   Widget _buildProfilePicture() {
     return CircleAvatar(
       radius: 25,
-      backgroundColor: Color(0xFF6B46C1),
+      backgroundColor: AppColors.accent,
       backgroundImage: chat.otherUser.profilePictureUrl != null &&
               chat.otherUser.profilePictureUrl!.isNotEmpty
           ? NetworkImage(chat.otherUser.profilePictureUrl!)
@@ -123,7 +124,7 @@ class ChatCard extends StatelessWidget {
                   ? chat.otherUser.displayName[0].toUpperCase()
                   : 'U',
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.surface,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),

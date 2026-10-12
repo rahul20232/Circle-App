@@ -1,5 +1,6 @@
 // lib/screens/Profile/Settings/subscription_components.dart
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:circle_app/screens/Profile/Settings/controllers/subscription_controller.dart';
 import '../../../../components/Cards/PricingCard.dart';
@@ -26,7 +27,7 @@ class SubscriptionComponents {
 
   Widget buildCarouselSlider() {
     return Container(
-      color: Colors.black.withOpacity(0.7),
+      color: AppColors.ink.withOpacity(0.7),
       child: CarouselSlider(
         options: CarouselOptions(
           height: double.infinity,
@@ -53,7 +54,7 @@ class SubscriptionComponents {
                   bottomLeft: Radius.circular(16),
                   bottomRight: Radius.circular(16),
                 ),
-                color: Colors.black.withOpacity(0.4),
+                color: AppColors.ink.withOpacity(0.4),
               ),
             ),
           );
@@ -78,7 +79,7 @@ class SubscriptionComponents {
                 fontFamily: 'DMSerifDisplay-Regular',
                 fontSize: isSmallScreen ? 24 : 32,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColors.surface,
                 letterSpacing: 2,
               ),
             ),
@@ -90,7 +91,7 @@ class SubscriptionComponents {
               'All dinners, every Wednesday',
               style: TextStyle(
                 fontSize: isSmallScreen ? 14 : 18,
-                color: Colors.white,
+                color: AppColors.surface,
                 fontWeight: FontWeight.w300,
               ),
             ),
@@ -115,10 +116,10 @@ class SubscriptionComponents {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: controller.currentSlide == index
-                  ? Colors.white
-                  : Colors.white.withOpacity(0.5),
+                  ? AppColors.surface
+                  : AppColors.surface.withOpacity(0.5),
               border: controller.currentSlide == index
-                  ? Border.all(color: Colors.grey, width: 1)
+                  ? Border.all(color: AppColors.grey500, width: 1)
                   : null,
             ),
           );
@@ -135,7 +136,7 @@ class SubscriptionComponents {
         icon: Icon(
           Icons.close,
           size: 30,
-          color: Colors.white,
+          color: AppColors.surface,
         ),
         onPressed: () => Navigator.pop(context),
       ),
@@ -199,8 +200,8 @@ class SubscriptionComponents {
       child: ElevatedButton(
         onPressed: () => controller.showPaymentModal(context),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.white,
+          backgroundColor: AppColors.ink,
+          foregroundColor: AppColors.surface,
           padding: EdgeInsets.symmetric(
             vertical: isSmallScreen ? 12 : 16,
           ),
@@ -227,9 +228,9 @@ class SubscriptionComponents {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: AppColors.grey300),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -239,7 +240,7 @@ class SubscriptionComponents {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: Colors.black,
+              color: AppColors.ink,
             ),
           ),
           SizedBox(height: 12),
@@ -255,7 +256,7 @@ class SubscriptionComponents {
                   children: [
                     Icon(
                       Icons.check_circle,
-                      color: Colors.green,
+                      color: AppColors.success,
                       size: 20,
                     ),
                     SizedBox(width: 8),
@@ -280,9 +281,9 @@ class SubscriptionComponents {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.blue.shade50,
+        color: AppColors.infoSoft,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.blue.shade200),
+        border: Border.all(color: AppColors.infoSoft),
       ),
       child: Column(
         children: [
@@ -291,7 +292,7 @@ class SubscriptionComponents {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Colors.blue.shade800,
+              color: AppColors.info,
             ),
           ),
           SizedBox(height: 12),
@@ -342,10 +343,10 @@ class SubscriptionComponents {
                       style: TextStyle(fontSize: 12)),
                   Text('21%',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12, color: Colors.green)),
+                      style: TextStyle(fontSize: 12, color: AppColors.success)),
                   Text('47%',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12, color: Colors.green)),
+                      style: TextStyle(fontSize: 12, color: AppColors.success)),
                 ],
               ),
             ],
@@ -360,9 +361,9 @@ class SubscriptionComponents {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: AppColors.grey100,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: AppColors.grey300),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -372,7 +373,7 @@ class SubscriptionComponents {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Colors.black,
+              color: AppColors.ink,
             ),
           ),
           SizedBox(height: 8),
@@ -388,7 +389,7 @@ class SubscriptionComponents {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black,
+                  color: AppColors.ink,
                 ),
               ),
             ],
@@ -399,7 +400,7 @@ class SubscriptionComponents {
               'Save ${plan['savePercentage']}%',
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.green.shade600,
+                color: AppColors.success,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -421,13 +422,13 @@ class SubscriptionComponents {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
-          color: Colors.orange,
+          color: AppColors.warning,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
           'MOST POPULAR',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.surface,
             fontSize: 10,
             fontWeight: FontWeight.w600,
           ),
@@ -448,7 +449,7 @@ class SubscriptionComponents {
             'Loading subscription options...',
             style: TextStyle(
               fontSize: 16,
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
             ),
           ),
         ],

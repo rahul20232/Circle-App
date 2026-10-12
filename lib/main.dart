@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -11,6 +13,9 @@ import 'package:circle_app/services/core/token_manager.dart';
 import 'package:circle_app/services/deep_link_handler.dart';
 import 'package:circle_app/services/push_notification_service.dart';
 import 'package:circle_app/services/supabase_service.dart';
+import 'package:circle_app/demo/demo_mode.dart';
+import 'package:circle_app/theme/app_theme.dart';
+import 'package:http/http.dart' as http;
 import 'firebase_options.dart';
 import 'services/auth_service.dart';
 import 'screens/Auth/login_screen.dart';
@@ -35,8 +40,22 @@ Future<bool> checkCameraPermission() async {
 }
 
 Future<void> main() async {
+  // Demo build (--dart-define=DEMO=true): sign in a demo user and answer every
+  // API call from bundled JSON instead of the live backend.
+  // Flutter must be initialised *inside* the client zone, otherwise taps and
+  // other engine callbacks run outside it and would bypass the demo client.
+  if (kDemoMode) {
+    return http.runWithClient(() async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await DemoStore.init();
+      await _start();
+    }, DemoClient.new);
+  }
   WidgetsFlutterBinding.ensureInitialized();
+  return _start();
+}
 
+Future<void> _start() async {
   await SupabaseService.initialize();
 
   await DeepLinkHandler.initialize(navigatorKey);
@@ -50,7 +69,7 @@ Future<void> main() async {
   print("DEBUG: Current token: ${token != null ? 'EXISTS' : 'NULL'}");
   print("DEBUG: Token length: ${token?.length ?? 0}");
 
-  if (Platform.isIOS) {
+  if (!kIsWeb && Platform.isIOS) {
     try {
       final bundle = await rootBundle.loadString('ios/Runner/Info.plist');
       print(
@@ -60,19 +79,27 @@ Future<void> main() async {
     }
   }
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // Firebase is only used for push notifications, which the demo skips.
+  if (!kDemoMode) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
 
-  try {
-    await PushNotificationService.initialize();
-    print('Notifications initialized successfully in main()');
-  } catch (e) {
-    print('Failed to initialize notifications in main(): $e');
+  // Push needs a real device token and backend — skip it in the demo.
+  if (!kDemoMode) {
+    try {
+      await PushNotificationService.initialize();
+      print('Notifications initialized successfully in main()');
+    } catch (e) {
+      print('Failed to initialize notifications in main(): $e');
+    }
   }
 
   await AuthService.loadUserSession();
 
+  // Camera is only needed for card scanning; skip on web and in the demo.
+  if (!kIsWeb && !kDemoMode) {
   final cameraStatus = await Permission.camera.status;
   print('Camera permission status at startup: $cameraStatus');
 
@@ -85,6 +112,7 @@ Future<void> main() async {
   } catch (e) {
     print('Error getting available cameras: $e');
     cameras = [];
+  }
   }
 
   runApp(MyApp());
@@ -119,10 +147,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       navigatorKey: navigatorKey,
       title: 'Circle',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
+      debugShowCheckedModeBanner: !kDemoMode,
+      theme: AppTheme.light,
       home: AnimatedSwitcher(
         duration: Duration(milliseconds: 600),
         transitionBuilder: (Widget child, Animation<double> animation) {

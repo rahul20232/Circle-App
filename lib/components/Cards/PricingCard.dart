@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 
 class PriceCard extends StatelessWidget {
   final String title;
@@ -52,7 +53,7 @@ class PriceCard extends StatelessWidget {
                     bottomLeft: Radius.circular(15),
                     bottomRight: Radius.circular(15),
                   ),
-                  color: isSelected ? Colors.black : Colors.transparent,
+                  color: isSelected ? AppColors.ink : Colors.transparent,
                 ),
               ),
             ),
@@ -67,7 +68,7 @@ class PriceCard extends StatelessWidget {
                     bottomLeft: Radius.circular(13),
                     bottomRight: Radius.circular(13),
                   ),
-                  color: Color.fromRGBO(250, 250, 250, 1),
+                  color: AppColors.surface,
                 ),
               ),
             ),
@@ -82,7 +83,7 @@ class PriceCard extends StatelessWidget {
                     topLeft: Radius.circular(13),
                     topRight: Radius.circular(13),
                   ),
-                  color: isSelected ? Colors.red.shade400 : Color(0xFFBCB6B6),
+                  color: isSelected ? AppColors.danger : Color(0xFFBCB6B6),
                 ),
               ),
             ),
@@ -99,7 +100,7 @@ class PriceCard extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color:
-                        isSelected ? Colors.white : Color.fromRGBO(0, 0, 0, 1),
+                        isSelected ? AppColors.surface : Color.fromRGBO(0, 0, 0, 1),
                     fontFamily: 'Inter',
                     fontSize: titleFontSize,
                     fontWeight: isSelected ? FontWeight.w400 : FontWeight.w300,
@@ -120,7 +121,7 @@ class PriceCard extends StatelessWidget {
                   duration,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.black,
+                    color: AppColors.ink,
                     fontFamily: 'Inter',
                     fontSize: contentFontSize,
                     fontWeight: FontWeight.w500,
@@ -141,7 +142,7 @@ class PriceCard extends StatelessWidget {
                   price,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.black,
+                    color: AppColors.ink,
                     fontFamily: 'Inter',
                     fontSize: contentFontSize,
                     fontWeight: FontWeight.w500,

@@ -1,5 +1,6 @@
 // lib/screens/Auth/register_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Auth/controllers/register_controller.dart';
 import 'package:circle_app/screens/Auth/components/register_components.dart';
 
@@ -37,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.green.shade50, Colors.white],
+            colors: [AppColors.successSoft, AppColors.surface],
           ),
         ),
         child: Center(

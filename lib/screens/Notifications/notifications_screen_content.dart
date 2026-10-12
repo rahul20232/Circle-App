@@ -1,5 +1,6 @@
 // lib/screens/Notifications/notifications_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Notifications/controllers/notifications_controller.dart';
 import 'package:circle_app/screens/Notifications/components/notifications_components.dart';
 
@@ -44,7 +45,7 @@ class _NotificationsScreenState extends State<NotificationsScreenContent>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
@@ -52,13 +53,13 @@ class _NotificationsScreenState extends State<NotificationsScreenContent>
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.ink,
           ),
         ),
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh, color: Colors.black),
+            icon: Icon(Icons.refresh, color: AppColors.ink),
             onPressed: _controller.refreshNotifications,
           ),
         ],
@@ -66,7 +67,7 @@ class _NotificationsScreenState extends State<NotificationsScreenContent>
             ? PreferredSize(
                 preferredSize: Size.fromHeight(60),
                 child: Container(
-                  color: Color(0xFFFEF1DE),
+                  color: AppColors.background,
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Row(
@@ -101,7 +102,7 @@ class _NotificationsScreenState extends State<NotificationsScreenContent>
               )
             : null,
       ),
-      backgroundColor: Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       body: _buildBody(),
     );
   }
@@ -109,7 +110,7 @@ class _NotificationsScreenState extends State<NotificationsScreenContent>
   Widget _buildBody() {
     if (_controller.isLoading) {
       return Center(
-        child: CircularProgressIndicator(color: Color(0xFF6B46C1)),
+        child: CircularProgressIndicator(color: AppColors.accent),
       );
     }
 

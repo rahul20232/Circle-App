@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 
 class OnboardingModal extends StatelessWidget {
   final VoidCallback onContinue;
@@ -16,7 +17,7 @@ class OnboardingModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
@@ -33,7 +34,7 @@ class OnboardingModal extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: IconButton(
                   onPressed: onClose,
-                  icon: Icon(Icons.close, color: Colors.grey.shade600),
+                  icon: Icon(Icons.close, color: AppColors.grey600),
                 ),
               ),
             ),
@@ -48,8 +49,8 @@ class OnboardingModal extends StatelessWidget {
                   'Continue your onboarding',
                   style: TextStyle(
                     fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+                    color: AppColors.ink,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -61,7 +62,7 @@ class OnboardingModal extends StatelessWidget {
                   'It looks like you\'ve already started the onboarding process. Would you like to continue from where you left off, or restart from the beginning?',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.grey.shade700,
+                    color: AppColors.grey700,
                     height: 1.4,
                   ),
                   textAlign: TextAlign.center,
@@ -82,7 +83,7 @@ class OnboardingModal extends StatelessWidget {
                             borderRadius: BorderRadius.circular(28),
                           ),
                           side: BorderSide(
-                            color: Colors.grey.shade400,
+                            color: AppColors.grey400,
                             width: 1,
                           ),
                         ),
@@ -91,7 +92,7 @@ class OnboardingModal extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: Colors.black,
+                            color: AppColors.ink,
                           ),
                         ),
                       ),
@@ -104,8 +105,8 @@ class OnboardingModal extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: onContinue,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          foregroundColor: Colors.white,
+                          backgroundColor: AppColors.ink,
+                          foregroundColor: AppColors.surface,
                           padding: EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(28),

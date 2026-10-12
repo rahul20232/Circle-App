@@ -1,5 +1,6 @@
 // lib/screens/Connect/chat_detail_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import '../../models/chat_model.dart';
 import 'contollers/chat_detail_controller.dart';
 import 'components/chat_detail_components.dart';
@@ -59,7 +60,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
         otherUserTyping: _controller.otherUserTyping,
         onBackPressed: () => Navigator.pop(context),
       ),
-      backgroundColor: const Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:share_plus/share_plus.dart';
@@ -51,12 +52,12 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColors.ink),
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
@@ -64,13 +65,13 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.ink,
           ),
         ),
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.ios_share, color: Colors.black),
+            icon: const Icon(Icons.ios_share, color: AppColors.ink),
             onPressed: _sharePdf, // 👈 hooked up here
           )
         ],
@@ -106,13 +107,13 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.7),
+                    color: AppColors.ink.withOpacity(0.7),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
                     "$_currentPage / $_totalPages",
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: AppColors.surface,
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                     ),

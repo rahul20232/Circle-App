@@ -1,5 +1,6 @@
 // lib/services/dinner_service.dart
 import 'dart:convert';
+import 'package:circle_app/services/core/backend_config.dart';
 import 'package:http/http.dart' as http;
 import '../models/dinner_model.dart';
 import '../models/rating_model.dart';
@@ -9,7 +10,7 @@ import 'api_service.dart';
 /// Service for dinner-related operations
 class DinnerService {
   static const String baseUrl =
-      'https://circle-app-production-09eb.up.railway.app/api';
+      BackendConfig.apiUrl;
 
   // ================== Dinner Queries ==================
 

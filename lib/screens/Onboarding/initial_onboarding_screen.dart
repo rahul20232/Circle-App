@@ -1,5 +1,6 @@
 // lib/screens/Onboarding/initial_onboarding_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'dart:ui';
 import 'package:circle_app/components/Modals/onboarding_modal.dart';
 import 'package:circle_app/screens/Onboarding/onboarding_flow.dart';
@@ -90,9 +91,9 @@ class _InitialOnboardingScreenState extends State<InitialOnboardingScreen> {
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
-                  color: Colors.grey.shade300,
+                  color: AppColors.grey300,
                   child: Icon(Icons.people,
-                      size: 100, color: Colors.grey.shade400),
+                      size: 100, color: AppColors.grey400),
                 );
               },
             ),
@@ -110,7 +111,7 @@ class _InitialOnboardingScreenState extends State<InitialOnboardingScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.3),
+                    AppColors.ink.withOpacity(0.3),
                     Colors.transparent,
                   ],
                 ),
@@ -150,11 +151,11 @@ class _InitialOnboardingScreenState extends State<InitialOnboardingScreen> {
                               end: Alignment.bottomCenter,
                               colors: [
                                 Colors.transparent,
-                                Colors.white.withOpacity(0.3),
-                                Colors.white.withOpacity(0.5),
-                                Colors.white.withOpacity(0.7),
-                                Colors.white.withOpacity(0.85),
-                                Colors.white,
+                                AppColors.surface.withOpacity(0.3),
+                                AppColors.surface.withOpacity(0.5),
+                                AppColors.surface.withOpacity(0.7),
+                                AppColors.surface.withOpacity(0.85),
+                                AppColors.surface,
                               ],
                               stops: [0.0, 0.4, 0.6, 0.75, 0.9, 1.0],
                             ),
@@ -172,8 +173,8 @@ class _InitialOnboardingScreenState extends State<InitialOnboardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 36,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black,
+                              fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+                              color: AppColors.ink,
                               height: 1.2,
                               letterSpacing: -0.5,
                             ),
@@ -186,7 +187,7 @@ class _InitialOnboardingScreenState extends State<InitialOnboardingScreen> {
 
                 // Solid white buttons section
                 Container(
-                  color: Colors.white,
+                  color: AppColors.surface,
                   padding: EdgeInsets.fromLTRB(32, 24, 32, 40),
                   child: Column(
                     children: [
@@ -196,8 +197,8 @@ class _InitialOnboardingScreenState extends State<InitialOnboardingScreen> {
                         child: ElevatedButton(
                           onPressed: _startOnboarding,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            foregroundColor: Colors.white,
+                            backgroundColor: AppColors.ink,
+                            foregroundColor: AppColors.surface,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(28),
                             ),
@@ -225,10 +226,10 @@ class _InitialOnboardingScreenState extends State<InitialOnboardingScreen> {
                             );
                           },
                           style: OutlinedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.black,
+                            backgroundColor: AppColors.surface,
+                            foregroundColor: AppColors.ink,
                             side: BorderSide(
-                                color: Colors.grey.shade300, width: 1.5),
+                                color: AppColors.grey300, width: 1.5),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(28),
                             ),
@@ -249,7 +250,7 @@ class _InitialOnboardingScreenState extends State<InitialOnboardingScreen> {
                         text: TextSpan(
                           style: TextStyle(
                             fontSize: 12,
-                            color: Colors.grey.shade600,
+                            color: AppColors.grey600,
                             height: 1.5,
                           ),
                           children: [
@@ -258,7 +259,7 @@ class _InitialOnboardingScreenState extends State<InitialOnboardingScreen> {
                               text: 'Terms of Service',
                               style: TextStyle(
                                 decoration: TextDecoration.underline,
-                                color: Colors.grey.shade700,
+                                color: AppColors.grey700,
                               ),
                             ),
                             TextSpan(text: ', '),
@@ -266,7 +267,7 @@ class _InitialOnboardingScreenState extends State<InitialOnboardingScreen> {
                               text: 'Privacy Policy',
                               style: TextStyle(
                                 decoration: TextDecoration.underline,
-                                color: Colors.grey.shade700,
+                                color: AppColors.grey700,
                               ),
                             ),
                             TextSpan(text: ' and '),
@@ -274,7 +275,7 @@ class _InitialOnboardingScreenState extends State<InitialOnboardingScreen> {
                               text: 'Community Guidelines',
                               style: TextStyle(
                                 decoration: TextDecoration.underline,
-                                color: Colors.grey.shade700,
+                                color: AppColors.grey700,
                               ),
                             ),
                             TextSpan(text: '.'),

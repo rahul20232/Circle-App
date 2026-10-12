@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 
 class AccountDetailsScreen extends StatefulWidget {
   final String title; // AppBar title
@@ -79,21 +80,21 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         elevation: 0,
         title: Text(
           widget.title,
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.ink,
           ),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColors.ink),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -129,21 +130,21 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(
                           color: _validationMessage != null
-                              ? Colors.red.shade300
-                              : Colors.grey.shade300,
+                              ? AppColors.danger
+                              : AppColors.grey300,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(
                           color: _validationMessage != null
-                              ? Colors.red
-                              : Colors.black,
+                              ? AppColors.danger
+                              : AppColors.ink,
                           width: 2,
                         ),
                       ),
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor: AppColors.surface,
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 12,
@@ -153,7 +154,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                           ? '+91 '
                           : null,
                       prefixStyle: TextStyle(
-                        color: Colors.grey.shade600,
+                        color: AppColors.grey600,
                         fontSize: 16,
                       ),
                     ),
@@ -166,15 +167,15 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
-                        color: Colors.red.shade50,
+                        color: AppColors.dangerSoft,
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.red.shade200),
+                        border: Border.all(color: AppColors.dangerSoft),
                       ),
                       child: Row(
                         children: [
                           Icon(
                             Icons.error_outline,
-                            color: Colors.red.shade600,
+                            color: AppColors.danger,
                             size: 20,
                           ),
                           const SizedBox(width: 8),
@@ -182,7 +183,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                             child: Text(
                               _validationMessage!,
                               style: TextStyle(
-                                color: Colors.red.shade700,
+                                color: AppColors.danger,
                                 fontSize: 14,
                               ),
                             ),
@@ -202,7 +203,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                         children: [
                           Icon(
                             Icons.info_outline,
-                            color: Colors.grey.shade600,
+                            color: AppColors.grey600,
                             size: 16,
                           ),
                           const SizedBox(width: 8),
@@ -210,7 +211,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                             child: Text(
                               "Enter your 10-digit phone number without country code",
                               style: TextStyle(
-                                color: Colors.grey.shade600,
+                                color: AppColors.grey600,
                                 fontSize: 12,
                               ),
                             ),
@@ -237,9 +238,9 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: _isButtonEnabled
-                          ? Colors.black
-                          : Colors.grey.shade400,
-                      foregroundColor: Colors.white,
+                          ? AppColors.ink
+                          : AppColors.grey400,
+                      foregroundColor: AppColors.surface,
                       shape: const StadiumBorder(),
                       minimumSize: const Size(double.infinity, 55),
                       elevation: _isButtonEnabled ? 2 : 0,
@@ -264,7 +265,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                     child: Text(
                       widget.buttonText,
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: AppColors.surface,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),

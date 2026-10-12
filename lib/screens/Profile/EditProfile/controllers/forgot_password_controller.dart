@@ -1,5 +1,6 @@
 // lib/screens/Auth/forgot_password_controller.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/services/auth_service.dart';
 
 class ForgotPasswordController {
@@ -48,7 +49,7 @@ class ForgotPasswordController {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: isError ? Colors.red : Colors.green,
+        backgroundColor: isError ? AppColors.danger : AppColors.success,
         duration: Duration(seconds: 3),
       ),
     );

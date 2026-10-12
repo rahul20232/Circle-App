@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -190,14 +191,14 @@ class _GuideWebViewScreenState extends State<GuideWebViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.grey.shade800,
+            color: AppColors.grey800,
           ),
           onPressed: () => Navigator.pop(context),
         ),
@@ -206,7 +207,7 @@ class _GuideWebViewScreenState extends State<GuideWebViewScreen> {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.grey.shade800,
+            color: AppColors.grey800,
           ),
         ),
         centerTitle: true,
@@ -223,7 +224,7 @@ class _GuideWebViewScreenState extends State<GuideWebViewScreen> {
                     Icon(
                       Icons.close,
                       size: 80,
-                      color: Colors.grey.shade500,
+                      color: AppColors.grey500,
                     ),
                     SizedBox(height: 24),
                     Text(
@@ -231,7 +232,7 @@ class _GuideWebViewScreenState extends State<GuideWebViewScreen> {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
-                        color: Colors.grey.shade800,
+                        color: AppColors.grey800,
                       ),
                     ),
                     SizedBox(height: 12),
@@ -241,7 +242,7 @@ class _GuideWebViewScreenState extends State<GuideWebViewScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.grey.shade600,
+                        color: AppColors.grey600,
                         height: 1.4,
                       ),
                     ),
@@ -253,8 +254,8 @@ class _GuideWebViewScreenState extends State<GuideWebViewScreen> {
                         icon: Icon(Icons.open_in_browser),
                         label: Text('Open in Browser'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey.shade800,
-                          foregroundColor: Colors.white,
+                          backgroundColor: AppColors.grey800,
+                          foregroundColor: AppColors.surface,
                           padding: EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25),
@@ -274,7 +275,7 @@ class _GuideWebViewScreenState extends State<GuideWebViewScreen> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         side: BorderSide(
-                          color: Colors.grey.shade800,
+                          color: AppColors.grey800,
                           width: 1.5,
                         ),
                       ),
@@ -283,7 +284,7 @@ class _GuideWebViewScreenState extends State<GuideWebViewScreen> {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: Colors.grey.shade800,
+                          color: AppColors.grey800,
                         ),
                       ),
                     ),
@@ -302,13 +303,13 @@ class _GuideWebViewScreenState extends State<GuideWebViewScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircularProgressIndicator(
-                    color: Colors.grey.shade600,
+                    color: AppColors.grey600,
                   ),
                   SizedBox(height: 16),
                   Text(
                     'Loading...',
                     style: TextStyle(
-                      color: Colors.grey.shade600,
+                      color: AppColors.grey600,
                       fontSize: 16,
                     ),
                   ),

@@ -1,6 +1,7 @@
 // lib/screens/Profile/Settings/controllers/delete_account_controller.dart
 
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/services/auth_service.dart';
 import 'package:circle_app/screens/Onboarding/initial_onboarding_screen.dart'; // Changed from LoginScreen
 
@@ -53,7 +54,7 @@ class DeleteAccountController {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: isError ? Colors.red : Colors.green,
+        backgroundColor: isError ? AppColors.danger : AppColors.success,
       ),
     );
   }

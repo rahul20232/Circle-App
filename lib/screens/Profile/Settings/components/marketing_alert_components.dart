@@ -1,5 +1,6 @@
 // lib/screens/Profile/Settings/marketing_alert_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/Settings/controllers/marketing_alert_controller.dart';
 
 class MarketingAlertComponents {
@@ -21,9 +22,9 @@ class MarketingAlertComponents {
   Widget buildNotificationOptions() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300, width: 1),
+        border: Border.all(color: AppColors.grey300, width: 1),
       ),
       child: Column(
         children: [
@@ -53,17 +54,17 @@ class MarketingAlertComponents {
             title,
             style: TextStyle(
               fontSize: 16,
-              color: Colors.black,
+              color: AppColors.ink,
               fontWeight: FontWeight.w400,
             ),
           ),
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: Colors.white,
-            activeTrackColor: Color(0xFF00C853),
-            inactiveThumbColor: Colors.white,
-            inactiveTrackColor: Colors.grey.shade400,
+            activeColor: AppColors.surface,
+            activeTrackColor: AppColors.success,
+            inactiveThumbColor: AppColors.surface,
+            inactiveTrackColor: AppColors.grey400,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ],
@@ -79,8 +80,8 @@ class MarketingAlertComponents {
         child: ElevatedButton(
           onPressed: () => controller.saveAndNavigateBack(context),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.white,
+            backgroundColor: AppColors.ink,
+            foregroundColor: AppColors.surface,
             padding: EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
@@ -104,13 +105,13 @@ class MarketingAlertComponents {
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: controller.isEmailEnabled
-            ? Colors.green.shade50
-            : Colors.grey.shade50,
+            ? AppColors.successSoft
+            : AppColors.grey50,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: controller.isEmailEnabled
-              ? Colors.green.shade200
-              : Colors.grey.shade300,
+              ? AppColors.successSoft
+              : AppColors.grey300,
         ),
       ),
       child: Row(
@@ -120,8 +121,8 @@ class MarketingAlertComponents {
                 ? Icons.check_circle_outline
                 : Icons.info_outline,
             color: controller.isEmailEnabled
-                ? Colors.green.shade600
-                : Colors.grey.shade600,
+                ? AppColors.success
+                : AppColors.grey600,
             size: 16,
           ),
           SizedBox(width: 8),
@@ -130,8 +131,8 @@ class MarketingAlertComponents {
               controller.getMarketingStatus(),
               style: TextStyle(
                 color: controller.isEmailEnabled
-                    ? Colors.green.shade700
-                    : Colors.grey.shade700,
+                    ? AppColors.success
+                    : AppColors.grey700,
                 fontSize: 14,
               ),
             ),
@@ -145,9 +146,9 @@ class MarketingAlertComponents {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.blue.shade50,
+        color: AppColors.infoSoft,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.blue.shade200),
+        border: Border.all(color: AppColors.infoSoft),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,7 +157,7 @@ class MarketingAlertComponents {
             children: [
               Icon(
                 Icons.privacy_tip_outlined,
-                color: Colors.blue.shade600,
+                color: AppColors.info,
                 size: 20,
               ),
               SizedBox(width: 8),
@@ -165,7 +166,7 @@ class MarketingAlertComponents {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.blue.shade800,
+                  color: AppColors.info,
                 ),
               ),
             ],
@@ -175,7 +176,7 @@ class MarketingAlertComponents {
             controller.getPrivacyStatus(),
             style: TextStyle(
               fontSize: 14,
-              color: Colors.blue.shade700,
+              color: AppColors.info,
               height: 1.4,
             ),
           ),
@@ -188,9 +189,9 @@ class MarketingAlertComponents {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.orange.shade50,
+        color: AppColors.warningSoft,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.orange.shade200),
+        border: Border.all(color: AppColors.warningSoft),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,7 +200,7 @@ class MarketingAlertComponents {
             children: [
               Icon(
                 Icons.campaign_outlined,
-                color: Colors.orange.shade600,
+                color: AppColors.warning,
                 size: 20,
               ),
               SizedBox(width: 8),
@@ -208,7 +209,7 @@ class MarketingAlertComponents {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.orange.shade800,
+                  color: AppColors.warning,
                 ),
               ),
             ],
@@ -218,7 +219,7 @@ class MarketingAlertComponents {
             '• Early access to new city launches\n• Exclusive dining events and experiences\n• Special promotions and discounts\n• Product updates and feature announcements',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.orange.shade700,
+              color: AppColors.warning,
               height: 1.4,
             ),
           ),
@@ -233,15 +234,15 @@ class MarketingAlertComponents {
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: AppColors.grey100,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: AppColors.grey300),
       ),
       child: Row(
         children: [
           Icon(
             Icons.unsubscribe,
-            color: Colors.grey.shade600,
+            color: AppColors.grey600,
             size: 16,
           ),
           SizedBox(width: 8),
@@ -249,7 +250,7 @@ class MarketingAlertComponents {
             child: Text(
               'You can resubscribe to marketing emails at any time by enabling this setting.',
               style: TextStyle(
-                color: Colors.grey.shade700,
+                color: AppColors.grey700,
                 fontSize: 12,
               ),
             ),
@@ -263,9 +264,9 @@ class MarketingAlertComponents {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: AppColors.grey50,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: AppColors.grey200),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -290,8 +291,8 @@ class MarketingAlertComponents {
                   ),
                   style: OutlinedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 8),
-                    foregroundColor: Colors.green.shade600,
-                    side: BorderSide(color: Colors.green.shade600),
+                    foregroundColor: AppColors.success,
+                    side: BorderSide(color: AppColors.success),
                   ),
                 ),
               ),
@@ -305,8 +306,8 @@ class MarketingAlertComponents {
                   ),
                   style: OutlinedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 8),
-                    foregroundColor: Colors.red.shade600,
-                    side: BorderSide(color: Colors.red.shade600),
+                    foregroundColor: AppColors.danger,
+                    side: BorderSide(color: AppColors.danger),
                   ),
                 ),
               ),
@@ -356,9 +357,9 @@ class MarketingAlertComponents {
       width: double.infinity,
       padding: padding ?? EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300, width: 1),
+        border: Border.all(color: AppColors.grey300, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

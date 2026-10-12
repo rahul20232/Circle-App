@@ -1,5 +1,6 @@
 // lib/components/star_rating.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 
 class StarRating extends StatelessWidget {
   final int rating;
@@ -16,7 +17,7 @@ class StarRating extends StatelessWidget {
     this.maxRating = 5,
     this.size = 25,
     this.activeColor = Colors.amber,
-    this.inactiveColor = Colors.grey,
+    this.inactiveColor = AppColors.grey500,
     this.onRatingChanged,
     this.allowHalfRating = false,
   }) : super(key: key);
@@ -55,7 +56,7 @@ class InteractiveStarRating extends StatefulWidget {
     this.maxRating = 5,
     this.size = 30,
     this.activeColor = Colors.amber,
-    this.inactiveColor = Colors.grey,
+    this.inactiveColor = AppColors.grey500,
     required this.onRatingChanged,
   }) : super(key: key);
 

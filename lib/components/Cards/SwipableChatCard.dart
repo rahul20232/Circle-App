@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import '../../models/chat_model.dart';
 
 class SwipeableChatCard extends StatefulWidget {
@@ -136,7 +137,7 @@ class _SwipeableChatCardState extends State<SwipeableChatCard>
                 widget.onDelete();
               },
               style: TextButton.styleFrom(
-                foregroundColor: Colors.red,
+                foregroundColor: AppColors.danger,
               ),
               child: const Text('Delete'),
             ),
@@ -158,7 +159,7 @@ class _SwipeableChatCardState extends State<SwipeableChatCard>
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.red,
+                  color: AppColors.danger,
                 ),
                 child: Align(
                   alignment: Alignment.centerRight,
@@ -169,14 +170,14 @@ class _SwipeableChatCardState extends State<SwipeableChatCard>
                       children: [
                         Icon(
                           Icons.delete_outline,
-                          color: Colors.white,
+                          color: AppColors.surface,
                           size: 28,
                         ),
                         const SizedBox(height: 4),
                         Text(
                           'Delete',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: AppColors.surface,
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
                           ),
@@ -225,7 +226,7 @@ class _SwipeableChatCardState extends State<SwipeableChatCard>
                             height: 100,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: Colors.black,
+                              color: AppColors.ink,
                             ),
                           ),
                           // Inner white container
@@ -237,7 +238,7 @@ class _SwipeableChatCardState extends State<SwipeableChatCard>
                               height: 90,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(13),
-                                color: const Color.fromRGBO(250, 250, 250, 1),
+                                color: AppColors.surface,
                               ),
                               padding: const EdgeInsets.all(16),
                               child: Row(
@@ -282,7 +283,7 @@ class _SwipeableChatCardState extends State<SwipeableChatCard>
                                                 ),
                                                 decoration: BoxDecoration(
                                                   color:
-                                                      const Color(0xFF6B46C1),
+                                                      AppColors.accent,
                                                   borderRadius:
                                                       BorderRadius.circular(12),
                                                 ),
@@ -290,7 +291,7 @@ class _SwipeableChatCardState extends State<SwipeableChatCard>
                                                   widget.chat.unreadCount
                                                       .toString(),
                                                   style: const TextStyle(
-                                                    color: Colors.white,
+                                                    color: AppColors.surface,
                                                     fontSize: 12,
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -305,7 +306,7 @@ class _SwipeableChatCardState extends State<SwipeableChatCard>
                                           Text(
                                             widget.chat.lastMessage!.content,
                                             style: TextStyle(
-                                              color: Colors.grey.shade600,
+                                              color: AppColors.grey600,
                                               fontSize: 14,
                                             ),
                                             maxLines: 1,
@@ -349,7 +350,7 @@ class _SwipeableChatCardState extends State<SwipeableChatCard>
   Widget _buildProfilePicture() {
     return CircleAvatar(
       radius: 25,
-      backgroundColor: const Color(0xFF6B46C1),
+      backgroundColor: AppColors.accent,
       backgroundImage: widget.chat.otherUser.profilePictureUrl != null &&
               widget.chat.otherUser.profilePictureUrl!.isNotEmpty
           ? NetworkImage(widget.chat.otherUser.profilePictureUrl!)
@@ -361,7 +362,7 @@ class _SwipeableChatCardState extends State<SwipeableChatCard>
                   ? widget.chat.otherUser.displayName[0].toUpperCase()
                   : 'U',
               style: const TextStyle(
-                color: Colors.white,
+                color: AppColors.surface,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),

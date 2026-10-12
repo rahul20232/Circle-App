@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/components/Cards/ChatCard.dart';
 import 'package:circle_app/components/Cards/SwipableChatCard.dart';
 import 'package:circle_app/components/Modals/connection_modal.dart';
@@ -129,7 +130,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
             SnackBar(
               content: Text(
                   'Cannot connect with attendees from dinners older than 1 day'),
-              backgroundColor: Colors.orange,
+              backgroundColor: AppColors.warning,
             ),
           );
         }
@@ -311,7 +312,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
@@ -319,7 +320,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.ink,
           ),
         ),
         centerTitle: true,
@@ -327,7 +328,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
           IconButton(
             icon: Icon(
               Icons.refresh,
-              color: Colors.black,
+              color: AppColors.ink,
               size: 24,
             ),
             onPressed: _isLoading
@@ -347,7 +348,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
           ),
         ],
       ),
-      backgroundColor: Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       body: _buildBody(),
     );
   }
@@ -376,7 +377,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
           Icon(
             Icons.error_outline,
             size: 64,
-            color: Colors.grey.shade400,
+            color: AppColors.grey400,
           ),
           SizedBox(height: 16),
           Text(
@@ -384,7 +385,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
             ),
           ),
           SizedBox(height: 8),
@@ -392,7 +393,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
             _errorMessage ?? 'Unknown error occurred',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.grey.shade500,
+              color: AppColors.grey500,
             ),
             textAlign: TextAlign.center,
           ),
@@ -400,8 +401,8 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
           ElevatedButton(
             onPressed: _loadChats,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF6B46C1),
-              foregroundColor: Colors.white,
+              backgroundColor: AppColors.accent,
+              foregroundColor: AppColors.surface,
             ),
             child: Text('Retry'),
           ),
@@ -439,7 +440,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
           child: Container(
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.surface,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
@@ -471,7 +472,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Conversation deleted successfully'),
-            backgroundColor: Colors.green,
+            backgroundColor: AppColors.success,
           ),
         );
       }
@@ -482,7 +483,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Failed to delete conversation: $e'),
-            backgroundColor: Colors.red,
+            backgroundColor: AppColors.danger,
           ),
         );
       }
@@ -491,7 +492,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
 
   Widget _buildOnboardingState() {
     return Container(
-      color: Color(0xFFFEF1DE),
+      color: AppColors.background,
       child: SafeArea(
         child: Column(
           children: [
@@ -513,7 +514,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
                                 child: Icon(
                                   Icons.auto_awesome,
                                   size: 16,
-                                  color: Colors.grey.shade400,
+                                  color: AppColors.grey400,
                                 ),
                               ),
                               Positioned(
@@ -522,7 +523,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
                                 child: Icon(
                                   Icons.auto_awesome,
                                   size: 12,
-                                  color: Colors.grey.shade400,
+                                  color: AppColors.grey400,
                                 ),
                               ),
                               Container(
@@ -530,7 +531,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
                                 child: Icon(
                                   Icons.chat_bubble_outline,
                                   size: 80,
-                                  color: Colors.grey.shade700,
+                                  color: AppColors.grey700,
                                 ),
                               ),
                             ],
@@ -540,8 +541,8 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
                             'Start connecting!',
                             style: TextStyle(
                               fontSize: 24,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey.shade800,
+                              fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+                              color: AppColors.grey800,
                             ),
                           ),
                           SizedBox(height: 16),
@@ -549,7 +550,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
                             'Join dinners and give feedback to discover compatible connections. Book a new seat to start!',
                             style: TextStyle(
                               fontSize: 16,
-                              color: Colors.grey.shade600,
+                              color: AppColors.grey600,
                               height: 1.4,
                             ),
                             textAlign: TextAlign.center,
@@ -586,8 +587,8 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          foregroundColor: Colors.white,
+                          backgroundColor: AppColors.ink,
+                          foregroundColor: AppColors.surface,
                           padding: EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),

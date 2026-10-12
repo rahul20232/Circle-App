@@ -1,5 +1,6 @@
 // lib/screens/Account/account_details_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/EditProfile/controllers/account_details_controller.dart';
 
 class AccountDetailsComponents {
@@ -28,27 +29,27 @@ class AccountDetailsComponents {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade300),
+          borderSide: BorderSide(color: AppColors.grey300),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.black, width: 2),
+          borderSide: const BorderSide(color: AppColors.ink, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.red.shade300),
+          borderSide: BorderSide(color: AppColors.danger),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.red, width: 2),
+          borderSide: const BorderSide(color: AppColors.danger, width: 2),
         ),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: AppColors.surface,
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         prefixText: prefixText,
         prefixStyle: TextStyle(
-          color: Colors.grey.shade600,
+          color: AppColors.grey600,
           fontSize: 16,
         ),
       ),
@@ -65,8 +66,8 @@ class AccountDetailsComponents {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor:
-              controller.isButtonEnabled ? Colors.black : Colors.grey.shade400,
-          foregroundColor: Colors.white,
+              controller.isButtonEnabled ? AppColors.ink : AppColors.grey400,
+          foregroundColor: AppColors.surface,
           shape: const StadiumBorder(),
           minimumSize: const Size(double.infinity, 55),
           elevation: controller.isButtonEnabled ? 2 : 0,
@@ -75,7 +76,7 @@ class AccountDetailsComponents {
         child: Text(
           buttonText,
           style: const TextStyle(
-            color: Colors.white,
+            color: AppColors.surface,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -88,17 +89,17 @@ class AccountDetailsComponents {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: isError ? Colors.red.shade50 : Colors.green.shade50,
+        color: isError ? AppColors.dangerSoft : AppColors.successSoft,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: isError ? Colors.red.shade200 : Colors.green.shade200,
+          color: isError ? AppColors.dangerSoft : AppColors.successSoft,
         ),
       ),
       child: Row(
         children: [
           Icon(
             isError ? Icons.error_outline : Icons.check_circle_outline,
-            color: isError ? Colors.red.shade600 : Colors.green.shade600,
+            color: isError ? AppColors.danger : AppColors.success,
             size: 20,
           ),
           const SizedBox(width: 8),
@@ -106,7 +107,7 @@ class AccountDetailsComponents {
             child: Text(
               message,
               style: TextStyle(
-                color: isError ? Colors.red.shade700 : Colors.green.shade700,
+                color: isError ? AppColors.danger : AppColors.success,
                 fontSize: 14,
               ),
             ),
@@ -146,7 +147,7 @@ class AccountDetailsComponents {
         children: [
           Icon(
             Icons.info_outline,
-            color: Colors.grey.shade600,
+            color: AppColors.grey600,
             size: 16,
           ),
           const SizedBox(width: 8),
@@ -154,7 +155,7 @@ class AccountDetailsComponents {
             child: Text(
               helpText,
               style: TextStyle(
-                color: Colors.grey.shade600,
+                color: AppColors.grey600,
                 fontSize: 12,
               ),
             ),

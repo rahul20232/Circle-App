@@ -1,5 +1,6 @@
 // lib/screens/Profile/Settings/event_alert_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/Settings/controllers/event_alert_controller.dart';
 import 'package:circle_app/screens/Profile/Settings/components/event_alert_components.dart';
 
@@ -34,18 +35,18 @@ class _EventAlertScreenState extends State<EventAlertScreen> {
   Widget build(BuildContext context) {
     if (_controller.isLoading) {
       return Scaffold(
-        backgroundColor: Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         body: Center(child: CircularProgressIndicator()),
       );
     }
 
     return Scaffold(
-      backgroundColor: Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: AppColors.ink),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
@@ -53,7 +54,7 @@ class _EventAlertScreenState extends State<EventAlertScreen> {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.ink,
           ),
         ),
         centerTitle: true,

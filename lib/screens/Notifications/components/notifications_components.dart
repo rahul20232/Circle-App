@@ -1,5 +1,6 @@
 // lib/screens/Notifications/notifications_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/components/Cards/SwipableNotificationCard.dart';
 import 'package:circle_app/models/notification_model.dart';
 import '../controllers/notifications_controller.dart';
@@ -22,10 +23,10 @@ class NotificationsComponents {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.black : Colors.white,
+          color: isSelected ? AppColors.ink : AppColors.surface,
           borderRadius: BorderRadius.circular(25),
           border: Border.all(
-            color: isSelected ? Colors.black : Colors.grey.shade300,
+            color: isSelected ? AppColors.ink : AppColors.grey300,
             width: 1.5,
           ),
         ),
@@ -35,7 +36,7 @@ class NotificationsComponents {
             Text(
               title,
               style: TextStyle(
-                color: isSelected ? Colors.white : Colors.black,
+                color: isSelected ? AppColors.surface : AppColors.ink,
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
@@ -45,13 +46,13 @@ class NotificationsComponents {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: isSelected ? Colors.white : Color(0xFF6B46C1),
+                  color: isSelected ? AppColors.surface : AppColors.accent,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
                   unreadCount.toString(),
                   style: TextStyle(
-                    color: isSelected ? Colors.black : Colors.white,
+                    color: isSelected ? AppColors.ink : AppColors.surface,
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
@@ -72,7 +73,7 @@ class NotificationsComponents {
           Icon(
             Icons.error_outline,
             size: 64,
-            color: Colors.grey.shade400,
+            color: AppColors.grey400,
           ),
           SizedBox(height: 16),
           Text(
@@ -80,7 +81,7 @@ class NotificationsComponents {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
             ),
           ),
           SizedBox(height: 8),
@@ -88,7 +89,7 @@ class NotificationsComponents {
             errorMessage,
             style: TextStyle(
               fontSize: 14,
-              color: Colors.grey.shade500,
+              color: AppColors.grey500,
             ),
             textAlign: TextAlign.center,
           ),
@@ -96,8 +97,8 @@ class NotificationsComponents {
           ElevatedButton(
             onPressed: controller.retryLoading,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF6B46C1),
-              foregroundColor: Colors.white,
+              backgroundColor: AppColors.accent,
+              foregroundColor: AppColors.surface,
             ),
             child: Text('Retry'),
           ),
@@ -108,7 +109,7 @@ class NotificationsComponents {
 
   Widget buildEmptyState() {
     return Container(
-      color: Color(0xFFFEF1DE),
+      color: AppColors.background,
       child: SafeArea(
         child: Column(
           children: [
@@ -128,7 +129,7 @@ class NotificationsComponents {
                             child: Icon(
                               Icons.auto_awesome,
                               size: 16,
-                              color: Colors.grey.shade400,
+                              color: AppColors.grey400,
                             ),
                           ),
                           Positioned(
@@ -137,7 +138,7 @@ class NotificationsComponents {
                             child: Icon(
                               Icons.auto_awesome,
                               size: 12,
-                              color: Colors.grey.shade400,
+                              color: AppColors.grey400,
                             ),
                           ),
                           Container(
@@ -145,7 +146,7 @@ class NotificationsComponents {
                             child: Icon(
                               Icons.notifications_outlined,
                               size: 80,
-                              color: Colors.grey.shade700,
+                              color: AppColors.grey700,
                             ),
                           ),
                         ],
@@ -155,8 +156,8 @@ class NotificationsComponents {
                         'No notifications yet',
                         style: TextStyle(
                           fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey.shade800,
+                          fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+                          color: AppColors.grey800,
                         ),
                       ),
                       SizedBox(height: 12),
@@ -164,7 +165,7 @@ class NotificationsComponents {
                         'Notifications about your dinners and connections will appear here.',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.grey.shade600,
+                          color: AppColors.grey600,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -210,7 +211,7 @@ class NotificationsComponents {
                   ? Icons.calendar_today_outlined
                   : Icons.people_outline,
               size: 60,
-              color: Colors.grey.shade400,
+              color: AppColors.grey400,
             ),
             SizedBox(height: 16),
             Text(
@@ -218,7 +219,7 @@ class NotificationsComponents {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey.shade600,
+                color: AppColors.grey600,
               ),
             ),
             SizedBox(height: 8),
@@ -228,7 +229,7 @@ class NotificationsComponents {
                   : 'Connection requests and messages will appear here.',
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey.shade500,
+                color: AppColors.grey500,
               ),
               textAlign: TextAlign.center,
             ),

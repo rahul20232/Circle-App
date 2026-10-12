@@ -1,5 +1,6 @@
 // lib/screens/Onboarding/onboarding_account_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:flutter/services.dart';
 import 'package:circle_app/screens/Onboarding/components/unified_progress_component.dart';
 import 'package:circle_app/services/auth_service.dart';
@@ -67,16 +68,16 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
 
   // Country codes
   final List<Map<String, String>> _countryCodes = [
-    {'code': '+91', 'country': 'IN', 'flag': '🇮🇳'},
-    {'code': '+1', 'country': 'US', 'flag': '🇺🇸'},
-    {'code': '+44', 'country': 'UK', 'flag': '🇬🇧'},
-    {'code': '+86', 'country': 'CN', 'flag': '🇨🇳'},
-    {'code': '+81', 'country': 'JP', 'flag': '🇯🇵'},
-    {'code': '+49', 'country': 'DE', 'flag': '🇩🇪'},
-    {'code': '+33', 'country': 'FR', 'flag': '🇫🇷'},
-    {'code': '+39', 'country': 'IT', 'flag': '🇮🇹'},
-    {'code': '+61', 'country': 'AU', 'flag': '🇦🇺'},
-    {'code': '+7', 'country': 'RU', 'flag': '🇷🇺'},
+    {'code': '+91', 'country': 'IN'},
+    {'code': '+1', 'country': 'US'},
+    {'code': '+44', 'country': 'UK'},
+    {'code': '+86', 'country': 'CN'},
+    {'code': '+81', 'country': 'JP'},
+    {'code': '+49', 'country': 'DE'},
+    {'code': '+33', 'country': 'FR'},
+    {'code': '+39', 'country': 'IT'},
+    {'code': '+61', 'country': 'AU'},
+    {'code': '+7', 'country': 'RU'},
   ];
 
   @override
@@ -224,7 +225,7 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: isError ? Colors.red.shade600 : Colors.green.shade600,
+        backgroundColor: isError ? AppColors.danger : AppColors.success,
         behavior: SnackBarBehavior.floating,
         margin: EdgeInsets.all(16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -307,7 +308,7 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
       builder: (context) => Container(
         height: MediaQuery.of(context).size.height * 0.6,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.surface,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
@@ -318,7 +319,7 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
+                border: Border(bottom: BorderSide(color: AppColors.grey200)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -327,7 +328,7 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
                     onPressed: () => Navigator.of(context).pop(),
                     child: Text('Cancel',
                         style: TextStyle(
-                            color: Colors.grey.shade600, fontSize: 16)),
+                            color: AppColors.grey600, fontSize: 16)),
                   ),
                   Text('Select Country',
                       style:
@@ -344,8 +345,6 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
                   final isSelected = country['code'] == _selectedCountryCode;
 
                   return ListTile(
-                    leading:
-                        Text(country['flag']!, style: TextStyle(fontSize: 24)),
                     title: Text(
                       '${country['country']} ${country['code']}',
                       style: TextStyle(
@@ -353,7 +352,7 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
                               isSelected ? FontWeight.w600 : FontWeight.normal),
                     ),
                     trailing: isSelected
-                        ? Icon(Icons.check, color: Colors.black)
+                        ? Icon(Icons.check, color: AppColors.ink)
                         : null,
                     onTap: () {
                       setState(() {
@@ -412,18 +411,18 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
     final identityData = widget.identityData ?? {};
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F0E8),
+      backgroundColor: AppColors.surfaceMuted,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFF5F0E8),
+        backgroundColor: AppColors.surfaceMuted,
         elevation: 0,
         title: Text('Account',
             style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: Colors.black)),
+                color: AppColors.ink)),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColors.ink),
           onPressed: _isLoading
               ? null
               : _previousStep, // Disable back button during loading
@@ -453,8 +452,8 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
                     _getStepTitle(),
                     style: TextStyle(
                         fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                        fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+                        color: AppColors.ink),
                   ),
 
                   const SizedBox(height: 60),
@@ -487,9 +486,9 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
                       : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: (_canProceed() && !_isLoading)
-                        ? Colors.black
-                        : Colors.grey.shade300,
-                    foregroundColor: Colors.white,
+                        ? AppColors.ink
+                        : AppColors.grey300,
+                    foregroundColor: AppColors.surface,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(28)),
                     elevation: 0,
@@ -504,7 +503,7 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
                                 valueColor:
-                                    AlwaysStoppedAnimation<Color>(Colors.white),
+                                    AlwaysStoppedAnimation<Color>(AppColors.surface),
                               ),
                             ),
                             SizedBox(width: 12),
@@ -536,24 +535,19 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.surface,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.grey.shade300),
+                border: Border.all(color: AppColors.grey300),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                      _countryCodes.firstWhere(
-                          (c) => c['code'] == _selectedCountryCode)['flag']!,
-                      style: TextStyle(fontSize: 20)),
-                  SizedBox(width: 8),
                   Text(_selectedCountryCode,
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
                   SizedBox(width: 4),
                   Icon(Icons.keyboard_arrow_down,
-                      color: Colors.grey.shade600, size: 20),
+                      color: AppColors.grey600, size: 20),
                 ],
               ),
             ),
@@ -571,16 +565,16 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               decoration: InputDecoration(
                 hintText: 'Phone number',
-                hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
+                hintStyle: TextStyle(color: AppColors.grey500, fontSize: 16),
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: AppColors.surface,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.grey.shade300),
+                  borderSide: BorderSide(color: AppColors.grey300),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.black, width: 2),
+                  borderSide: BorderSide(color: AppColors.ink, width: 2),
                 ),
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -602,16 +596,16 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         decoration: InputDecoration(
           hintText: 'Email',
-          hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
+          hintStyle: TextStyle(color: AppColors.grey500, fontSize: 16),
           filled: true,
-          fillColor: Colors.white,
+          fillColor: AppColors.surface,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Colors.grey.shade300),
+            borderSide: BorderSide(color: AppColors.grey300),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Colors.black, width: 2),
+            borderSide: BorderSide(color: AppColors.ink, width: 2),
           ),
           contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         ),
@@ -633,23 +627,23 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             decoration: InputDecoration(
               hintText: 'Your password',
-              hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
+              hintStyle: TextStyle(color: AppColors.grey500, fontSize: 16),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: AppColors.surface,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.shade300),
+                borderSide: BorderSide(color: AppColors.grey300),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.black, width: 2),
+                borderSide: BorderSide(color: AppColors.ink, width: 2),
               ),
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               suffixIcon: IconButton(
                 icon: Icon(
                     _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                    color: Colors.grey.shade600),
+                    color: AppColors.grey600),
                 onPressed: () =>
                     setState(() => _obscurePassword = !_obscurePassword),
               ),
@@ -687,13 +681,13 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
                 children: [
                   Icon(
                     entry.value ? Icons.check : Icons.close,
-                    color: entry.value ? Colors.green : Colors.grey.shade600,
+                    color: entry.value ? AppColors.success : AppColors.grey600,
                     size: 16,
                   ),
                   SizedBox(width: 8),
                   Text(label,
                       style:
-                          TextStyle(color: Colors.grey.shade700, fontSize: 16)),
+                          TextStyle(color: AppColors.grey700, fontSize: 16)),
                 ],
               ),
             );
@@ -709,16 +703,16 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             decoration: InputDecoration(
               hintText: 'Confirm password',
-              hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
+              hintStyle: TextStyle(color: AppColors.grey500, fontSize: 16),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: AppColors.surface,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.shade300),
+                borderSide: BorderSide(color: AppColors.grey300),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.black, width: 2),
+                borderSide: BorderSide(color: AppColors.ink, width: 2),
               ),
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -727,7 +721,7 @@ class OnboardingAccountScreenState extends State<OnboardingAccountScreen> {
                     _obscureConfirmPassword
                         ? Icons.visibility_off
                         : Icons.visibility,
-                    color: Colors.grey.shade600),
+                    color: AppColors.grey600),
                 onPressed: () => setState(
                     () => _obscureConfirmPassword = !_obscureConfirmPassword),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/services/api_service.dart';
 import 'package:circle_app/services/connection_service.dart';
 import 'package:circle_app/services/notification_service.dart';
@@ -56,7 +57,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Connection request sent to $displayName'),
-          backgroundColor: Colors.green,
+          backgroundColor: AppColors.success,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -72,7 +73,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Failed to send connection request: $e'),
-            backgroundColor: Colors.red,
+            backgroundColor: AppColors.danger,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
@@ -118,7 +119,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Connection request from $displayName accepted'),
-          backgroundColor: Colors.green,
+          backgroundColor: AppColors.success,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -138,7 +139,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Failed to accept connection request: $e'),
-            backgroundColor: Colors.red,
+            backgroundColor: AppColors.danger,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
@@ -176,7 +177,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Connection request from $displayName rejected'),
-          backgroundColor: Colors.orange,
+          backgroundColor: AppColors.warning,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -192,7 +193,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Failed to reject connection request: $e'),
-            backgroundColor: Colors.red,
+            backgroundColor: AppColors.danger,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
@@ -220,7 +221,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: Colors.green.shade100,
+          color: AppColors.successSoft,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
@@ -229,13 +230,13 @@ class _ConnectionModalState extends State<ConnectionModal> {
             Icon(
               Icons.check_circle,
               size: 14,
-              color: Colors.green.shade700,
+              color: AppColors.success,
             ),
             SizedBox(width: 4),
             Text(
               'Connected',
               style: TextStyle(
-                color: Colors.green.shade700,
+                color: AppColors.success,
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
               ),
@@ -249,7 +250,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: Colors.orange.shade100,
+          color: AppColors.warningSoft,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
@@ -258,13 +259,13 @@ class _ConnectionModalState extends State<ConnectionModal> {
             Icon(
               Icons.schedule,
               size: 14,
-              color: Colors.orange.shade700,
+              color: AppColors.warning,
             ),
             SizedBox(width: 4),
             Text(
               'Pending',
               style: TextStyle(
-                color: Colors.orange.shade700,
+                color: AppColors.warning,
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
               ),
@@ -289,13 +290,13 @@ class _ConnectionModalState extends State<ConnectionModal> {
               height: 36,
               decoration: BoxDecoration(
                 color: _isProcessingRequest
-                    ? Colors.grey.shade400
-                    : Colors.red.shade500,
+                    ? AppColors.grey400
+                    : AppColors.danger,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.close,
-                color: Colors.white,
+                color: AppColors.surface,
                 size: 18,
               ),
             ),
@@ -311,8 +312,8 @@ class _ConnectionModalState extends State<ConnectionModal> {
               height: 36,
               decoration: BoxDecoration(
                 color: _isProcessingRequest
-                    ? Colors.grey.shade400
-                    : Colors.green.shade500,
+                    ? AppColors.grey400
+                    : AppColors.success,
                 shape: BoxShape.circle,
               ),
               child: _isProcessingRequest
@@ -320,13 +321,13 @@ class _ConnectionModalState extends State<ConnectionModal> {
                       width: 14,
                       height: 14,
                       child: CircularProgressIndicator(
-                        color: Colors.white,
+                        color: AppColors.surface,
                         strokeWidth: 2,
                       ),
                     )
                   : Icon(
                       Icons.check,
-                      color: Colors.white,
+                      color: AppColors.surface,
                       size: 18,
                     ),
             ),
@@ -345,7 +346,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
         height: 40,
         decoration: BoxDecoration(
           color:
-              _isProcessingRequest ? Colors.grey.shade400 : Color(0xFF6B46C1),
+              _isProcessingRequest ? AppColors.grey400 : AppColors.accent,
           shape: BoxShape.circle,
         ),
         child: _isProcessingRequest
@@ -353,13 +354,13 @@ class _ConnectionModalState extends State<ConnectionModal> {
                 width: 16,
                 height: 16,
                 child: CircularProgressIndicator(
-                  color: Colors.white,
+                  color: AppColors.surface,
                   strokeWidth: 2,
                 ),
               )
             : Icon(
                 Icons.add,
-                color: Colors.white,
+                color: AppColors.surface,
                 size: 20,
               ),
       ),
@@ -381,12 +382,12 @@ class _ConnectionModalState extends State<ConnectionModal> {
       margin: EdgeInsets.only(bottom: 12),
       padding: EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: AppColors.grey200),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: AppColors.ink.withOpacity(0.04),
             blurRadius: 4,
             offset: Offset(0, 2),
           ),
@@ -400,7 +401,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
             height: 50,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFF6B46C1),
+              color: AppColors.accentSoft,
               image: profilePictureUrl != null && profilePictureUrl.isNotEmpty
                   ? DecorationImage(
                       image: NetworkImage(profilePictureUrl),
@@ -409,12 +410,14 @@ class _ConnectionModalState extends State<ConnectionModal> {
                   : null,
             ),
             child: profilePictureUrl == null || profilePictureUrl.isEmpty
-                ? Text(
-                    displayName.isNotEmpty ? displayName[0].toUpperCase() : 'U',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                ? Center(
+                    child: Text(
+                      displayName.isNotEmpty ? displayName[0].toUpperCase() : 'U',
+                      style: const TextStyle(
+                        color: AppColors.accentDeep,
+                        fontFamily: AppFonts.serif,
+                        fontSize: 22,
+                      ),
                     ),
                   )
                 : null,
@@ -432,7 +435,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
-                    color: Colors.grey.shade800,
+                    color: AppColors.grey800,
                   ),
                 ),
                 SizedBox(height: 2),
@@ -440,7 +443,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
                   industry ?? 'Fellow diner',
                   style: TextStyle(
                     fontSize: 13,
-                    color: Colors.grey.shade600,
+                    color: AppColors.grey600,
                   ),
                 ),
                 // Show status text for incoming requests
@@ -450,7 +453,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
                     'Wants to connect with you',
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.blue.shade600,
+                      color: AppColors.info,
                       fontStyle: FontStyle.italic,
                     ),
                   ),
@@ -477,14 +480,14 @@ class _ConnectionModalState extends State<ConnectionModal> {
           Icon(
             Icons.people_outline,
             size: 48,
-            color: Colors.grey.shade400,
+            color: AppColors.grey400,
           ),
           SizedBox(height: 12),
           Text(
             'No fellow diners to connect with',
             style: TextStyle(
               fontSize: 16,
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -493,7 +496,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
             'Check back after attending more dinners!',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.grey.shade500,
+              color: AppColors.grey500,
             ),
             textAlign: TextAlign.center,
           ),
@@ -527,7 +530,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
           builder: (context, scrollController) {
             return Container(
               decoration: BoxDecoration(
-                color: Color(0xFFFEF1DE),
+                color: AppColors.background,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
@@ -542,7 +545,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: AppColors.grey300,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -563,7 +566,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
                                 ? 16
                                 : (isSmallScreen ? 18 : 20),
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: AppColors.ink,
                           ),
                         ),
                         IconButton(
@@ -572,7 +575,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
                             size: isVerySmallScreen
                                 ? 20
                                 : (isSmallScreen ? 22 : 24),
-                            color: Colors.grey.shade600,
+                            color: AppColors.grey600,
                           ),
                           onPressed: _isProcessingRequest
                               ? null
@@ -598,7 +601,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
                             widget.dinnerTitle,
                             style: TextStyle(
                               fontSize: isVerySmallScreen ? 14 : 16,
-                              color: Colors.grey.shade700,
+                              color: AppColors.grey700,
                               fontWeight: FontWeight.w500,
                             ),
                             textAlign: TextAlign.left,
@@ -611,7 +614,7 @@ class _ConnectionModalState extends State<ConnectionModal> {
                             'Send connection requests to people from your recent dinner',
                             style: TextStyle(
                               fontSize: isVerySmallScreen ? 12 : 14,
-                              color: Colors.grey.shade500,
+                              color: AppColors.grey500,
                             ),
                             textAlign: TextAlign.left,
                           ),
@@ -659,9 +662,9 @@ class _ConnectionModalState extends State<ConnectionModal> {
                                     },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: _isProcessingRequest
-                                    ? Colors.grey
-                                    : Color(0xFF6B46C1),
-                                foregroundColor: Colors.white,
+                                    ? AppColors.grey500
+                                    : AppColors.accent,
+                                foregroundColor: AppColors.surface,
                                 padding: EdgeInsets.symmetric(
                                   vertical: isVerySmallScreen
                                       ? 12

@@ -1,12 +1,13 @@
 // lib/services/connection_service.dart
 import 'dart:convert';
+import 'package:circle_app/services/core/backend_config.dart';
 import 'package:http/http.dart' as http;
 import 'core/token_manager.dart';
 
 /// Service for managing user connections and friend requests
 class ConnectionService {
   static const String baseUrl =
-      'https://circle-app-production-09eb.up.railway.app/api';
+      BackendConfig.apiUrl;
 
   // ================== Connection Requests ==================
 

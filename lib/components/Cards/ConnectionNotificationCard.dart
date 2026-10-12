@@ -1,5 +1,6 @@
 // lib/components/Cards/ConnectionNotificationCard.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/services/connection_service.dart';
 import 'package:circle_app/services/notification_service.dart';
 import '../../services/api_service.dart';
@@ -48,21 +49,23 @@ class _ConnectionNotificationCardState
         child: Stack(
           children: <Widget>[
             // Outer border container
+            // Sizes to its content (no fixed height, so long names/messages
+            // can't overflow); the ink shows as a 2px border plus the 3D lip.
             Container(
               width: double.infinity,
-              height: 190, // Slightly taller to accommodate buttons
+              padding: const EdgeInsets.fromLTRB(2, 2, 2, 8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Colors.black,
+                color: AppColors.ink,
               ),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   // Main content area
                   Container(
-                    margin: EdgeInsets.all(2),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(13),
-                      color: Color.fromRGBO(250, 250, 250, 1),
+                      color: AppColors.surface,
                     ),
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
@@ -73,7 +76,7 @@ class _ConnectionNotificationCardState
                           Text(
                             widget.title,
                             style: TextStyle(
-                              color: Colors.black,
+                              color: AppColors.ink,
                               fontFamily: 'Inter',
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -89,7 +92,7 @@ class _ConnectionNotificationCardState
                           Text(
                             _cleanMessage,
                             style: TextStyle(
-                              color: Colors.grey.shade600,
+                              color: AppColors.grey600,
                               fontFamily: 'Inter',
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -105,7 +108,7 @@ class _ConnectionNotificationCardState
                           Text(
                             widget.time,
                             style: TextStyle(
-                              color: Colors.grey.shade500,
+                              color: AppColors.grey500,
                               fontFamily: 'Inter',
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
@@ -124,11 +127,12 @@ class _ConnectionNotificationCardState
                                       : () =>
                                           _handleConnectionRequest('accept'),
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.green,
-                                    foregroundColor: Colors.white,
+                                    backgroundColor: AppColors.success,
+                                    foregroundColor: AppColors.surface,
                                     padding: EdgeInsets.symmetric(vertical: 12),
+                                    minimumSize: const Size(0, 44),
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
+                                      borderRadius: BorderRadius.circular(999),
                                     ),
                                   ),
                                   child: _isProcessing
@@ -139,7 +143,7 @@ class _ConnectionNotificationCardState
                                             strokeWidth: 2,
                                             valueColor:
                                                 AlwaysStoppedAnimation<Color>(
-                                                    Colors.white),
+                                                    AppColors.surface),
                                           ),
                                         )
                                       : Text(
@@ -159,12 +163,13 @@ class _ConnectionNotificationCardState
                                       : () =>
                                           _handleConnectionRequest('decline'),
                                   style: OutlinedButton.styleFrom(
-                                    foregroundColor: Colors.grey.shade700,
+                                    foregroundColor: AppColors.grey700,
                                     side:
-                                        BorderSide(color: Colors.grey.shade300),
+                                        BorderSide(color: AppColors.grey300),
                                     padding: EdgeInsets.symmetric(vertical: 12),
+                                    minimumSize: const Size(0, 44),
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
+                                      borderRadius: BorderRadius.circular(999),
                                     ),
                                   ),
                                   child: Text(
@@ -194,7 +199,7 @@ class _ConnectionNotificationCardState
                 width: 12,
                 height: 12,
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: AppColors.info,
                   shape: BoxShape.circle,
                 ),
               ),
@@ -232,7 +237,7 @@ class _ConnectionNotificationCardState
           SnackBar(
               content: Text(message),
               backgroundColor:
-                  action == 'accept' ? Colors.green : Colors.orange),
+                  action == 'accept' ? AppColors.success : AppColors.warning),
         );
 
         if (widget.onUpdate != null) {

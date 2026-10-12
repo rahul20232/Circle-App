@@ -1,5 +1,6 @@
 // lib/screens/Home/booking_success_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import '../../models/dinner_model.dart';
 import './controllers/booking_success_controller.dart';
 import './components/booking_success_components.dart';
@@ -15,7 +16,7 @@ class BookingSuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: BookingSuccessComponents.buildScrollableContainer(
           context: context,

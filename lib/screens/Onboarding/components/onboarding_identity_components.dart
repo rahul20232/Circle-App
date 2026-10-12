@@ -1,5 +1,6 @@
 // lib/screens/Onboarding/components/onboarding_identity_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:circle_app/screens/Onboarding/controllers/onboarding_identity_controller.dart';
 import 'package:circle_app/components/Cards/IdentityCard.dart';
@@ -35,8 +36,8 @@ class OnboardingIdentityComponents {
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
+            fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+            color: AppColors.ink,
           ),
         ),
       ),
@@ -81,17 +82,17 @@ class OnboardingIdentityComponents {
                 duration: Duration(milliseconds: 200),
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.surface,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: controller.hasAnsweredCurrent
-                        ? Colors.black
-                        : Colors.grey.shade300,
+                        ? AppColors.ink
+                        : AppColors.grey300,
                     width: controller.hasAnsweredCurrent ? 2 : 1,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
+                      color: AppColors.ink.withOpacity(0.05),
                       blurRadius: 4,
                       offset: Offset(0, 2),
                     ),
@@ -107,8 +108,8 @@ class OnboardingIdentityComponents {
                         style: TextStyle(
                           fontSize: 16,
                           color: controller.hasAnsweredCurrent
-                              ? Colors.black
-                              : Colors.grey.shade500,
+                              ? AppColors.ink
+                              : AppColors.grey500,
                           fontWeight: controller.hasAnsweredCurrent
                               ? FontWeight.w500
                               : FontWeight.normal,
@@ -118,8 +119,8 @@ class OnboardingIdentityComponents {
                     Icon(
                       Icons.calendar_today,
                       color: controller.hasAnsweredCurrent
-                          ? Colors.black
-                          : Colors.grey.shade400,
+                          ? AppColors.ink
+                          : AppColors.grey400,
                       size: 20,
                     ),
                   ],
@@ -143,8 +144,8 @@ class OnboardingIdentityComponents {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      foregroundColor: Colors.white,
+                      backgroundColor: AppColors.ink,
+                      foregroundColor: AppColors.surface,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(28),
                       ),
@@ -197,7 +198,7 @@ class OnboardingIdentityComponents {
         return Container(
           height: 400,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.surface,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
@@ -210,7 +211,7 @@ class OnboardingIdentityComponents {
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(color: Colors.grey.shade200),
+                    bottom: BorderSide(color: AppColors.grey200),
                   ),
                 ),
                 child: Row(
@@ -221,7 +222,7 @@ class OnboardingIdentityComponents {
                       child: Text(
                         'Cancel',
                         style: TextStyle(
-                          color: Colors.grey.shade600,
+                          color: AppColors.grey600,
                           fontSize: 16,
                         ),
                       ),
@@ -231,7 +232,7 @@ class OnboardingIdentityComponents {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                        color: AppColors.ink,
                       ),
                     ),
                     TextButton(
@@ -249,7 +250,7 @@ class OnboardingIdentityComponents {
                       child: Text(
                         'Done',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: AppColors.ink,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -348,7 +349,7 @@ class OnboardingIdentityComponents {
             width: double.infinity,
             height: 4,
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: AppColors.grey300,
               borderRadius: BorderRadius.circular(2),
             ),
             child: ClipRRect(
@@ -358,7 +359,7 @@ class OnboardingIdentityComponents {
                 widthFactor: controller.progress.clamp(0.0, 1.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.black,
+                    color: AppColors.ink,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -384,8 +385,8 @@ class OnboardingIdentityComponents {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: index <= controller.currentQuestionIndex
-                ? Colors.black
-                : Colors.grey.shade300,
+                ? AppColors.ink
+                : AppColors.grey300,
           ),
         ),
       ),
@@ -407,8 +408,8 @@ class OnboardingIdentityComponents {
               }
             : null,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.white,
+          backgroundColor: AppColors.ink,
+          foregroundColor: AppColors.surface,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -429,23 +430,23 @@ class OnboardingIdentityComponents {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.green.shade100,
+        color: AppColors.successSoft,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.green.shade300),
+        border: Border.all(color: AppColors.success),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
             Icons.check_circle,
-            color: Colors.green.shade600,
+            color: AppColors.success,
             size: 16,
           ),
           SizedBox(width: 6),
           Text(
             selectedValue,
             style: TextStyle(
-              color: Colors.green.shade800,
+              color: AppColors.success,
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
@@ -464,7 +465,7 @@ class OnboardingIdentityComponents {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             decoration: BoxDecoration(
-              color: Colors.blue.shade100,
+              color: AppColors.infoSoft,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
@@ -472,7 +473,7 @@ class OnboardingIdentityComponents {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.blue.shade700,
+                color: AppColors.info,
               ),
             ),
           ),
@@ -488,9 +489,9 @@ class OnboardingIdentityComponents {
       curve: Curves.elasticOut,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.green.shade50,
+        color: AppColors.successSoft,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.green.shade200),
+        border: Border.all(color: AppColors.successSoft),
       ),
       child: Column(
         children: [
@@ -499,7 +500,7 @@ class OnboardingIdentityComponents {
             curve: Curves.bounceIn,
             child: Icon(
               Icons.check_circle,
-              color: Colors.green.shade600,
+              color: AppColors.success,
               size: 48,
             ),
           ),
@@ -509,7 +510,7 @@ class OnboardingIdentityComponents {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w600,
-              color: Colors.green.shade800,
+              color: AppColors.success,
             ),
           ),
           SizedBox(height: 8),
@@ -517,7 +518,7 @@ class OnboardingIdentityComponents {
             'You\'ve answered all ${controller.totalQuestions} questions',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.green.shade700,
+              color: AppColors.success,
             ),
           ),
         ],

@@ -1,5 +1,6 @@
 // lib/screens/Home/home_screen_content.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/components/Cards/NewCard.dart';
 import './controllers/home_screen_controller.dart';
 import './components/home_screen_components.dart';
@@ -19,6 +20,21 @@ class _HomeScreenContentState extends State<HomeScreenContent>
   late Animation<double> _bounceAnimation;
 
   double _dragOffset = 0.0;
+
+  // The sheet starts just below the header's real bottom edge (measured after
+  // layout), so it fits any screen size and grows/shrinks with header content.
+  final GlobalKey _headerKey = GlobalKey();
+  double? _headerBottom;
+
+  void _measureHeader() {
+    if (_dragOffset != 0) return; // only measure at rest
+    final box = _headerKey.currentContext?.findRenderObject() as RenderBox?;
+    if (box == null || !box.hasSize) return;
+    final bottom = box.localToGlobal(Offset(0, box.size.height)).dy;
+    if (_headerBottom == null || (bottom - _headerBottom!).abs() > 1) {
+      setState(() => _headerBottom = bottom);
+    }
+  }
   bool _isDragging = false;
 
   @override
@@ -55,7 +71,7 @@ class _HomeScreenContentState extends State<HomeScreenContent>
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Thank you for rating your dinner experience!'),
-          backgroundColor: Colors.green,
+          backgroundColor: AppColors.success,
         ),
       );
     }
@@ -66,7 +82,7 @@ class _HomeScreenContentState extends State<HomeScreenContent>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Failed to submit rating: $error'),
-          backgroundColor: Colors.red,
+          backgroundColor: AppColors.danger,
         ),
       );
     }
@@ -143,8 +159,8 @@ class _HomeScreenContentState extends State<HomeScreenContent>
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color(0xFF6B46C1), // Purple
-                const Color(0xFF9333EA), // Lighter purple
+                AppColors.accent, // Purple
+                AppColors.accentDeep, // Lighter purple
               ],
               // Adjust gradient stops based on stretch
               stops: [
@@ -162,7 +178,7 @@ class _HomeScreenContentState extends State<HomeScreenContent>
               children: [
                 Transform.translate(
                   offset: Offset(0, _dragOffset * 0.2),
-                  child: _buildHeader(),
+                  child: KeyedSubtree(key: _headerKey, child: _buildHeader()),
                 ),
                 const Spacer(),
               ],
@@ -181,14 +197,14 @@ class _HomeScreenContentState extends State<HomeScreenContent>
 
         return Container(
             decoration: BoxDecoration(
-              color: const Color(0xFFFEF1DE),
+              color: AppColors.background,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(24 + stretchFactor.abs() * 2),
                 topRight: Radius.circular(24 + stretchFactor.abs() * 2),
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black
+                  color: AppColors.ink
                       .withOpacity(0.1 + stretchFactor.abs() * 0.05),
                   blurRadius: 15 + stretchFactor.abs() * 5,
                   offset: Offset(0, -8 + _dragOffset * 0.02),
@@ -215,7 +231,7 @@ class _HomeScreenContentState extends State<HomeScreenContent>
                           width: 40 + stretchFactor.abs() * 5,
                           height: 4,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color: AppColors.grey300,
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),
@@ -232,8 +248,17 @@ class _HomeScreenContentState extends State<HomeScreenContent>
                 ),
 
                 // SCROLLABLE CONTENT SECTION (NOT DRAGGABLE)
+                // Soft fade at the bottom so cards visibly continue under the button.
                 Expanded(
-                  child: SingleChildScrollView(
+                  child: ShaderMask(
+                    shaderCallback: (rect) => const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.black, Colors.black, Colors.transparent],
+                      stops: [0.0, 0.88, 1.0],
+                    ).createShader(rect),
+                    blendMode: BlendMode.dstIn,
+                    child: SingleChildScrollView(
                     child: Column(
                       children: [
                         if (_controller.isLoading)
@@ -280,9 +305,10 @@ class _HomeScreenContentState extends State<HomeScreenContent>
                             height: 200,
                             child: HomeScreenComponents.buildEmptyState(),
                           ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 24),
                       ],
                     ),
+                  ),
                   ),
                 ),
 
@@ -313,7 +339,7 @@ class _HomeScreenContentState extends State<HomeScreenContent>
           child: CustomPaint(
             painter: RubberBandPainter(
               stretchAmount: _dragOffset,
-              color: const Color(0xFF9333EA).withOpacity(0.4),
+              color: AppColors.accentDeep.withOpacity(0.4),
             ),
           ),
         );
@@ -327,8 +353,15 @@ class _HomeScreenContentState extends State<HomeScreenContent>
       listenable: _controller,
       builder: (context, child) {
         final screenHeight = MediaQuery.of(context).size.height;
-        final initialBottomSheetHeight = screenHeight * 0.72;
-        final sheetTop = (screenHeight - initialBottomSheetHeight + _dragOffset).clamp(0.0, screenHeight * 0.6);
+        // With a rating pending the header holds stars + Submit + Connect,
+        // so the sheet starts lower to keep those buttons reachable.
+        WidgetsBinding.instance.addPostFrameCallback((_) => _measureHeader());
+        // Fallback (first frame, before measuring): the old fixed proportion.
+        final restingTop = _headerBottom != null
+            ? _headerBottom! + 20
+            : screenHeight * 0.28;
+        final sheetTop = (restingTop + _dragOffset)
+            .clamp(screenHeight * 0.15, screenHeight * 0.7);
 
         return Scaffold(
           body: Stack(

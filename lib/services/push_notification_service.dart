@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:circle_app/theme/app_colors.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -110,7 +111,7 @@ class PushNotificationService {
     String body, {
     Duration duration = const Duration(seconds: 4),
     Color backgroundColor = Colors.black87,
-    Color textColor = Colors.white,
+    Color textColor = AppColors.surface,
     IconData icon = Icons.notifications,
   }) {
     if (_currentContext == null) return;
@@ -131,14 +132,14 @@ class PushNotificationService {
             decoration: BoxDecoration(
               color: backgroundColor,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
+              border: Border.all(color: AppColors.surface.withOpacity(0.1)),
             ),
             child: Row(
               children: [
                 Container(
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
+                    color: AppColors.surface.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Icon(icon, color: textColor, size: 20),
@@ -463,7 +464,7 @@ class PushNotificationService {
         showInAppNotification(
           'Scheduled!',
           'Notification scheduled for ${scheduleAfterSeconds}s. Minimize app to see it.',
-          backgroundColor: Colors.orange,
+          backgroundColor: AppColors.warning,
         );
       } else {
         // SOLUTION: Immediate + micro-delayed notifications
@@ -472,7 +473,7 @@ class PushNotificationService {
         showInAppNotification(
           title,
           body,
-          backgroundColor: Colors.green,
+          backgroundColor: AppColors.success,
         );
 
         if (forceForegroundNotification) {
@@ -491,7 +492,7 @@ class PushNotificationService {
           showInAppNotification(
             'Force Mode!',
             'Native notification scheduled for 100ms delay to bypass foreground suppression',
-            backgroundColor: Colors.purple,
+            backgroundColor: AppColors.accent,
             icon: Icons.rocket_launch,
           );
         } else {
@@ -520,7 +521,7 @@ class PushNotificationService {
       showInAppNotification(
         'Error',
         'Failed to send notification: $e',
-        backgroundColor: Colors.red,
+        backgroundColor: AppColors.danger,
         icon: Icons.error,
       );
     }
@@ -534,7 +535,7 @@ class PushNotificationService {
   }) async {
     if (_isAppInForeground) {
       // App is in foreground - show in-app notification and schedule native with delay
-      showInAppNotification(title, body, backgroundColor: Colors.blue);
+      showInAppNotification(title, body, backgroundColor: AppColors.info);
 
       // Schedule native notification with small delay to appear when user backgrounds app
       await _localNotifications.zonedSchedule(
@@ -608,7 +609,7 @@ class PushNotificationService {
         showInAppNotification(
           'Reminder Skipped',
           'The reminder time is in the past',
-          backgroundColor: Colors.orange,
+          backgroundColor: AppColors.warning,
           icon: Icons.schedule,
         );
         return;
@@ -644,7 +645,7 @@ class PushNotificationService {
       showInAppNotification(
         'Reminder Set!',
         'Dinner reminder scheduled for ${reminderTime.hour.toString().padLeft(2, '0')}:${reminderTime.minute.toString().padLeft(2, '0')}',
-        backgroundColor: Colors.blue,
+        backgroundColor: AppColors.info,
         icon: Icons.restaurant,
       );
     } catch (e) {
@@ -652,7 +653,7 @@ class PushNotificationService {
       showInAppNotification(
         'Error',
         'Failed to schedule reminder: $e',
-        backgroundColor: Colors.red,
+        backgroundColor: AppColors.danger,
         icon: Icons.error,
       );
     }

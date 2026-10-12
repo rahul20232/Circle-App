@@ -1,5 +1,6 @@
 // lib/screens/Profile/EditProfile/identity_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/EditProfile/controllers/identity_controller.dart';
 import 'package:circle_app/components/Cards/IdentityCard.dart';
 
@@ -53,7 +54,7 @@ class IdentityComponents {
             Icon(
               Icons.help_outline,
               size: 64,
-              color: Colors.grey.shade400,
+              color: AppColors.grey400,
             ),
             SizedBox(height: 16),
             Text(
@@ -61,7 +62,7 @@ class IdentityComponents {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey.shade600,
+                color: AppColors.grey600,
               ),
             ),
             SizedBox(height: 8),
@@ -69,7 +70,7 @@ class IdentityComponents {
               'This question type is not supported yet.',
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey.shade500,
+                color: AppColors.grey500,
               ),
               textAlign: TextAlign.center,
             ),
@@ -83,23 +84,23 @@ class IdentityComponents {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.green.shade100,
+        color: AppColors.successSoft,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.green.shade300),
+        border: Border.all(color: AppColors.success),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
             Icons.check_circle,
-            color: Colors.green.shade600,
+            color: AppColors.success,
             size: 16,
           ),
           SizedBox(width: 6),
           Text(
             selectedValue,
             style: TextStyle(
-              color: Colors.green.shade800,
+              color: AppColors.success,
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
@@ -118,7 +119,7 @@ class IdentityComponents {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             decoration: BoxDecoration(
-              color: Colors.blue.shade100,
+              color: AppColors.infoSoft,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
@@ -126,7 +127,7 @@ class IdentityComponents {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.blue.shade700,
+                color: AppColors.info,
               ),
             ),
           ),
@@ -150,7 +151,7 @@ class IdentityComponents {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color:
-                  index <= selectedIndex ? Colors.black : Colors.grey.shade300,
+                  index <= selectedIndex ? AppColors.ink : AppColors.grey300,
             ),
           ),
         ),

@@ -1,5 +1,6 @@
 // Replace your payment_modal.dart with this simplified version:
 import 'package:flutter/cupertino.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -104,7 +105,7 @@ class _PaymentModalState extends State<PaymentModal> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Card detected successfully!'),
-        backgroundColor: Colors.green,
+        backgroundColor: AppColors.success,
         duration: Duration(seconds: 2),
       ),
     );
@@ -151,7 +152,7 @@ class _PaymentModalState extends State<PaymentModal> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Please fill in all card details'),
-          backgroundColor: Colors.red,
+          backgroundColor: AppColors.danger,
         ),
       );
       return;
@@ -175,7 +176,7 @@ class _PaymentModalState extends State<PaymentModal> {
           SnackBar(
             content:
                 Text('Payment processed successfully! Subscription activated.'),
-            backgroundColor: Colors.green,
+            backgroundColor: AppColors.success,
             duration: Duration(seconds: 2),
           ),
         );
@@ -215,7 +216,7 @@ class _PaymentModalState extends State<PaymentModal> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Payment failed: ${e.toString()}'),
-          backgroundColor: Colors.red,
+          backgroundColor: AppColors.danger,
         ),
       );
     } finally {
@@ -246,7 +247,7 @@ class _PaymentModalState extends State<PaymentModal> {
           builder: (context, scrollController) {
             return Container(
               decoration: BoxDecoration(
-                color: Color(0xFFFEF1DE),
+                color: AppColors.background,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
@@ -261,7 +262,7 @@ class _PaymentModalState extends State<PaymentModal> {
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: AppColors.grey300,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -277,7 +278,7 @@ class _PaymentModalState extends State<PaymentModal> {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: AppColors.ink,
                           ),
                         ),
                         IconButton(
@@ -319,13 +320,13 @@ class _PaymentModalState extends State<PaymentModal> {
                                         },
                                   icon: Icon(
                                     Icons.camera_alt_outlined,
-                                    color: Colors.blue,
+                                    color: AppColors.info,
                                     size: isSmallScreen ? 12 : 16,
                                   ),
                                   label: Text(
                                     'Scan',
                                     style: TextStyle(
-                                      color: Colors.blue,
+                                      color: AppColors.info,
                                       fontSize: isSmallScreen ? 10 : 12,
                                     ),
                                   ),
@@ -375,7 +376,7 @@ class _PaymentModalState extends State<PaymentModal> {
                               'By providing your card information, you allow Circle to charge your card for future payments in accordance with their terms.',
                               style: TextStyle(
                                   fontSize: 10,
-                                  color: Colors.grey[600],
+                                  color: AppColors.grey600,
                                   height: 1.2),
                             ),
 
@@ -404,8 +405,8 @@ class _PaymentModalState extends State<PaymentModal> {
         // Card number field
         Container(
           decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: Colors.grey[300]!),
+            color: AppColors.surface,
+            border: Border.all(color: AppColors.grey300!),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
@@ -425,14 +426,14 @@ class _PaymentModalState extends State<PaymentModal> {
                       height: 14,
                       margin: EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Colors.blue[800],
+                        color: AppColors.info,
                         borderRadius: BorderRadius.circular(2),
                       ),
                       child: Center(
                         child: Text(
                           'VISA',
                           style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.surface,
                               fontSize: 6,
                               fontWeight: FontWeight.bold),
                         ),
@@ -455,8 +456,8 @@ class _PaymentModalState extends State<PaymentModal> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.grey[300]!),
+                  color: AppColors.surface,
+                  border: Border.all(color: AppColors.grey300!),
                   borderRadius:
                       BorderRadius.only(bottomLeft: Radius.circular(8)),
                 ),
@@ -487,11 +488,11 @@ class _PaymentModalState extends State<PaymentModal> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.surface,
                   border: Border(
-                    top: BorderSide(color: Colors.grey[300]!),
-                    right: BorderSide(color: Colors.grey[300]!),
-                    bottom: BorderSide(color: Colors.grey[300]!),
+                    top: BorderSide(color: AppColors.grey300!),
+                    right: BorderSide(color: AppColors.grey300!),
+                    bottom: BorderSide(color: AppColors.grey300!),
                   ),
                   borderRadius:
                       BorderRadius.only(bottomRight: Radius.circular(8)),
@@ -538,7 +539,7 @@ class _PaymentModalState extends State<PaymentModal> {
                       Container(
                         decoration: BoxDecoration(
                           border: Border(
-                              bottom: BorderSide(color: Colors.grey.shade300)),
+                              bottom: BorderSide(color: AppColors.grey300)),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -578,8 +579,8 @@ class _PaymentModalState extends State<PaymentModal> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.grey[300]!),
+          color: AppColors.surface,
+          border: Border.all(color: AppColors.grey300!),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -587,7 +588,7 @@ class _PaymentModalState extends State<PaymentModal> {
           children: [
             Text(selectedCountry,
                 style: TextStyle(fontSize: isSmallScreen ? 12 : 14)),
-            Icon(Icons.arrow_drop_down, color: Colors.grey),
+            Icon(Icons.arrow_drop_down, color: AppColors.grey500),
           ],
         ),
       ),
@@ -600,8 +601,8 @@ class _PaymentModalState extends State<PaymentModal> {
       child: ElevatedButton(
         onPressed: isProcessingPayment ? null : _processPayment,
         style: ElevatedButton.styleFrom(
-          backgroundColor: isProcessingPayment ? Colors.grey : Colors.black,
-          foregroundColor: Colors.white,
+          backgroundColor: isProcessingPayment ? AppColors.grey500 : AppColors.ink,
+          foregroundColor: AppColors.surface,
           padding: EdgeInsets.symmetric(vertical: isSmallScreen ? 10 : 12),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
@@ -614,7 +615,7 @@ class _PaymentModalState extends State<PaymentModal> {
                     width: 12,
                     height: 12,
                     child: CircularProgressIndicator(
-                        color: Colors.white, strokeWidth: 1.5),
+                        color: AppColors.surface, strokeWidth: 1.5),
                   ),
                   SizedBox(width: 8),
                   Text('Processing...',

@@ -1,5 +1,6 @@
 // lib/screens/Onboarding/controllers/pre_registration_controller.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/services/supabase_service.dart';
 import 'package:circle_app/services/auth_service.dart';
 import 'package:circle_app/screens/Auth/login_screen.dart';
@@ -124,12 +125,12 @@ class PreRegistrationController {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: Colors.green.shade50,
+                color: AppColors.successSoft,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.check_circle,
-                color: Colors.green,
+                color: AppColors.success,
                 size: 48,
               ),
             ),
@@ -138,8 +139,8 @@ class PreRegistrationController {
               'Account Created!',
               style: TextStyle(
                 fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+                fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+                color: AppColors.ink,
               ),
             ),
             SizedBox(height: 16),
@@ -148,7 +149,7 @@ class PreRegistrationController {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.grey.shade700,
+                color: AppColors.grey700,
                 height: 1.4,
               ),
             ),
@@ -158,7 +159,7 @@ class PreRegistrationController {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey.shade600,
+                color: AppColors.grey600,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -168,8 +169,8 @@ class PreRegistrationController {
               child: ElevatedButton(
                 onPressed: () => Navigator.of(context).pop(),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
+                  backgroundColor: AppColors.ink,
+                  foregroundColor: AppColors.surface,
                   padding: EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -204,7 +205,7 @@ class PreRegistrationController {
       SnackBar(
         content: Text(userMessage),
         backgroundColor:
-            shouldNavigateToLogin ? Colors.orange : Colors.red.shade600,
+            shouldNavigateToLogin ? AppColors.warning : AppColors.danger,
         behavior: SnackBarBehavior.floating,
         margin: EdgeInsets.all(16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

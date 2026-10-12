@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -121,30 +122,30 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
   // Helper method to get status color
   Color _getStatusColor(String status) {
     if (_isPastDinner) {
-      return Colors.orange.shade600; // Orange for past dinners
+      return AppColors.warning; // Orange for past dinners
     }
 
     switch (status.toLowerCase()) {
       case 'confirmed':
-        return Colors.green;
+        return AppColors.success;
       case 'pending':
-        return Colors.orange;
+        return AppColors.warning;
       case 'cancelled':
-        return Colors.red;
+        return AppColors.danger;
       default:
-        return Colors.grey;
+        return AppColors.grey500;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: AppColors.ink),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
@@ -152,7 +153,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.ink,
           ),
         ),
         centerTitle: true,
@@ -167,8 +168,8 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
               widget.dinner?.title ?? 'Dinner Booking',
               style: TextStyle(
                 fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+                fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+                color: AppColors.ink,
               ),
             ),
             SizedBox(height: 8),
@@ -201,11 +202,11 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                 width: double.infinity,
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.surface,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.shade200,
+                      color: AppColors.grey200,
                       blurRadius: 8,
                       offset: Offset(0, 2),
                     ),
@@ -235,7 +236,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                        color: AppColors.ink,
                       ),
                     ),
                     SizedBox(height: 4),
@@ -243,7 +244,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                       _formatTime(widget.dinner!.date),
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.grey.shade600,
+                        color: AppColors.grey600,
                       ),
                     ),
                   ],
@@ -256,11 +257,11 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.surface,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.shade200,
+                    color: AppColors.grey200,
                     blurRadius: 8,
                     offset: Offset(0, 2),
                   ),
@@ -275,7 +276,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     child: Row(
                       children: [
                         Icon(Icons.location_on,
-                            color: Colors.red.shade400, size: 20),
+                            color: AppColors.danger, size: 20),
                         SizedBox(width: 8),
                         Text(
                           'Restaurant Location',
@@ -297,7 +298,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                        color: AppColors.ink,
                       ),
                     ),
                   ),
@@ -310,7 +311,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.grey.shade300),
+                        border: Border.all(color: AppColors.grey300),
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
@@ -340,21 +341,21 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                       height: 200,
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: AppColors.danger,
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.grey.shade300),
+                        border: Border.all(color: AppColors.grey300),
                       ),
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.location_off,
-                                color: Colors.grey, size: 32),
+                                color: AppColors.grey500, size: 32),
                             SizedBox(height: 8),
                             Text(
                               'Location not available',
                               style: TextStyle(
-                                color: Colors.grey.shade600,
+                                color: AppColors.grey600,
                                 fontSize: 14,
                               ),
                             ),
@@ -380,8 +381,8 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                         label: Text('Get Directions'),
                         style: OutlinedButton.styleFrom(
                           padding: EdgeInsets.symmetric(vertical: 12),
-                          side: BorderSide(color: Colors.blue, width: 1.5),
-                          foregroundColor: Colors.blue,
+                          side: BorderSide(color: AppColors.info, width: 1.5),
+                          foregroundColor: AppColors.info,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -400,11 +401,11 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                 width: double.infinity,
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.surface,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.shade200,
+                      color: AppColors.grey200,
                       blurRadius: 8,
                       offset: Offset(0, 2),
                     ),
@@ -416,7 +417,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     Row(
                       children: [
                         Icon(Icons.people,
-                            color: Colors.green.shade600, size: 20),
+                            color: AppColors.success, size: 20),
                         SizedBox(width: 8),
                         Text(
                           'Available Spots',
@@ -434,7 +435,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                        color: AppColors.ink,
                       ),
                     ),
                   ],
@@ -448,9 +449,9 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
               width: double.infinity,
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.grey.shade50,
+                color: AppColors.grey50,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.grey.shade200),
+                border: Border.all(color: AppColors.grey200),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -460,7 +461,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: Colors.grey.shade600,
+                      color: AppColors.grey600,
                     ),
                   ),
                   SizedBox(height: 8),
@@ -469,7 +470,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black,
+                      color: AppColors.ink,
                       fontFamily: 'monospace',
                     ),
                   ),
@@ -494,8 +495,8 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                   label: Text('Connect with Attendees'),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 16),
-                    backgroundColor: Color(0xFF6B46C1),
-                    foregroundColor: Colors.white,
+                    backgroundColor: AppColors.accent,
+                    foregroundColor: AppColors.surface,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -514,7 +515,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                   },
                   style: OutlinedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 16),
-                    side: BorderSide(color: Colors.red, width: 1.5),
+                    side: BorderSide(color: AppColors.danger, width: 1.5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -523,7 +524,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     'Cancel Booking',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.red,
+                      color: AppColors.danger,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -572,7 +573,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          backgroundColor: Color(0xFFFEF1DE),
+          backgroundColor: AppColors.background,
           title: Text(
             'Cancel Booking',
             style: TextStyle(
@@ -596,7 +597,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
               child: Text(
                 'Keep Booking',
                 style: TextStyle(
-                  color: Colors.grey.shade600,
+                  color: AppColors.grey600,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -608,7 +609,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
               child: Text(
                 'Cancel Booking',
                 style: TextStyle(
-                  color: Colors.red,
+                  color: AppColors.danger,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -686,7 +687,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
             scaffoldMessenger.showSnackBar(
               SnackBar(
                 content: Text('Booking cancelled successfully'),
-                backgroundColor: Colors.green,
+                backgroundColor: AppColors.success,
               ),
             );
           } catch (e) {
@@ -700,7 +701,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
             scaffoldMessenger.showSnackBar(
               SnackBar(
                 content: Text('Failed to cancel booking'),
-                backgroundColor: Colors.red,
+                backgroundColor: AppColors.danger,
               ),
             );
           } catch (e) {
@@ -723,7 +724,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
           scaffoldMessenger.showSnackBar(
             SnackBar(
               content: Text('Error: ${e.toString()}'),
-              backgroundColor: Colors.red,
+              backgroundColor: AppColors.danger,
             ),
           );
         } catch (snackError) {

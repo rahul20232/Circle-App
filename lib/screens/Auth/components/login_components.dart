@@ -1,5 +1,6 @@
 // lib/screens/Auth/components/login_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Auth/controllers/login_controller.dart';
 
 class LoginComponents {
@@ -9,11 +10,11 @@ class LoginComponents {
   Widget buildEmailInput() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.ink.withOpacity(0.05),
             blurRadius: 10,
             offset: Offset(0, 2),
           ),
@@ -26,7 +27,7 @@ class LoginComponents {
         decoration: InputDecoration(
           hintText: 'Email',
           hintStyle: TextStyle(
-            color: Colors.grey.shade500,
+            color: AppColors.grey500,
             fontSize: 16,
           ),
           border: OutlineInputBorder(
@@ -42,7 +43,7 @@ class LoginComponents {
             borderSide: BorderSide.none,
           ),
           filled: true,
-          fillColor: Colors.white,
+          fillColor: AppColors.surface,
           contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         ),
       ),
@@ -52,11 +53,11 @@ class LoginComponents {
   Widget buildPasswordInput() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.ink.withOpacity(0.05),
             blurRadius: 10,
             offset: Offset(0, 2),
           ),
@@ -69,7 +70,7 @@ class LoginComponents {
         decoration: InputDecoration(
           hintText: 'Password',
           hintStyle: TextStyle(
-            color: Colors.grey.shade500,
+            color: AppColors.grey500,
             fontSize: 16,
           ),
           border: OutlineInputBorder(
@@ -85,7 +86,7 @@ class LoginComponents {
             borderSide: BorderSide.none,
           ),
           filled: true,
-          fillColor: Colors.white,
+          fillColor: AppColors.surface,
           contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           suffixIcon: GestureDetector(
             onTap: controller.togglePasswordVisibility,
@@ -95,7 +96,7 @@ class LoginComponents {
                 controller.isPasswordVisible
                     ? Icons.visibility_off_outlined
                     : Icons.visibility_outlined,
-                color: Colors.grey.shade600,
+                color: AppColors.grey600,
                 size: 24,
               ),
             ),
@@ -114,8 +115,8 @@ class LoginComponents {
             ? null
             : () => controller.loginWithEmail(context),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.white,
+          backgroundColor: AppColors.ink,
+          foregroundColor: AppColors.surface,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(28),
           ),
@@ -127,7 +128,7 @@ class LoginComponents {
                 width: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.surface),
                 ),
               )
             : Text(
@@ -147,7 +148,7 @@ class LoginComponents {
         Expanded(
           child: Container(
             height: 1,
-            color: Colors.grey.shade400,
+            color: AppColors.grey400,
           ),
         ),
         Padding(
@@ -155,7 +156,7 @@ class LoginComponents {
           child: Text(
             'OR CONTINUE WITH',
             style: TextStyle(
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
               fontSize: 12,
               fontWeight: FontWeight.w500,
               letterSpacing: 0.5,
@@ -165,7 +166,7 @@ class LoginComponents {
         Expanded(
           child: Container(
             height: 1,
-            color: Colors.grey.shade400,
+            color: AppColors.grey400,
           ),
         ),
       ],
@@ -184,14 +185,14 @@ class LoginComponents {
           width: 20,
           height: 20,
           decoration: BoxDecoration(
-            color: Colors.red,
+            color: AppColors.danger,
             shape: BoxShape.circle,
           ),
           child: Center(
             child: Text(
               'G',
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.surface,
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
@@ -203,15 +204,15 @@ class LoginComponents {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.ink,
           ),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
+          backgroundColor: AppColors.surface,
+          foregroundColor: AppColors.ink,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(28),
-            side: BorderSide(color: Colors.grey.shade300, width: 1),
+            side: BorderSide(color: AppColors.grey300, width: 1),
           ),
           elevation: 0,
         ),

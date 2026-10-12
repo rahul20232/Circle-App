@@ -1,5 +1,6 @@
 // lib/screens/Home/dinner_preferences_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import '../../models/dinner_model.dart';
 
 import './controllers/dinner_preferences_controller.dart';
@@ -39,7 +40,7 @@ class _DinnerPreferencesScreenState extends State<DinnerPreferencesScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Failed to save preferences'),
-        backgroundColor: Colors.red,
+        backgroundColor: AppColors.danger,
       ),
     );
   }
@@ -48,7 +49,7 @@ class _DinnerPreferencesScreenState extends State<DinnerPreferencesScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Booking failed: $error'),
-        backgroundColor: Colors.red,
+        backgroundColor: AppColors.danger,
       ),
     );
   }
@@ -84,18 +85,18 @@ class _DinnerPreferencesScreenState extends State<DinnerPreferencesScreen> {
       builder: (context, child) {
         if (_controller.isLoading) {
           return const Scaffold(
-            backgroundColor: Color(0xFFFEF1DE),
+            backgroundColor: AppColors.background,
             body: Center(child: CircularProgressIndicator()),
           );
         }
 
         return Scaffold(
-          backgroundColor: const Color(0xFFFEF1DE),
+          backgroundColor: AppColors.background,
           appBar: AppBar(
-            backgroundColor: const Color(0xFFFEF1DE),
+            backgroundColor: AppColors.background,
             elevation: 0,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              icon: const Icon(Icons.arrow_back, color: AppColors.ink),
               onPressed: () => Navigator.pop(context),
             ),
             title: const Text(
@@ -103,7 +104,7 @@ class _DinnerPreferencesScreenState extends State<DinnerPreferencesScreen> {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: Colors.black,
+                color: AppColors.ink,
               ),
             ),
             centerTitle: true,

@@ -1,6 +1,7 @@
 // SOLUTION 1: Update ProfileScreenContent to refresh when returning from EditProfileScreen
 
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:circle_app/models/user_model.dart';
 import 'package:circle_app/screens/Profile/EditProfile/edit_profile_screen.dart';
@@ -27,7 +28,7 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
@@ -35,7 +36,7 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.ink,
           ),
         ),
         centerTitle: true,
@@ -62,7 +63,7 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
           //   icon: Icon(
           //     Icons.settings,
           //     size: 28,
-          //     color: Colors.grey.shade700,
+          //     color: AppColors.grey700,
           //   ),
           //   onPressed: () {
           //     Navigator.push(
@@ -73,9 +74,9 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
           // ),
         ],
       ),
-      backgroundColor: Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       body: Container(
-        color: Color(0xFFFEF1DE),
+        color: AppColors.background,
         child: SafeArea(
           child: Column(
             children: [
@@ -96,9 +97,9 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                               height: 110,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Colors.grey.shade300,
+                                color: AppColors.grey300,
                                 border: Border.all(
-                                  color: Colors.grey.shade800,
+                                  color: AppColors.grey800,
                                   width: 2,
                                 ),
                               ),
@@ -117,7 +118,7 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                                           return Icon(
                                             Icons.person,
                                             size: 40,
-                                            color: Colors.grey.shade800,
+                                            color: AppColors.grey800,
                                           );
                                         },
                                       ),
@@ -125,7 +126,7 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                                   : Icon(
                                       Icons.person,
                                       size: 40,
-                                      color: Colors.grey.shade800,
+                                      color: AppColors.grey800,
                                     ),
                             ),
 
@@ -137,7 +138,7 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.grey.shade800,
+                                color: AppColors.grey800,
                               ),
                             ),
 
@@ -163,20 +164,20 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                                   }
                                 },
                                 style: OutlinedButton.styleFrom(
-                                  backgroundColor: Colors.white,
+                                  backgroundColor: AppColors.surface,
                                   padding: EdgeInsets.symmetric(vertical: 12),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(25),
                                   ),
                                   side: BorderSide(
-                                      color: Colors.grey.shade800, width: 1.5),
+                                      color: AppColors.grey800, width: 1.5),
                                 ),
                                 child: Text(
                                   'Edit profile',
                                   style: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w800,
-                                    color: Colors.grey.shade800,
+                                    color: AppColors.grey800,
                                   ),
                                 ),
                               ),
@@ -200,14 +201,14 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                                   color: Colors.transparent,
                                   borderRadius: BorderRadius.circular(16),
                                   border: Border.all(
-                                      color: Colors.grey.shade800, width: 1.5),
+                                      color: AppColors.grey800, width: 1.5),
                                 ),
                                 child: Row(
                                   children: [
                                     Icon(
                                       Icons.calendar_today_outlined,
                                       size: 24,
-                                      color: Colors.grey.shade800,
+                                      color: AppColors.grey800,
                                     ),
                                     SizedBox(width: 16),
                                     Text(
@@ -215,14 +216,14 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600,
-                                        color: Colors.grey.shade800,
+                                        color: AppColors.grey800,
                                       ),
                                     ),
                                     Spacer(),
                                     Icon(
                                       Icons.arrow_forward_ios,
                                       size: 16,
-                                      color: Colors.grey.shade800,
+                                      color: AppColors.grey800,
                                     ),
                                   ],
                                 ),
@@ -236,17 +237,17 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                               width: double.infinity,
                               padding: EdgeInsets.all(20),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.6),
+                                color: AppColors.surface.withOpacity(0.6),
                                 borderRadius: BorderRadius.circular(16),
                                 border: Border.all(
-                                    color: Colors.grey.shade400, width: 1),
+                                    color: AppColors.grey400, width: 1),
                               ),
                               child: Row(
                                 children: [
                                   Icon(
                                     Icons.help_outline,
                                     size: 24,
-                                    color: Colors.grey.shade800,
+                                    color: AppColors.grey800,
                                   ),
                                   SizedBox(width: 16),
                                   Text(
@@ -254,14 +255,14 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.grey.shade800,
+                                      color: AppColors.grey800,
                                     ),
                                   ),
                                   Spacer(),
                                   Icon(
                                     Icons.arrow_forward_ios,
                                     size: 16,
-                                    color: Colors.grey.shade600,
+                                    color: AppColors.grey600,
                                   ),
                                 ],
                               ),
@@ -274,10 +275,10 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                               width: double.infinity,
                               padding: EdgeInsets.all(20),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.6),
+                                color: AppColors.surface.withOpacity(0.6),
                                 borderRadius: BorderRadius.circular(16),
                                 border: Border.all(
-                                    color: Colors.grey.shade400, width: 1),
+                                    color: AppColors.grey400, width: 1),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -287,7 +288,7 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.grey.shade800,
+                                      color: AppColors.grey800,
                                     ),
                                   ),
                                   SizedBox(height: 12),
@@ -300,7 +301,7 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                                           'Discover our 6 steps to talking to strangers and having unforgettable dinners.',
                                           style: TextStyle(
                                             fontSize: 16,
-                                            color: Colors.grey.shade700,
+                                            color: AppColors.grey700,
                                             height: 1.4,
                                           ),
                                         ),
@@ -331,7 +332,7 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                                                 BorderRadius.circular(20),
                                           ),
                                           side: BorderSide(
-                                              color: Colors.grey.shade800,
+                                              color: AppColors.grey800,
                                               width: 1.5),
                                         ),
                                         child: Text(
@@ -339,7 +340,7 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                                           style: TextStyle(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500,
-                                            color: Colors.grey.shade800,
+                                            color: AppColors.grey800,
                                           ),
                                         ),
                                       ),

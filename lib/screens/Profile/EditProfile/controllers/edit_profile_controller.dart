@@ -1,5 +1,7 @@
 // lib/screens/Profile/EditProfile/edit_profile_controller.dart
 import 'dart:io';
+import 'package:circle_app/utils/text_utils.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -67,7 +69,7 @@ class EditProfileController {
     relationshipStatus = user.relationshipStatus ?? "";
     hasChildren = user.childrenStatus ?? "";
     industry = user.industry ?? "";
-    country = user.country ?? "";
+    country = stripEmoji(user.country ?? "");
     birthday = user.birthdate;
 
     relController.text = relationshipStatus ?? "";
@@ -206,7 +208,7 @@ class EditProfileController {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: isError ? Colors.red : Colors.green,
+        backgroundColor: isError ? AppColors.danger : AppColors.success,
       ),
     );
   }

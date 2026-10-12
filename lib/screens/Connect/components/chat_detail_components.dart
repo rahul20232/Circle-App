@@ -1,5 +1,6 @@
 // lib/components/chat_detail_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import '../../../../models/chat_model.dart';
 
 class ChatDetailComponents {
@@ -9,7 +10,7 @@ class ChatDetailComponents {
     final hasImage = user.profilePictureUrl != null && user.profilePictureUrl!.isNotEmpty;
     return CircleAvatar(
       radius: radius,
-      backgroundColor: const Color(0xFF6B46C1),
+      backgroundColor: AppColors.accent,
       backgroundImage: hasImage ? NetworkImage(user.profilePictureUrl!) : null,
       onBackgroundImageError: hasImage
           ? (exception, stackTrace) {
@@ -22,7 +23,7 @@ class ChatDetailComponents {
                   ? user.displayName[0].toUpperCase()
                   : 'U',
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.surface,
                 fontWeight: FontWeight.bold,
                 fontSize: radius * 0.6,
               ),
@@ -53,14 +54,14 @@ class ChatDetailComponents {
             Icon(
               Icons.error_outline,
               size: 64,
-              color: Colors.grey.shade400,
+              color: AppColors.grey400,
             ),
             const SizedBox(height: 16),
             Text(
               'Failed to load messages',
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.grey.shade600,
+                color: AppColors.grey600,
               ),
             ),
             const SizedBox(height: 8),
@@ -68,7 +69,7 @@ class ChatDetailComponents {
               errorMessage,
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey.shade500,
+                color: AppColors.grey500,
               ),
               textAlign: TextAlign.center,
             ),
@@ -90,14 +91,14 @@ class ChatDetailComponents {
             Icon(
               Icons.chat_bubble_outline,
               size: 64,
-              color: Colors.grey.shade400,
+              color: AppColors.grey400,
             ),
             const SizedBox(height: 16),
             Text(
               'No messages yet',
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.grey.shade600,
+                color: AppColors.grey600,
               ),
             ),
             const SizedBox(height: 8),
@@ -105,7 +106,7 @@ class ChatDetailComponents {
               'Start the conversation!',
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey.shade500,
+                color: AppColors.grey500,
               ),
             ),
           ],
@@ -165,11 +166,11 @@ class ChatDetailComponents {
                   vertical: 10,
                 ),
                 decoration: BoxDecoration(
-                  color: isOwnMessage ? const Color(0xFF6B46C1) : Colors.white,
+                  color: isOwnMessage ? AppColors.accent : AppColors.surface,
                   borderRadius: BorderRadius.circular(18),
                   border: isOwnMessage
                       ? null
-                      : Border.all(color: Colors.grey.shade200),
+                      : Border.all(color: AppColors.grey200),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,7 +179,7 @@ class ChatDetailComponents {
                       message.content,
                       style: TextStyle(
                         fontSize: 16,
-                        color: isOwnMessage ? Colors.white : Colors.black87,
+                        color: isOwnMessage ? AppColors.surface : Colors.black87,
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -191,7 +192,7 @@ class ChatDetailComponents {
                             fontSize: 12,
                             color: isOwnMessage
                                 ? Colors.white70
-                                : Colors.grey.shade500,
+                                : AppColors.grey500,
                           ),
                         ),
                         if (isOwnMessage) ...[
@@ -200,7 +201,7 @@ class ChatDetailComponents {
                             message.isRead ? Icons.done_all : Icons.done,
                             size: 14,
                             color: message.isRead
-                                ? Colors.blue.shade300
+                                ? AppColors.info
                                 : Colors.white70,
                           ),
                         ],
@@ -227,9 +228,9 @@ class ChatDetailComponents {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         border: Border(
-          top: BorderSide(color: Colors.grey.shade200),
+          top: BorderSide(color: AppColors.grey200),
         ),
       ),
       child: SafeArea(
@@ -238,7 +239,7 @@ class ChatDetailComponents {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+                  color: AppColors.grey100,
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: TextField(
@@ -260,7 +261,7 @@ class ChatDetailComponents {
             const SizedBox(width: 8),
             Container(
               decoration: const BoxDecoration(
-                color: Color(0xFF6B46C1),
+                color: AppColors.accent,
                 shape: BoxShape.circle,
               ),
               child: IconButton(
@@ -272,12 +273,12 @@ class ChatDetailComponents {
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
                           valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.white),
+                              AlwaysStoppedAnimation<Color>(AppColors.surface),
                         ),
                       )
                     : const Icon(
                         Icons.send,
-                        color: Colors.white,
+                        color: AppColors.surface,
                       ),
               ),
             ),
@@ -294,10 +295,10 @@ class ChatDetailComponents {
     required VoidCallback onBackPressed,
   }) {
     return AppBar(
-      backgroundColor: const Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Colors.black),
+        icon: const Icon(Icons.arrow_back, color: AppColors.ink),
         onPressed: onBackPressed,
       ),
       title: Row(
@@ -313,7 +314,7 @@ class ChatDetailComponents {
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                    color: AppColors.ink,
                   ),
                 ),
                 if (otherUserTyping)
@@ -321,7 +322,7 @@ class ChatDetailComponents {
                     'typing...',
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey.shade600,
+                      color: AppColors.grey600,
                       fontStyle: FontStyle.italic,
                     ),
                   ),

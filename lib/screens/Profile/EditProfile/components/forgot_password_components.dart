@@ -1,5 +1,6 @@
 // lib/screens/Auth/forgot_password_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/EditProfile/controllers/forgot_password_controller.dart';
 import '../reset_password_screen.dart';
 
@@ -29,14 +30,14 @@ class ForgotPasswordComponents {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade300),
+          borderSide: BorderSide(color: AppColors.grey300),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade400),
+          borderSide: BorderSide(color: AppColors.grey400),
         ),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: AppColors.surface,
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
@@ -49,11 +50,11 @@ class ForgotPasswordComponents {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: controller.isLinkSent
-              ? Colors.green
+              ? AppColors.success
               : (controller.isButtonEnabled
-                  ? Colors.black
-                  : Colors.grey.shade400),
-          foregroundColor: Colors.white,
+                  ? AppColors.ink
+                  : AppColors.grey400),
+          foregroundColor: AppColors.surface,
           shape: const StadiumBorder(),
           minimumSize: const Size(double.infinity, 55),
           elevation: controller.isButtonEnabled ? 2 : 0,
@@ -70,14 +71,14 @@ class ForgotPasswordComponents {
                     height: 16,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.surface),
                     ),
                   ),
                   SizedBox(width: 8),
                   Text(
                     "Sending...",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppColors.surface,
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                     ),
@@ -87,7 +88,7 @@ class ForgotPasswordComponents {
             : Text(
                 controller.isLinkSent ? "Sent" : "Send reset link",
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: AppColors.surface,
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                 ),
@@ -101,9 +102,9 @@ class ForgotPasswordComponents {
       margin: const EdgeInsets.only(bottom: 20),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Colors.green.shade100,
+        color: AppColors.successSoft,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.green.shade300),
+        border: Border.all(color: AppColors.success),
       ),
       child: Column(
         children: [
@@ -111,7 +112,7 @@ class ForgotPasswordComponents {
             children: [
               const Icon(
                 Icons.check_circle,
-                color: Colors.green,
+                color: AppColors.success,
                 size: 24,
               ),
               const SizedBox(width: 10),
@@ -119,7 +120,7 @@ class ForgotPasswordComponents {
                 child: Text(
                   "A reset link has been sent to your email.",
                   style: TextStyle(
-                    color: Colors.green.shade800,
+                    color: AppColors.success,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -136,7 +137,7 @@ class ForgotPasswordComponents {
               child: Text(
                 "Resend",
                 style: TextStyle(
-                  color: Colors.green.shade700,
+                  color: AppColors.success,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -154,7 +155,7 @@ class ForgotPasswordComponents {
         children: [
           Icon(
             Icons.info_outline,
-            color: Colors.grey.shade600,
+            color: AppColors.grey600,
             size: 16,
           ),
           const SizedBox(width: 8),
@@ -162,7 +163,7 @@ class ForgotPasswordComponents {
             child: Text(
               "Check your spam folder if you don't receive the email within a few minutes.",
               style: TextStyle(
-                color: Colors.grey.shade600,
+                color: AppColors.grey600,
                 fontSize: 12,
               ),
             ),
@@ -176,15 +177,15 @@ class ForgotPasswordComponents {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.blue.shade50,
+        color: AppColors.infoSoft,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.blue.shade200),
+        border: Border.all(color: AppColors.infoSoft),
       ),
       child: Row(
         children: [
           Icon(
             Icons.email,
-            color: Colors.blue.shade600,
+            color: AppColors.info,
             size: 20,
           ),
           const SizedBox(width: 8),
@@ -192,7 +193,7 @@ class ForgotPasswordComponents {
             child: Text(
               "Reset link will be sent to:",
               style: TextStyle(
-                color: Colors.blue.shade700,
+                color: AppColors.info,
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),

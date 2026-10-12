@@ -1,5 +1,6 @@
 // lib/screens/Auth/reset_password_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/EditProfile/controllers/reset_password_controller.dart';
 
 class ResetPasswordComponents {
@@ -80,7 +81,7 @@ class ResetPasswordComponents {
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 14,
-            color: Colors.grey.shade700,
+            color: AppColors.grey700,
           ),
         ),
         const SizedBox(height: 8),
@@ -96,14 +97,14 @@ class ResetPasswordComponents {
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.shade300),
+              borderSide: BorderSide(color: AppColors.grey300),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.black, width: 2),
+              borderSide: BorderSide(color: AppColors.ink, width: 2),
             ),
             filled: true,
-            fillColor: Colors.white,
+            fillColor: AppColors.surface,
             contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           ),
         ),
@@ -116,8 +117,8 @@ class ResetPasswordComponents {
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.white,
+          backgroundColor: AppColors.ink,
+          foregroundColor: AppColors.surface,
           shape: const StadiumBorder(),
           minimumSize: const Size(double.infinity, 55),
           elevation: 2,
@@ -131,13 +132,13 @@ class ResetPasswordComponents {
                 width: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.surface),
                 ),
               )
             : const Text(
                 "Reset Password",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.surface,
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                 ),
@@ -150,9 +151,9 @@ class ResetPasswordComponents {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.blue.shade50,
+        color: AppColors.infoSoft,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.blue.shade200),
+        border: Border.all(color: AppColors.infoSoft),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,7 +162,7 @@ class ResetPasswordComponents {
             children: [
               Icon(
                 Icons.info_outline,
-                color: Colors.blue.shade600,
+                color: AppColors.info,
                 size: 20,
               ),
               const SizedBox(width: 8),
@@ -169,7 +170,7 @@ class ResetPasswordComponents {
                 'Instructions:',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  color: Colors.blue.shade800,
+                  color: AppColors.info,
                 ),
               ),
             ],
@@ -181,7 +182,7 @@ class ResetPasswordComponents {
             '3. Enter your new password\n'
             '4. Password must be at least 6 characters',
             style: TextStyle(
-              color: Colors.blue.shade700,
+              color: AppColors.info,
               fontSize: 14,
             ),
           ),
@@ -194,17 +195,17 @@ class ResetPasswordComponents {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: isError ? Colors.red.shade50 : Colors.green.shade50,
+        color: isError ? AppColors.dangerSoft : AppColors.successSoft,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: isError ? Colors.red.shade200 : Colors.green.shade200,
+          color: isError ? AppColors.dangerSoft : AppColors.successSoft,
         ),
       ),
       child: Row(
         children: [
           Icon(
             isError ? Icons.error_outline : Icons.check_circle_outline,
-            color: isError ? Colors.red.shade600 : Colors.green.shade600,
+            color: isError ? AppColors.danger : AppColors.success,
             size: 16,
           ),
           SizedBox(width: 8),
@@ -212,7 +213,7 @@ class ResetPasswordComponents {
             child: Text(
               message,
               style: TextStyle(
-                color: isError ? Colors.red.shade700 : Colors.green.shade700,
+                color: isError ? AppColors.danger : AppColors.success,
                 fontSize: 12,
               ),
             ),
@@ -225,10 +226,10 @@ class ResetPasswordComponents {
   Widget buildPasswordStrengthIndicator(String password) {
     int strength = _calculatePasswordStrength(password);
     Color color = strength < 2
-        ? Colors.red
+        ? AppColors.danger
         : strength < 4
-            ? Colors.orange
-            : Colors.green;
+            ? AppColors.warning
+            : AppColors.success;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -240,7 +241,7 @@ class ResetPasswordComponents {
               'Password Strength: ',
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.grey.shade600,
+                color: AppColors.grey600,
               ),
             ),
             Text(
@@ -256,7 +257,7 @@ class ResetPasswordComponents {
         SizedBox(height: 4),
         LinearProgressIndicator(
           value: strength / 4,
-          backgroundColor: Colors.grey.shade300,
+          backgroundColor: AppColors.grey300,
           valueColor: AlwaysStoppedAnimation<Color>(color),
         ),
       ],

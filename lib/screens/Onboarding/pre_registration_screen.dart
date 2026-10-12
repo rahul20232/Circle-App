@@ -1,5 +1,6 @@
 // lib/screens/Onboarding/pre_registration_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Onboarding/initial_onboarding_screen.dart';
 import 'package:circle_app/screens/Onboarding/controllers/pre_registration_controller.dart';
 
@@ -156,9 +157,9 @@ class _PreRegistrationScreenState extends State<PreRegistrationScreen>
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
-                  color: const Color(0xFFF5F0E8),
+                  color: AppColors.surfaceMuted,
                   child: Scaffold(
-                    backgroundColor: const Color(0xFFF5F0E8),
+                    backgroundColor: AppColors.surfaceMuted,
                     body: Stack(
                       children: [
                         SafeArea(
@@ -210,10 +211,10 @@ class _PreRegistrationScreenState extends State<PreRegistrationScreen>
                         // Loading overlay
                         if (_controller.isLoading)
                           Container(
-                            color: Colors.black.withOpacity(0.5),
+                            color: AppColors.ink.withOpacity(0.5),
                             child: Center(
                               child: CircularProgressIndicator(
-                                color: Colors.white,
+                                color: AppColors.surface,
                               ),
                             ),
                           ),
@@ -233,14 +234,13 @@ class _PreRegistrationScreenState extends State<PreRegistrationScreen>
     return AnimatedContainer(
       duration: Duration(milliseconds: 800),
       curve: Curves.easeOut,
-      child: Text(
-        'circle',
-        style: TextStyle(
-          fontSize: 48,
-          fontWeight: FontWeight.w800,
-          color: Colors.black,
-          letterSpacing: -1.5,
-          height: 1.0,
+      child: RichText(
+        text: const TextSpan(
+          style: TextStyle(fontSize: 52, fontFamily: AppFonts.serif, color: AppColors.ink, letterSpacing: -1.2, height: 1.0),
+          children: [
+            TextSpan(text: 'circle'),
+            TextSpan(text: '.', style: TextStyle(color: AppColors.accent)),
+          ],
         ),
       ),
     );
@@ -257,8 +257,8 @@ class _PreRegistrationScreenState extends State<PreRegistrationScreen>
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 32,
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
+              fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+              color: AppColors.ink,
               height: 1.2,
               letterSpacing: -0.5,
             ),
@@ -275,21 +275,21 @@ class _PreRegistrationScreenState extends State<PreRegistrationScreen>
           onTap: _controller.isLoading
               ? null
               : () => _controller.handleGoogleSignUp(),
-          backgroundColor: Colors.white,
-          textColor: Colors.black,
-          borderColor: Colors.grey.shade300,
+          backgroundColor: AppColors.surface,
+          textColor: AppColors.ink,
+          borderColor: AppColors.grey300,
           icon: _buildGoogleIcon(),
           text: 'Sign up with Google',
         ),
         const SizedBox(height: 16),
         _buildSignUpButton(
           onTap: _controller.isLoading ? null : widget.onEmailSignup,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          borderColor: Colors.black,
+          backgroundColor: AppColors.ink,
+          textColor: AppColors.surface,
+          borderColor: AppColors.ink,
           icon: Icon(
             Icons.email_outlined,
-            color: Colors.white,
+            color: AppColors.surface,
             size: 20,
           ),
           text: 'Sign up with e-mail',
@@ -400,7 +400,7 @@ class GoogleLogoPainter extends CustomPainter {
       paint,
     );
 
-    paint.color = Colors.white;
+    paint.color = AppColors.surface;
     canvas.drawCircle(center, radius * 0.4, paint);
 
     paint.color = Color(0xFF4285F4);

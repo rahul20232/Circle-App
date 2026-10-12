@@ -1,6 +1,7 @@
 // Updated personality_screen.dart
 // lib/screens/Onboarding/personality_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Onboarding/controllers/personality_controller.dart';
 import 'package:circle_app/screens/Onboarding/components/personality_components.dart';
 import 'package:circle_app/screens/Onboarding/components/unified_progress_component.dart';
@@ -82,7 +83,7 @@ class PersonalityScreenState extends State<PersonalityScreen>
         ),
         title: Row(
           children: [
-            Icon(Icons.psychology, color: Colors.purple, size: 28),
+            Icon(Icons.psychology, color: AppColors.accent, size: 28),
             SizedBox(width: 12),
             Text('Personality Complete!'),
           ],
@@ -122,7 +123,7 @@ class PersonalityScreenState extends State<PersonalityScreen>
                                         ? '${entry.value}/10'
                                         : entry.value,
                                     style: TextStyle(
-                                      color: Colors.blue.shade700,
+                                      color: AppColors.info,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
@@ -158,7 +159,7 @@ class PersonalityScreenState extends State<PersonalityScreen>
   @override
   Widget build(BuildContext context) {
     final isRatingScale = _controller.currentQuestionType == 'rating_scale';
-    final backgroundColor = const Color(0xFFFEF1DE);
+    final backgroundColor = AppColors.background;
 
     print('Building PersonalityScreen:');
     print('- Current index: ${_controller.currentQuestionIndex}');
@@ -176,13 +177,13 @@ class PersonalityScreenState extends State<PersonalityScreen>
         title: Text(
           'Personality',
           style: TextStyle(
-            color: Colors.black,
+            color: AppColors.ink,
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColors.ink),
           onPressed: () {
             print('Back button pressed');
             if (_controller.isFirstQuestion) {

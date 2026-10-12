@@ -1,5 +1,6 @@
 // lib/screens/splash_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   final VoidCallback onComplete;
@@ -53,18 +54,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFFFF8A3D),
-            Color(0xFFFF6B9D),
-            Color(0xFFFFB5D8),
-          ],
-          stops: [0.0, 0.5, 1.0],
-        ),
-      ),
+      color: AppColors.background,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
@@ -73,14 +63,20 @@ class _SplashScreenState extends State<SplashScreen>
             builder: (context, child) {
               return Opacity(
                 opacity: _logoFadeAnimation.value,
-                child: Text(
-                  'circle',
-                  style: TextStyle(
-                    fontSize: 64,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.black,
-                    letterSpacing: -2.0,
-                    height: 1.0,
+                // Wordmark: serif "circle" with a terracotta full stop.
+                child: RichText(
+                  text: const TextSpan(
+                    style: TextStyle(
+                      fontSize: 72,
+                      fontFamily: AppFonts.serif,
+                      color: AppColors.ink,
+                      letterSpacing: -1.5,
+                      height: 1.0,
+                    ),
+                    children: [
+                      TextSpan(text: 'circle'),
+                      TextSpan(text: '.', style: TextStyle(color: AppColors.accent)),
+                    ],
                   ),
                 ),
               );

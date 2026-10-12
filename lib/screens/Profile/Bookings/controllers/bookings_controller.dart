@@ -1,5 +1,6 @@
 // lib/screens/Profile/Bookings/bookings_controller.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/Bookings/bookings_detail_screen.dart';
 import 'package:circle_app/services/dinner_service.dart';
 import 'package:circle_app/models/dinner_model.dart';
@@ -123,7 +124,7 @@ class BookingsController {
           scaffoldMessenger.showSnackBar(
             SnackBar(
               content: Text('Booking removed successfully'),
-              backgroundColor: Colors.green,
+              backgroundColor: AppColors.success,
             ),
           );
         } catch (e) {
@@ -135,7 +136,7 @@ class BookingsController {
           scaffoldMessenger.showSnackBar(
             SnackBar(
               content: Text('Failed to remove booking'),
-              backgroundColor: Colors.red,
+              backgroundColor: AppColors.danger,
             ),
           );
         } catch (e) {
@@ -148,7 +149,7 @@ class BookingsController {
         scaffoldMessenger.showSnackBar(
           SnackBar(
             content: Text('Error: ${e.toString()}'),
-            backgroundColor: Colors.red,
+            backgroundColor: AppColors.danger,
           ),
         );
       } catch (snackError) {

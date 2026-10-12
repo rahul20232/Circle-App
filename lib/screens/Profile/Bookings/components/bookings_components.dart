@@ -1,5 +1,6 @@
 // lib/screens/Profile/Bookings/bookings_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/Bookings/controllers/bookings_controller.dart';
 import 'package:circle_app/components/Cards/SwipableBookingCard.dart';
 import 'package:circle_app/services/push_notification_service.dart';
@@ -19,7 +20,7 @@ class BookingsComponents {
             Icon(
               Icons.error_outline,
               size: 60,
-              color: Colors.red.shade400,
+              color: AppColors.danger,
             ),
             SizedBox(height: 16),
             Text(
@@ -27,7 +28,7 @@ class BookingsComponents {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.red.shade600,
+                color: AppColors.danger,
               ),
             ),
             SizedBox(height: 20),
@@ -36,8 +37,8 @@ class BookingsComponents {
               icon: Icon(Icons.refresh),
               label: Text('Retry'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red.shade600,
-                foregroundColor: Colors.white,
+                backgroundColor: AppColors.danger,
+                foregroundColor: AppColors.surface,
               ),
             ),
           ],
@@ -56,7 +57,7 @@ class BookingsComponents {
             Icon(
               Icons.calendar_today_outlined,
               size: 60,
-              color: Colors.black,
+              color: AppColors.ink,
             ),
             SizedBox(height: 24),
             Text(
@@ -64,7 +65,7 @@ class BookingsComponents {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: AppColors.ink,
               ),
             ),
             SizedBox(height: 8),
@@ -82,8 +83,8 @@ class BookingsComponents {
               child: ElevatedButton(
                 onPressed: () => controller.navigateToBookingScreen(context),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
+                  backgroundColor: AppColors.ink,
+                  foregroundColor: AppColors.surface,
                   padding: EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -127,8 +128,8 @@ class BookingsComponents {
           'Your Bookings',
           style: TextStyle(
             fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
+            fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+            color: AppColors.ink,
           ),
         ),
         SizedBox(height: 8),
@@ -136,7 +137,7 @@ class BookingsComponents {
           '$bookingCount booking${bookingCount == 1 ? '' : 's'}',
           style: TextStyle(
             fontSize: 16,
-            color: Colors.grey.shade600,
+            color: AppColors.grey600,
           ),
         ),
       ],
@@ -171,8 +172,8 @@ class BookingsComponents {
         onPressed: () => controller.navigateToBookingScreen(context),
         style: OutlinedButton.styleFrom(
           padding: EdgeInsets.symmetric(vertical: 16),
-          side: BorderSide(color: Colors.black, width: 1.5),
-          backgroundColor: Colors.white,
+          side: BorderSide(color: AppColors.ink, width: 1.5),
+          backgroundColor: AppColors.surface,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -181,7 +182,7 @@ class BookingsComponents {
           'Book another dinner',
           style: TextStyle(
             fontSize: 16,
-            color: Colors.black,
+            color: AppColors.ink,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -228,7 +229,7 @@ class BookingsComponents {
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: AppColors.grey100,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -238,9 +239,9 @@ class BookingsComponents {
               style: TextStyle(fontWeight: FontWeight.bold)),
           SizedBox(height: 4),
           Text(
-              'Initialized: ${PushNotificationService.isInitialized ? "✅" : "❌"}'),
+              'Initialized: ${PushNotificationService.isInitialized ? "Yes" : "No"}'),
           Text(
-              'Remote: ${PushNotificationService.hasRemoteNotifications ? "✅" : "❌"}'),
+              'Remote: ${PushNotificationService.hasRemoteNotifications ? "Yes" : "No"}'),
         ],
       ),
     );
@@ -250,16 +251,16 @@ class BookingsComponents {
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.orange.shade50,
+        color: AppColors.warningSoft,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.orange.shade200),
+        border: Border.all(color: AppColors.warningSoft),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(Icons.info_outline, size: 16, color: Colors.orange.shade700),
+              Icon(Icons.info_outline, size: 16, color: AppColors.warning),
               SizedBox(width: 4),
               Text('iOS Foreground Behavior',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
@@ -268,7 +269,7 @@ class BookingsComponents {
           SizedBox(height: 4),
           Text(
             'Native notifications are suppressed when app is in foreground. This is normal iOS behavior.',
-            style: TextStyle(fontSize: 11, color: Colors.orange.shade700),
+            style: TextStyle(fontSize: 11, color: AppColors.warning),
           ),
         ],
       ),
@@ -283,11 +284,11 @@ class BookingsComponents {
             style: TextStyle(fontWeight: FontWeight.w500)),
         SizedBox(height: 8),
         Text('• Standard: In-app + native (may be suppressed)',
-            style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
+            style: TextStyle(fontSize: 12, color: AppColors.grey600)),
         Text('• Forced: Uses 100ms delay to bypass suppression',
-            style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
+            style: TextStyle(fontSize: 12, color: AppColors.grey600)),
         Text('• Smart: Adapts behavior based on app state',
-            style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
+            style: TextStyle(fontSize: 12, color: AppColors.grey600)),
       ],
     );
   }
@@ -299,14 +300,14 @@ class BookingsComponents {
           context,
           'Standard',
           Icons.notifications,
-          Colors.blue,
+          AppColors.info,
           () => _testStandardNotification(context),
         ),
         buildNotificationButton(
           context,
           'Force',
           Icons.rocket_launch,
-          Colors.purple,
+          AppColors.accent,
           () => _testForcedNotification(context),
         ),
         buildNotificationButton(
@@ -320,14 +321,14 @@ class BookingsComponents {
           context,
           '3s Delay',
           Icons.schedule,
-          Colors.grey,
+          AppColors.grey500,
           () => _testDelayedNotification(context),
         ),
         buildNotificationButton(
           context,
           'Dinner',
           Icons.restaurant,
-          Colors.orange,
+          AppColors.warning,
           () => _testDinnerReminder(context),
         ),
       ],
@@ -410,7 +411,7 @@ class BookingsComponents {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Error: $error'),
-        backgroundColor: Colors.red,
+        backgroundColor: AppColors.danger,
       ),
     );
   }

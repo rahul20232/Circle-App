@@ -1,5 +1,6 @@
 // lib/screens/Onboarding/components/personality_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/components/Cards/IdentityCard.dart';
 import 'package:circle_app/screens/Onboarding/controllers/personality_controller.dart';
 
@@ -36,7 +37,7 @@ class PersonalityComponents {
             fontSize:
                 controller.currentQuestionType == 'rating_scale' ? 26 : 24,
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: AppColors.ink,
             height: 1.2,
           ),
         ),
@@ -135,7 +136,7 @@ class PersonalityComponents {
                     controller.currentLeftLabel,
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: AppColors.grey600,
                       fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.left,
@@ -183,7 +184,7 @@ class PersonalityComponents {
                 controller.currentRightLabel,
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.grey.shade600,
+                  color: AppColors.grey600,
                   fontWeight: FontWeight.w500,
                 ),
                 textAlign: TextAlign.right,
@@ -221,22 +222,22 @@ class PersonalityComponents {
           width: 56,
           height: 56,
           decoration: BoxDecoration(
-            color: isSelected ? Colors.black : Colors.white,
+            color: isSelected ? AppColors.ink : AppColors.surface,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isSelected ? Colors.black : Colors.grey.shade300,
+              color: isSelected ? AppColors.ink : AppColors.grey300,
               width: isSelected ? 2 : 1,
             ),
             boxShadow: [
               if (isSelected)
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
+                  color: AppColors.ink.withOpacity(0.2),
                   blurRadius: 8,
                   offset: Offset(0, 2),
                 ),
               if (!isSelected)
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: AppColors.ink.withOpacity(0.05),
                   blurRadius: 4,
                   offset: Offset(0, 1),
                 ),
@@ -248,7 +249,7 @@ class PersonalityComponents {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: isSelected ? Colors.white : Colors.black,
+                color: isSelected ? AppColors.surface : AppColors.ink,
               ),
             ),
           ),
@@ -278,14 +279,14 @@ class PersonalityComponents {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          side: BorderSide(color: Colors.grey.shade400),
+                          side: BorderSide(color: AppColors.grey400),
                         ),
                         child: Text(
                           'Back',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: Colors.grey.shade700,
+                            color: AppColors.grey700,
                           ),
                         ),
                       ),
@@ -317,8 +318,8 @@ class PersonalityComponents {
                         }
                       : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    foregroundColor: Colors.white,
+                    backgroundColor: AppColors.ink,
+                    foregroundColor: AppColors.surface,
                     padding: EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -357,7 +358,7 @@ class PersonalityComponents {
         key: ValueKey(controller.currentQuestionIndex),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: Colors.grey.shade100,
+          color: AppColors.grey100,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
@@ -365,7 +366,7 @@ class PersonalityComponents {
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
-            color: Colors.grey.shade700,
+            color: AppColors.grey700,
           ),
         ),
       ),
@@ -387,9 +388,9 @@ class PersonalityComponents {
             shape: BoxShape.circle,
             color: index <= controller.currentQuestionIndex
                 ? (controller.currentQuestionType == 'rating_scale'
-                    ? Colors.orange
-                    : Colors.black)
-                : Colors.grey.shade300,
+                    ? AppColors.warning
+                    : AppColors.ink)
+                : AppColors.grey300,
           ),
         ),
       ),
@@ -402,9 +403,9 @@ class PersonalityComponents {
       curve: Curves.elasticOut,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.green.shade50,
+        color: AppColors.successSoft,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.green.shade200),
+        border: Border.all(color: AppColors.successSoft),
       ),
       child: Column(
         children: [
@@ -413,7 +414,7 @@ class PersonalityComponents {
             curve: Curves.bounceIn,
             child: Icon(
               Icons.check_circle,
-              color: Colors.green.shade600,
+              color: AppColors.success,
               size: 48,
             ),
           ),
@@ -423,7 +424,7 @@ class PersonalityComponents {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w600,
-              color: Colors.green.shade800,
+              color: AppColors.success,
             ),
           ),
           SizedBox(height: 8),
@@ -431,7 +432,7 @@ class PersonalityComponents {
             'You\'ve answered all ${controller.totalQuestions} questions',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.green.shade700,
+              color: AppColors.success,
             ),
           ),
         ],

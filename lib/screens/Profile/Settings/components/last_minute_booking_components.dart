@@ -1,5 +1,6 @@
 // lib/screens/Profile/Settings/last_minute_booking_components.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/Settings/controllers/last_minute_booking_controller.dart';
 
 class LastMinuteBookingComponents {
@@ -21,9 +22,9 @@ class LastMinuteBookingComponents {
   Widget buildNotificationOptions() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300, width: 1),
+        border: Border.all(color: AppColors.grey300, width: 1),
       ),
       child: Column(
         children: [
@@ -67,17 +68,17 @@ class LastMinuteBookingComponents {
             title,
             style: TextStyle(
               fontSize: 16,
-              color: Colors.black,
+              color: AppColors.ink,
               fontWeight: FontWeight.w400,
             ),
           ),
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: Colors.white,
-            activeTrackColor: Color(0xFF00C853),
-            inactiveThumbColor: Colors.white,
-            inactiveTrackColor: Colors.grey.shade400,
+            activeColor: AppColors.surface,
+            activeTrackColor: AppColors.success,
+            inactiveThumbColor: AppColors.surface,
+            inactiveTrackColor: AppColors.grey400,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ],
@@ -88,7 +89,7 @@ class LastMinuteBookingComponents {
   Widget buildDivider() {
     return Divider(
       height: 1,
-      color: Colors.grey.shade300,
+      color: AppColors.grey300,
       indent: 16,
       endIndent: 16,
     );
@@ -102,8 +103,8 @@ class LastMinuteBookingComponents {
         child: ElevatedButton(
           onPressed: () => controller.saveAndNavigateBack(context),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.white,
+            backgroundColor: AppColors.ink,
+            foregroundColor: AppColors.surface,
             padding: EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
@@ -129,15 +130,15 @@ class LastMinuteBookingComponents {
       padding: EdgeInsets.all(12),
       margin: EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: Colors.red.shade50,
+        color: AppColors.dangerSoft,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.red.shade200),
+        border: Border.all(color: AppColors.dangerSoft),
       ),
       child: Row(
         children: [
           Icon(
             Icons.warning_outlined,
-            color: Colors.red.shade600,
+            color: AppColors.danger,
             size: 16,
           ),
           SizedBox(width: 8),
@@ -145,7 +146,7 @@ class LastMinuteBookingComponents {
             child: Text(
               'At least one notification type must be enabled to receive last-minute booking alerts.',
               style: TextStyle(
-                color: Colors.red.shade700,
+                color: AppColors.danger,
                 fontSize: 12,
               ),
             ),
@@ -159,15 +160,15 @@ class LastMinuteBookingComponents {
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.blue.shade50,
+        color: AppColors.infoSoft,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.blue.shade200),
+        border: Border.all(color: AppColors.infoSoft),
       ),
       child: Row(
         children: [
           Icon(
             Icons.info_outline,
-            color: Colors.blue.shade600,
+            color: AppColors.info,
             size: 16,
           ),
           SizedBox(width: 8),
@@ -175,7 +176,7 @@ class LastMinuteBookingComponents {
             child: Text(
               controller.getNotificationSummary(),
               style: TextStyle(
-                color: Colors.blue.shade700,
+                color: AppColors.info,
                 fontSize: 14,
               ),
             ),
@@ -189,9 +190,9 @@ class LastMinuteBookingComponents {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: AppColors.grey50,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: AppColors.grey200),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,9 +244,9 @@ class LastMinuteBookingComponents {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.orange.shade50,
+        color: AppColors.warningSoft,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.orange.shade200),
+        border: Border.all(color: AppColors.warningSoft),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -254,7 +255,7 @@ class LastMinuteBookingComponents {
             children: [
               Icon(
                 Icons.schedule,
-                color: Colors.orange.shade600,
+                color: AppColors.warning,
                 size: 20,
               ),
               SizedBox(width: 8),
@@ -263,7 +264,7 @@ class LastMinuteBookingComponents {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.orange.shade800,
+                  color: AppColors.warning,
                 ),
               ),
             ],
@@ -273,7 +274,7 @@ class LastMinuteBookingComponents {
             'Get notified when spots become available within 2 hours of dinner time. These notifications are time-sensitive and require quick action.',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.orange.shade700,
+              color: AppColors.warning,
               height: 1.4,
             ),
           ),
@@ -287,7 +288,7 @@ class LastMinuteBookingComponents {
       padding: EdgeInsets.all(12),
       margin: EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: AppColors.grey50,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -306,7 +307,7 @@ class LastMinuteBookingComponents {
             description,
             style: TextStyle(
               fontSize: 12,
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
             ),
           ),
         ],
@@ -350,15 +351,15 @@ class LastMinuteBookingComponents {
       return Container(
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.green.shade50,
+          color: AppColors.successSoft,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.green.shade200),
+          border: Border.all(color: AppColors.successSoft),
         ),
         child: Row(
           children: [
             Icon(
               Icons.check_circle_outline,
-              color: Colors.green.shade600,
+              color: AppColors.success,
               size: 16,
             ),
             SizedBox(width: 8),
@@ -366,7 +367,7 @@ class LastMinuteBookingComponents {
               child: Text(
                 'Settings meet minimum requirements for last-minute bookings.',
                 style: TextStyle(
-                  color: Colors.green.shade700,
+                  color: AppColors.success,
                   fontSize: 12,
                 ),
               ),
@@ -379,15 +380,15 @@ class LastMinuteBookingComponents {
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.red.shade50,
+        color: AppColors.dangerSoft,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.red.shade200),
+        border: Border.all(color: AppColors.dangerSoft),
       ),
       child: Row(
         children: [
           Icon(
             Icons.error_outline,
-            color: Colors.red.shade600,
+            color: AppColors.danger,
             size: 16,
           ),
           SizedBox(width: 8),
@@ -395,7 +396,7 @@ class LastMinuteBookingComponents {
             child: Text(
               validationError,
               style: TextStyle(
-                color: Colors.red.shade700,
+                color: AppColors.danger,
                 fontSize: 12,
               ),
             ),

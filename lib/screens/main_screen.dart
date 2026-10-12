@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/services/api_service.dart';
 import 'package:circle_app/services/notification_service.dart';
 import 'Home/home_screen_content.dart';
@@ -130,10 +131,10 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.surface,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: AppColors.ink.withOpacity(0.1),
               blurRadius: 10,
               offset: const Offset(0, -5),
             ),
@@ -145,8 +146,8 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          selectedItemColor: Colors.red.shade400,
-          unselectedItemColor: Colors.grey.shade600,
+          selectedItemColor: AppColors.danger,
+          unselectedItemColor: AppColors.grey600,
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
             BottomNavigationBarItem(
@@ -176,7 +177,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
               decoration: BoxDecoration(
-                color: Color(0xFF6B46C1),
+                color: AppColors.accent,
                 borderRadius: BorderRadius.circular(10),
               ),
               constraints: BoxConstraints(
@@ -188,7 +189,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                     ? '99+'
                     : _notificationUnreadCount.toString(),
                 style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.surface,
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
                 ),

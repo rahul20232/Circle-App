@@ -1,5 +1,6 @@
 // lib/screens/Auth/forgot_password_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/EditProfile/controllers/forgot_password_controller.dart';
 import 'package:circle_app/screens/Profile/EditProfile/components/forgot_password_components.dart';
 
@@ -37,21 +38,21 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         elevation: 0,
         title: const Text(
           "Forgot Password",
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.ink,
           ),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColors.ink),
           onPressed: () => Navigator.pop(context),
         ),
       ),

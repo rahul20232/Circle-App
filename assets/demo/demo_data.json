@@ -1,0 +1,142 @@
+{
+  "_readme": "Demo-mode fixtures (build with --dart-define=DEMO=true). Strings like \"@+4d 19:30\" are rewritten to real local datetimes relative to now, so the demo never goes stale. Units: d=days, h=hours, m=minutes.",
+
+  "user": {
+    "id": 1,
+    "email": "aarav.demo@circle.app",
+    "display_name": "Aarav",
+    "phone_number": "+91 98765 43210",
+    "profile_picture_url": null,
+    "is_google_user": false,
+    "is_verified": true,
+    "relationship_status": "Single",
+    "children_status": "No",
+    "industry": "Design",
+    "country": "India",
+    "birth_date": "1997-06-14",
+    "dinner_budget": "₹₹",
+    "has_dietary_restrictions": false,
+    "dinner_languages": ["English", "Hindi"],
+    "dietary_options": [],
+    "event_push_notifications": true,
+    "event_sms": false,
+    "event_email": true,
+    "lastminute_push_notifications": true,
+    "lastminute_sms": false,
+    "lastminute_email": false,
+    "marketing_email": false,
+    "is_subscribed": true,
+    "subscription_type": "monthly",
+    "subscription_plan_id": "circle_monthly",
+    "is_subscription_active": true,
+    "subscription_start": "@-20d 10:00",
+    "subscription_end": "@+10d 10:00",
+    "days_until_subscription_expires": 10
+  },
+
+  "people": {
+    "2": { "display_name": "Meera", "industry": "Product", "profile_picture_url": null },
+    "3": { "display_name": "Kabir", "industry": "Architecture", "profile_picture_url": null },
+    "4": { "display_name": "Ananya", "industry": "Medicine", "profile_picture_url": null },
+    "5": { "display_name": "Rohan", "industry": "Finance", "profile_picture_url": null },
+    "6": { "display_name": "Ishita", "industry": "Music", "profile_picture_url": null },
+    "7": { "display_name": "Dev", "industry": "Engineering", "profile_picture_url": null },
+    "8": { "display_name": "Tara", "industry": "Journalism", "profile_picture_url": null },
+    "9": { "display_name": "Nikhil", "industry": "Startups", "profile_picture_url": null }
+  },
+
+  "dinners": [
+    {
+      "id": 101, "title": "Wednesday Supper Club", "date": "@+2d 19:30",
+      "description": "Six strangers, one long table, a set menu of small plates. Your group is matched from your personality quiz — you'll get the restaurant the morning of.",
+      "location": "Indiranagar, Bangalore", "latitude": 12.9719, "longitude": 77.6412,
+      "max_attendees": 6, "current_attendees": 4
+    },
+    {
+      "id": 102, "title": "Friday Night Table", "date": "@+4d 20:00",
+      "description": "End the week with good food and better conversation. Expect a lively table and a dessert you'll argue about.",
+      "location": "Koramangala, Bangalore", "latitude": 12.9352, "longitude": 77.6245,
+      "max_attendees": 6, "current_attendees": 5
+    },
+    {
+      "id": 103, "title": "Sunday Brunch Circle", "date": "@+6d 11:30",
+      "description": "Slow mornings, strong coffee and a group of five you haven't met yet.",
+      "location": "Jayanagar, Bangalore", "latitude": 12.9250, "longitude": 77.5938,
+      "max_attendees": 6, "current_attendees": 2
+    },
+    {
+      "id": 104, "title": "Rooftop Dinner", "date": "@+9d 19:45",
+      "description": "A rooftop table above the city lights. Matched on your love of long conversations.",
+      "location": "MG Road, Bangalore", "latitude": 12.9756, "longitude": 77.6050,
+      "max_attendees": 6, "current_attendees": 3
+    },
+    {
+      "id": 105, "title": "Midweek Thali Night", "date": "@+13d 20:00",
+      "description": "Unlimited thali, unlimited stories. Vegetarian-friendly by default.",
+      "location": "Malleshwaram, Bangalore", "latitude": 13.0035, "longitude": 77.5709,
+      "max_attendees": 6, "current_attendees": 1
+    }
+  ],
+
+  "past_dinners": [
+    { "id": 90, "title": "Saturday Long Table", "date": "@-5d 20:00", "location": "HSR Layout, Bangalore", "latitude": 12.9116, "longitude": 77.6474 },
+    { "id": 91, "title": "Thursday Taco Night", "date": "@-12d 19:30", "location": "Whitefield, Bangalore", "latitude": 12.9698, "longitude": 77.7500 }
+  ],
+
+  "bookings": [
+    { "id": 501, "dinner_id": 102, "status": "confirmed", "booked_at": "@-1d 21:14", "has_been_rated": false, "rating": null },
+    { "id": 490, "dinner_id": 90, "status": "confirmed", "booked_at": "@-9d 18:02", "has_been_rated": false, "rating": null },
+    { "id": 480, "dinner_id": 91, "status": "confirmed", "booked_at": "@-16d 12:40", "has_been_rated": true, "rating": 5 }
+  ],
+
+  "attendees": {
+    "90": [2, 3, 4, 5, 6],
+    "91": [7, 8, 9, 2],
+    "102": [6, 7, 8, 9]
+  },
+
+  "connections": {
+    "connected": [2, 7],
+    "request_sent": [4],
+    "pending_received": [{ "connection_id": 701, "user_id": 3, "created_at": "@-3h" }]
+  },
+
+  "chats": [
+    {
+      "id": 301, "other_user": 2, "dinner_id": 90, "created_at": "@-4d 10:00",
+      "messages": [
+        { "from": 2, "at": "@-4d 10:02", "text": "That was such a fun table on Saturday" },
+        { "from": 1, "at": "@-4d 10:15", "text": "Right?! Kabir's story about the lost passport had me crying" },
+        { "from": 2, "at": "@-4d 10:16", "text": "Haha we need a sequel. Are you booked for anything this week?" },
+        { "from": 1, "at": "@-1d 21:20", "text": "Just grabbed a seat at Friday Night Table in Koramangala" },
+        { "from": 2, "at": "@-40m", "text": "Ooh nice, I might join. Save me the dessert you'll argue about" }
+      ],
+      "unread": 1
+    },
+    {
+      "id": 302, "other_user": 7, "dinner_id": 91, "created_at": "@-11d 09:00",
+      "messages": [
+        { "from": 7, "at": "@-11d 09:01", "text": "Hey! Great meeting you at taco night" },
+        { "from": 1, "at": "@-11d 09:30", "text": "Likewise! Send me that keyboard link you mentioned?" },
+        { "from": 7, "at": "@-11d 09:31", "text": "Haha yes — it's a split ergo one, you'll never go back" },
+        { "from": 1, "at": "@-2d 18:05", "text": "Update: I went back. My wrists thank you though" }
+      ],
+      "unread": 0
+    }
+  ],
+
+  "chat_replies": [
+    "Haha, love that",
+    "Wait, tell me more!",
+    "Agreed. Same table next week?",
+    "Okay that's the best idea I've heard all day"
+  ],
+
+  "notifications": [
+    { "id": 901, "type": "connection_request", "title": "New connection request", "message": "Kabir from Saturday Long Table wants to connect.", "created_at": "@-3h", "is_read": false, "connection_id": 701 },
+    { "id": 902, "type": "BOOKING_CONFIRMED", "title": "You're in", "message": "Your seat at Friday Night Table is confirmed. We'll reveal the restaurant on the day.", "created_at": "@-1d 21:14", "is_read": false, "dinner_id": 102, "booking_id": 501 },
+    { "id": 903, "type": "LAST_MINUTE_SPOT", "title": "A seat just opened up", "message": "One spot left at Wednesday Supper Club in Indiranagar.", "created_at": "@-1d 12:00", "is_read": true, "dinner_id": 101 },
+    { "id": 904, "type": "connection_accepted", "title": "You're connected", "message": "Meera accepted your request. Say hi!", "created_at": "@-4d 09:55", "is_read": true },
+    { "id": 905, "type": "DINNER_REMINDER", "title": "How was Saturday Long Table?", "message": "Rate your dinner to help us match you even better next time.", "created_at": "@-4d 09:00", "is_read": true, "dinner_id": 90, "booking_id": 490 }
+  ]
+}

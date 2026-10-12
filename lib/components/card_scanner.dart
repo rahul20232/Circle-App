@@ -1,5 +1,6 @@
 // Replace your lib/components/card_scanner.dart with this working version:
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:camera/camera.dart';
 import 'package:camera/camera.dart' as cam;
 
@@ -99,14 +100,14 @@ class _CardScannerState extends State<CardScanner> {
   Widget _buildErrorView() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.red.shade100,
+        color: AppColors.dangerSoft,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline, size: 48, color: Colors.red),
+            Icon(Icons.error_outline, size: 48, color: AppColors.danger),
             SizedBox(height: 16),
             Text(
               'Camera Error',
@@ -118,7 +119,7 @@ class _CardScannerState extends State<CardScanner> {
               child: Text(
                 _error!,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.red.shade700),
+                style: TextStyle(color: AppColors.danger),
               ),
             ),
             SizedBox(height: 16),
@@ -126,8 +127,8 @@ class _CardScannerState extends State<CardScanner> {
               onPressed: widget.onClose,
               child: Text('Close'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
+                backgroundColor: AppColors.danger,
+                foregroundColor: AppColors.surface,
               ),
             ),
           ],
@@ -139,18 +140,18 @@ class _CardScannerState extends State<CardScanner> {
   Widget _buildLoadingView() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: AppColors.ink,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(color: Colors.white),
+            CircularProgressIndicator(color: AppColors.surface),
             SizedBox(height: 16),
             Text(
               'Initializing camera...',
-              style: TextStyle(color: Colors.white, fontSize: 16),
+              style: TextStyle(color: AppColors.surface, fontSize: 16),
             ),
           ],
         ),
@@ -196,7 +197,7 @@ class _CardScannerState extends State<CardScanner> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: IconButton(
-                icon: Icon(Icons.close, color: Colors.white, size: 24),
+                icon: Icon(Icons.close, color: AppColors.surface, size: 24),
                 onPressed: widget.onClose,
               ),
             ),
@@ -210,7 +211,7 @@ class _CardScannerState extends State<CardScanner> {
             child: Container(
               padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.7),
+                color: AppColors.ink.withOpacity(0.7),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
@@ -220,7 +221,7 @@ class _CardScannerState extends State<CardScanner> {
                     'Position your card within the frame',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppColors.surface,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -234,14 +235,14 @@ class _CardScannerState extends State<CardScanner> {
                           width: 16,
                           height: 16,
                           child: CircularProgressIndicator(
-                            color: Colors.white,
+                            color: AppColors.surface,
                             strokeWidth: 2,
                           ),
                         ),
                         SizedBox(width: 8),
                         Text(
                           'Scanning...',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: AppColors.surface),
                         ),
                       ],
                     ),
@@ -260,7 +261,7 @@ class CardScannerOverlay extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white
+      ..color = AppColors.surface
       ..strokeWidth = 3.0
       ..style = PaintingStyle.stroke;
 
@@ -284,7 +285,7 @@ class CardScannerOverlay extends CustomPainter {
 
     // Draw center guidelines (optional)
     final centerPaint = Paint()
-      ..color = Colors.white.withOpacity(0.3)
+      ..color = AppColors.surface.withOpacity(0.3)
       ..strokeWidth = 1.0;
 
     // Horizontal center line

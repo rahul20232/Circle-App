@@ -1,5 +1,6 @@
 // lib/screens/Profile/Settings/subscription_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/Settings/controllers/subscription_controller.dart';
 import 'package:circle_app/screens/Profile/Settings/components/subscription_components.dart';
 
@@ -41,9 +42,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     final isSmallScreen = screenHeight < 700;
 
     return Container(
-      color: Color(0xFFFEF1DE),
+      color: AppColors.background,
       child: Scaffold(
-        backgroundColor: Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         body: SingleChildScrollView(
           child: Column(
             children: [

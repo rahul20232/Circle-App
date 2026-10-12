@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/components/Cards/OnboardingCard.dart';
 
 class MiddleScreen extends StatefulWidget {
@@ -119,12 +120,12 @@ class _MiddleScreenState extends State<MiddleScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F0E8),
+      backgroundColor: AppColors.surfaceMuted,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black, size: 28),
+          icon: Icon(Icons.arrow_back, color: AppColors.ink, size: 28),
           onPressed: widget.onBack ?? () => Navigator.of(context).pop(),
         ),
       ),
@@ -208,7 +209,7 @@ class _MiddleScreenState extends State<MiddleScreen>
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.15),
+                        color: AppColors.ink.withOpacity(0.15),
                         blurRadius: 10,
                         offset: Offset(0, 4),
                       ),
@@ -222,7 +223,7 @@ class _MiddleScreenState extends State<MiddleScreen>
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
                         return Container(
-                          color: Colors.grey.shade200,
+                          color: AppColors.grey200,
                           child: Center(
                             child: CircularProgressIndicator(
                               value: loadingProgress.expectedTotalBytes != null
@@ -230,19 +231,19 @@ class _MiddleScreenState extends State<MiddleScreen>
                                       loadingProgress.expectedTotalBytes!
                                   : null,
                               strokeWidth: 2,
-                              color: Colors.grey.shade400,
+                              color: AppColors.grey400,
                             ),
                           ),
                         );
                       },
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
-                          color: Colors.grey.shade200,
+                          color: AppColors.grey200,
                           child: Center(
                             child: Icon(
                               Icons.people,
                               size: 40,
-                              color: Colors.grey.shade400,
+                              color: AppColors.grey400,
                             ),
                           ),
                         );
@@ -265,8 +266,8 @@ class _MiddleScreenState extends State<MiddleScreen>
       child: ElevatedButton(
         onPressed: widget.onNext,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.white,
+          backgroundColor: AppColors.ink,
+          foregroundColor: AppColors.surface,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(28),
           ),

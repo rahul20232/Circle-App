@@ -1,5 +1,6 @@
 // lib/screens/Profile/Settings/update_subscription_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/Settings/controllers/update_subscription_controller.dart';
 import 'package:circle_app/screens/Profile/Settings/components/update_subscription_components.dart';
 
@@ -34,7 +35,7 @@ class _UpdateSubscriptionScreenState extends State<UpdateSubscriptionScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFFFEF1DE),
+      color: AppColors.background,
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(
           parent: AlwaysScrollableScrollPhysics(),
@@ -42,7 +43,7 @@ class _UpdateSubscriptionScreenState extends State<UpdateSubscriptionScreen> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           child: Scaffold(
-            backgroundColor: Color(0xFFFEF1DE),
+            backgroundColor: AppColors.background,
             body: Stack(
               children: [
                 _components.buildMainContent(context),

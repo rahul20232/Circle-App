@@ -1,5 +1,6 @@
 // lib/services/api_service.dart
 import 'dart:convert';
+import 'package:circle_app/services/core/backend_config.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,7 +14,7 @@ import 'core/token_manager.dart';
 /// Pure API service - handles only HTTP requests and responses
 class ApiService {
   static const String baseUrl =
-      'https://circle-app-production-09eb.up.railway.app/api';
+      BackendConfig.apiUrl;
 
   static const Duration shortCacheDuration = Duration(seconds: 30);
   static const Duration mediumCacheDuration = Duration(minutes: 5);

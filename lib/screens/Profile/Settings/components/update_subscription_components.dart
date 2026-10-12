@@ -1,5 +1,6 @@
 // lib/screens/Profile/Settings/update_subscription_components.dart
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:circle_app/screens/Profile/Settings/controllers/update_subscription_controller.dart';
 import '../../../../components/Cards/PricingCard.dart';
@@ -25,7 +26,7 @@ class UpdateSubscriptionComponents {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.40,
       child: Container(
-        color: Colors.black.withOpacity(0.7),
+        color: AppColors.ink.withOpacity(0.7),
         child: CarouselSlider(
           options: CarouselOptions(
             height: double.infinity,
@@ -54,7 +55,7 @@ class UpdateSubscriptionComponents {
                         bottomLeft: Radius.circular(16),
                         bottomRight: Radius.circular(16),
                       ),
-                      color: Colors.black.withOpacity(0.4),
+                      color: AppColors.ink.withOpacity(0.4),
                     ),
                   ),
                 );
@@ -106,13 +107,13 @@ class UpdateSubscriptionComponents {
   //     child: Container(
   //       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
   //       decoration: BoxDecoration(
-  //         color: Colors.green,
+  //         color: AppColors.success,
   //         borderRadius: BorderRadius.circular(12),
   //       ),
   //       child: Text(
   //         'CURRENT PLAN',
   //         style: TextStyle(
-  //           color: Colors.white,
+  //           color: AppColors.surface,
   //           fontSize: 10,
   //           fontWeight: FontWeight.w600,
   //         ),
@@ -135,8 +136,8 @@ class UpdateSubscriptionComponents {
           style: ElevatedButton.styleFrom(
             backgroundColor: controller.isButtonEnabled
                 ? Color(0xFF2D3748)
-                : Colors.grey.shade400,
-            foregroundColor: Colors.white,
+                : AppColors.grey400,
+            foregroundColor: AppColors.surface,
             elevation: controller.isButtonEnabled ? 2 : 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -184,10 +185,10 @@ class UpdateSubscriptionComponents {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: controller.currentSlide == index
-                  ? Colors.white
-                  : Colors.white.withOpacity(0.5),
+                  ? AppColors.surface
+                  : AppColors.surface.withOpacity(0.5),
               border: controller.currentSlide == index
-                  ? Border.all(color: Colors.grey, width: 1)
+                  ? Border.all(color: AppColors.grey500, width: 1)
                   : null,
             ),
           );
@@ -209,7 +210,7 @@ class UpdateSubscriptionComponents {
               fontFamily: 'DMSerifDisplay-Regular',
               fontSize: 32,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: AppColors.surface,
               letterSpacing: 2,
             ),
           ),
@@ -218,7 +219,7 @@ class UpdateSubscriptionComponents {
             'All dinners, every Wednesday',
             style: TextStyle(
               fontSize: 18,
-              color: Colors.white,
+              color: AppColors.surface,
               fontWeight: FontWeight.w300,
             ),
           ),
@@ -235,7 +236,7 @@ class UpdateSubscriptionComponents {
         icon: Icon(
           Icons.close,
           size: 30,
-          color: Colors.white,
+          color: AppColors.surface,
         ),
         onPressed: () => Navigator.pop(context),
       ),
@@ -251,9 +252,9 @@ class UpdateSubscriptionComponents {
       padding: EdgeInsets.all(16),
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.blue.shade50,
+        color: AppColors.infoSoft,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.blue.shade200),
+        border: Border.all(color: AppColors.infoSoft),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -263,7 +264,7 @@ class UpdateSubscriptionComponents {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Colors.blue.shade800,
+              color: AppColors.info,
             ),
           ),
           SizedBox(height: 8),
@@ -271,7 +272,7 @@ class UpdateSubscriptionComponents {
             '${controller.currentPlanTitle} - ${controller.currentPlanDuration}',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.blue.shade700,
+              color: AppColors.info,
             ),
           ),
         ],
@@ -285,19 +286,19 @@ class UpdateSubscriptionComponents {
   //       padding: EdgeInsets.all(12),
   //       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
   //       decoration: BoxDecoration(
-  //         color: Colors.grey.shade100,
+  //         color: AppColors.grey100,
   //         borderRadius: BorderRadius.circular(8),
-  //         border: Border.all(color: Colors.grey.shade300),
+  //         border: Border.all(color: AppColors.grey300),
   //       ),
   //       child: Row(
   //         children: [
-  //           Icon(Icons.info_outline, color: Colors.grey.shade600, size: 16),
+  //           Icon(Icons.info_outline, color: AppColors.grey600, size: 16),
   //           SizedBox(width: 8),
   //           Expanded(
   //             child: Text(
   //               'This is your current plan',
   //               style: TextStyle(
-  //                 color: Colors.grey.shade700,
+  //                 color: AppColors.grey700,
   //                 fontSize: 12,
   //               ),
   //             ),
@@ -308,23 +309,23 @@ class UpdateSubscriptionComponents {
   //   }
 
   //   String actionText = '';
-  //   Color actionColor = Colors.blue;
+  //   Color actionColor = AppColors.info;
   //   IconData actionIcon = Icons.update;
 
   //   switch (controller.subscriptionActionType) {
   //     case 'upgrade':
   //       actionText = 'Upgrade to a longer plan and save more!';
-  //       actionColor = Colors.green;
+  //       actionColor = AppColors.success;
   //       actionIcon = Icons.trending_up;
   //       break;
   //     case 'downgrade':
   //       actionText = 'Switch to a shorter plan';
-  //       actionColor = Colors.orange;
+  //       actionColor = AppColors.warning;
   //       actionIcon = Icons.trending_down;
   //       break;
   //     case 'subscribe':
   //       actionText = 'Start your subscription journey';
-  //       actionColor = Colors.purple;
+  //       actionColor = AppColors.accent;
   //       actionIcon = Icons.star;
   //       break;
   //   }
@@ -365,9 +366,9 @@ class UpdateSubscriptionComponents {
       padding: EdgeInsets.all(16),
       margin: EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: AppColors.grey300),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -377,7 +378,7 @@ class UpdateSubscriptionComponents {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Colors.black,
+              color: AppColors.ink,
             ),
           ),
           SizedBox(height: 12),
@@ -390,7 +391,7 @@ class UpdateSubscriptionComponents {
                 padding: EdgeInsets.only(bottom: 6),
                 child: Row(
                   children: [
-                    Icon(Icons.check_circle, color: Colors.green, size: 16),
+                    Icon(Icons.check_circle, color: AppColors.success, size: 16),
                     SizedBox(width: 8),
                     Text(
                       benefit,
@@ -415,7 +416,7 @@ class UpdateSubscriptionComponents {
             'Loading your subscription...',
             style: TextStyle(
               fontSize: 16,
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
             ),
           ),
         ],

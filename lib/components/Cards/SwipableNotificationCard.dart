@@ -1,5 +1,6 @@
 // lib/components/Cards/SwipeableNotificationCard.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 
 class SwipeableNotificationCard extends StatefulWidget {
   final Widget child;
@@ -141,9 +142,9 @@ class _SwipeableNotificationCardState extends State<SwipeableNotificationCard>
     final swipePercentage = (-_dragExtent / cardWidth).clamp(0.0, 1.0);
 
     if (swipePercentage >= widget.clearThreshold) {
-      return Colors.red.shade600;
+      return AppColors.danger;
     } else {
-      return Colors.red.shade400;
+      return AppColors.danger;
     }
   }
 
@@ -192,7 +193,7 @@ class _SwipeableNotificationCardState extends State<SwipeableNotificationCard>
                               child: clearButtonWidth > 30
                                   ? Icon(
                                       Icons.clear,
-                                      color: Colors.white,
+                                      color: AppColors.surface,
                                       size: clearButtonWidth > 100 ? 24 : 20,
                                     )
                                   : SizedBox.shrink(),

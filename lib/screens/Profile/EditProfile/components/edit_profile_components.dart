@@ -1,5 +1,6 @@
 // lib/screens/Profile/EditProfile/edit_profile_components.dart
 import 'dart:io';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:circle_app/screens/Profile/EditProfile/controllers/edit_profile_controller.dart';
 import 'package:circle_app/screens/Profile/EditProfile/account_details_screen.dart';
@@ -18,7 +19,7 @@ class EditProfileComponents {
       children: [
         CircleAvatar(
           radius: 55,
-          backgroundColor: Colors.grey.shade300,
+          backgroundColor: AppColors.grey300,
           backgroundImage: controller.profileImage != null
               ? FileImage(controller.profileImage!)
               : user.profilePictureUrl != null
@@ -26,7 +27,7 @@ class EditProfileComponents {
                   : null,
           child:
               controller.profileImage == null && user.profilePictureUrl == null
-                  ? Icon(Icons.person, size: 50, color: Colors.grey.shade800)
+                  ? Icon(Icons.person, size: 50, color: AppColors.grey800)
                   : null,
         ),
         InkWell(
@@ -35,19 +36,19 @@ class EditProfileComponents {
               : () => controller.pickAndUploadImage(context),
           child: CircleAvatar(
             radius: 18,
-            backgroundColor: Colors.white,
+            backgroundColor: AppColors.surface,
             child: controller.isUploadingImage
                 ? SizedBox(
                     width: 12,
                     height: 12,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.ink),
                     ),
                   )
                 : Icon(
                     Icons.camera_alt,
-                    color: Colors.black,
+                    color: AppColors.ink,
                     size: 16,
                   ),
           ),
@@ -126,7 +127,7 @@ class EditProfileComponents {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Colors.grey.shade700,
+            color: AppColors.grey700,
           ),
         ),
       ),
@@ -147,7 +148,7 @@ class EditProfileComponents {
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(12),
         ),
         width: double.infinity,
@@ -158,12 +159,12 @@ class EditProfileComponents {
                 "$label\n${fieldController.text}",
                 style: const TextStyle(
                   fontSize: 15,
-                  color: Colors.black,
+                  color: AppColors.ink,
                   height: 1.4,
                 ),
               ),
             ),
-            Icon(Icons.chevron_right, color: Colors.grey.shade600),
+            Icon(Icons.chevron_right, color: AppColors.grey600),
           ],
         ),
       ),
@@ -177,7 +178,7 @@ class EditProfileComponents {
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(12),
         ),
         width: double.infinity,
@@ -188,12 +189,12 @@ class EditProfileComponents {
                 "$label\n${value.isEmpty ? 'Not set' : value}",
                 style: const TextStyle(
                   fontSize: 15,
-                  color: Colors.black,
+                  color: AppColors.ink,
                   height: 1.4,
                 ),
               ),
             ),
-            Icon(Icons.chevron_right, color: Colors.grey.shade600),
+            Icon(Icons.chevron_right, color: AppColors.grey600),
           ],
         ),
       ),
@@ -205,7 +206,7 @@ class EditProfileComponents {
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
       ),
       width: double.infinity,
@@ -216,7 +217,7 @@ class EditProfileComponents {
               "$label\n$value",
               style: const TextStyle(
                 fontSize: 15,
-                color: Colors.black,
+                color: AppColors.ink,
                 height: 1.4,
               ),
             ),
@@ -310,7 +311,7 @@ class EditProfileComponents {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: isError ? Colors.red : Colors.green,
+        backgroundColor: isError ? AppColors.danger : AppColors.success,
       ),
     );
   }
@@ -322,10 +323,10 @@ class EditProfileComponents {
         child,
         if (isLoading)
           Container(
-            color: Colors.black.withOpacity(0.3),
+            color: AppColors.ink.withOpacity(0.3),
             child: Center(
               child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.surface),
               ),
             ),
           ),

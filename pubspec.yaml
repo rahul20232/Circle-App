@@ -94,6 +94,7 @@ flutter:
       - assets/fonts/
       - assets/settings.svg
       - assets/onboarding.jpg
+      - assets/demo/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

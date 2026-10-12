@@ -1,5 +1,6 @@
 // lib/components/Cards/NotificationCard.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import '../../services/api_service.dart';
 
 class Notifictioncard extends StatefulWidget {
@@ -37,17 +38,17 @@ class _NotifictioncardState extends State<Notifictioncard> {
   Color get _statusColor {
     switch (widget.status.toLowerCase()) {
       case 'confirmed':
-        return Colors.green.shade600;
+        return AppColors.success;
       case 'pending':
-        return Colors.orange.shade600;
+        return AppColors.warning;
       case 'cancelled':
-        return Colors.red.shade600;
+        return AppColors.danger;
       case 'read':
-        return Colors.blue.shade600;
+        return AppColors.info;
       case 'unread':
-        return Colors.blue.shade600;
+        return AppColors.info;
       default:
-        return Colors.grey.shade600;
+        return AppColors.grey600;
     }
   }
 
@@ -95,7 +96,7 @@ class _NotifictioncardState extends State<Notifictioncard> {
                 padding: EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.black,
+                  color: AppColors.ink,
                 ),
                 child: Column(
                   mainAxisSize:
@@ -106,7 +107,7 @@ class _NotifictioncardState extends State<Notifictioncard> {
                       margin: EdgeInsets.all(2),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(13),
-                        color: Color.fromRGBO(250, 250, 250, 1),
+                        color: AppColors.surface,
                       ),
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(16, 20, 16,
@@ -119,7 +120,7 @@ class _NotifictioncardState extends State<Notifictioncard> {
                             Text(
                               widget.title,
                               style: TextStyle(
-                                color: Colors.black,
+                                color: AppColors.ink,
                                 fontFamily: 'Inter',
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -136,7 +137,7 @@ class _NotifictioncardState extends State<Notifictioncard> {
                             Text(
                               _cleanMessage,
                               style: TextStyle(
-                                color: Colors.grey.shade600,
+                                color: AppColors.grey600,
                                 fontFamily: 'Inter',
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -159,7 +160,7 @@ class _NotifictioncardState extends State<Notifictioncard> {
                                   child: Text(
                                     widget.time,
                                     style: TextStyle(
-                                      color: Colors.grey.shade500,
+                                      color: AppColors.grey500,
                                       fontFamily: 'Inter',
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,
@@ -202,7 +203,7 @@ class _NotifictioncardState extends State<Notifictioncard> {
                     width: 12,
                     height: 12,
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: AppColors.info,
                       shape: BoxShape.circle,
                     ),
                   ),

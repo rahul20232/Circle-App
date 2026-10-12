@@ -1,5 +1,6 @@
 // lib/screens/Profile/Settings/last_minute_booking_screen.dart
 import 'package:flutter/material.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:circle_app/screens/Profile/Settings/controllers/last_minute_booking_controller.dart';
 import 'package:circle_app/screens/Profile/Settings/components/last_minute_booking_components.dart';
 
@@ -35,18 +36,18 @@ class _LastMinuteBookingScreenState extends State<LastMinuteBookingScreen> {
   Widget build(BuildContext context) {
     if (_controller.isLoading) {
       return Scaffold(
-        backgroundColor: Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         body: Center(child: CircularProgressIndicator()),
       );
     }
 
     return Scaffold(
-      backgroundColor: Color(0xFFFEF1DE),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: Color(0xFFFEF1DE),
+        backgroundColor: AppColors.background,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: AppColors.ink),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
@@ -54,7 +55,7 @@ class _LastMinuteBookingScreenState extends State<LastMinuteBookingScreen> {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.ink,
           ),
         ),
         centerTitle: true,

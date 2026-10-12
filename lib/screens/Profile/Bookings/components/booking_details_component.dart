@@ -1,5 +1,6 @@
 // lib/screens/Profile/Bookings/booking_details_components.dart
 import 'package:flutter/cupertino.dart';
+import 'package:circle_app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:circle_app/screens/Profile/Bookings/controllers/booking_details_controller.dart';
@@ -14,8 +15,8 @@ class BookingDetailsComponents {
       controller.dinnerTitle,
       style: TextStyle(
         fontSize: 28,
-        fontWeight: FontWeight.bold,
-        color: Colors.black,
+        fontFamily: AppFonts.serif, fontWeight: FontWeight.w400,
+        color: AppColors.ink,
       ),
     );
   }
@@ -49,11 +50,11 @@ class BookingDetailsComponents {
       width: double.infinity,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.shade200,
+            color: AppColors.grey200,
             blurRadius: 8,
             offset: Offset(0, 2),
           ),
@@ -82,7 +83,7 @@ class BookingDetailsComponents {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
-              color: Colors.black,
+              color: AppColors.ink,
             ),
           ),
           SizedBox(height: 4),
@@ -90,7 +91,7 @@ class BookingDetailsComponents {
             controller.formatTime(controller.dinner!.date),
             style: TextStyle(
               fontSize: 16,
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
             ),
           ),
         ],
@@ -102,11 +103,11 @@ class BookingDetailsComponents {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.shade200,
+            color: AppColors.grey200,
             blurRadius: 8,
             offset: Offset(0, 2),
           ),
@@ -130,7 +131,7 @@ class BookingDetailsComponents {
       padding: EdgeInsets.all(20),
       child: Row(
         children: [
-          Icon(Icons.location_on, color: Colors.red.shade400, size: 20),
+          Icon(Icons.location_on, color: AppColors.danger, size: 20),
           SizedBox(width: 8),
           Text(
             'Restaurant Location',
@@ -153,7 +154,7 @@ class BookingDetailsComponents {
         style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,
-          color: Colors.black,
+          color: AppColors.ink,
         ),
       ),
     );
@@ -166,7 +167,7 @@ class BookingDetailsComponents {
         margin: EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey.shade300),
+          border: Border.all(color: AppColors.grey300),
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
@@ -198,20 +199,20 @@ class BookingDetailsComponents {
       height: 200,
       margin: EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: AppColors.grey100,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: AppColors.grey300),
       ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.location_off, color: Colors.grey, size: 32),
+            Icon(Icons.location_off, color: AppColors.grey500, size: 32),
             SizedBox(height: 8),
             Text(
               'Location not available',
               style: TextStyle(
-                color: Colors.grey.shade600,
+                color: AppColors.grey600,
                 fontSize: 14,
               ),
             ),
@@ -232,8 +233,8 @@ class BookingDetailsComponents {
           label: Text('Get Directions'),
           style: OutlinedButton.styleFrom(
             padding: EdgeInsets.symmetric(vertical: 12),
-            side: BorderSide(color: Colors.blue, width: 1.5),
-            foregroundColor: Colors.blue,
+            side: BorderSide(color: AppColors.info, width: 1.5),
+            foregroundColor: AppColors.info,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
@@ -248,11 +249,11 @@ class BookingDetailsComponents {
       width: double.infinity,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.shade200,
+            color: AppColors.grey200,
             blurRadius: 8,
             offset: Offset(0, 2),
           ),
@@ -263,7 +264,7 @@ class BookingDetailsComponents {
         children: [
           Row(
             children: [
-              Icon(Icons.people, color: Colors.green.shade600, size: 20),
+              Icon(Icons.people, color: AppColors.success, size: 20),
               SizedBox(width: 8),
               Text(
                 'Available Spots',
@@ -281,7 +282,7 @@ class BookingDetailsComponents {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
-              color: Colors.black,
+              color: AppColors.ink,
             ),
           ),
         ],
@@ -294,9 +295,9 @@ class BookingDetailsComponents {
       width: double.infinity,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: AppColors.grey50,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: AppColors.grey200),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -306,7 +307,7 @@ class BookingDetailsComponents {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: Colors.grey.shade600,
+              color: AppColors.grey600,
             ),
           ),
           SizedBox(height: 8),
@@ -315,7 +316,7 @@ class BookingDetailsComponents {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: Colors.black,
+              color: AppColors.ink,
               fontFamily: 'monospace',
             ),
           ),
@@ -343,8 +344,8 @@ class BookingDetailsComponents {
         label: Text('Connect with Attendees'),
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.symmetric(vertical: 16),
-          backgroundColor: Color(0xFF6B46C1),
-          foregroundColor: Colors.white,
+          backgroundColor: AppColors.accent,
+          foregroundColor: AppColors.surface,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -361,7 +362,7 @@ class BookingDetailsComponents {
         onPressed: () => showCancelBookingDialog(context, cachedNavigator),
         style: OutlinedButton.styleFrom(
           padding: EdgeInsets.symmetric(vertical: 16),
-          side: BorderSide(color: Colors.red, width: 1.5),
+          side: BorderSide(color: AppColors.danger, width: 1.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -370,7 +371,7 @@ class BookingDetailsComponents {
           'Cancel Booking',
           style: TextStyle(
             fontSize: 16,
-            color: Colors.red,
+            color: AppColors.danger,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -384,7 +385,7 @@ class BookingDetailsComponents {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          backgroundColor: Color(0xFFFEF1DE),
+          backgroundColor: AppColors.background,
           title: Text(
             'Cancel Booking',
             style: TextStyle(
@@ -408,7 +409,7 @@ class BookingDetailsComponents {
               child: Text(
                 'Keep Booking',
                 style: TextStyle(
-                  color: Colors.grey.shade600,
+                  color: AppColors.grey600,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -421,7 +422,7 @@ class BookingDetailsComponents {
               child: Text(
                 'Cancel Booking',
                 style: TextStyle(
-                  color: Colors.red,
+                  color: AppColors.danger,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -458,11 +459,11 @@ class BookingDetailsComponents {
       width: double.infinity,
       padding: padding ?? EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: backgroundColor ?? Colors.white,
+        color: backgroundColor ?? AppColors.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.shade200,
+            color: AppColors.grey200,
             blurRadius: 8,
             offset: Offset(0, 2),
           ),
