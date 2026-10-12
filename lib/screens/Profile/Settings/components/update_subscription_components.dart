@@ -87,8 +87,8 @@ class UpdateSubscriptionComponents {
                     isSelected: controller.isPlanSelected(index),
                     onTap: () => controller.selectPlan(index),
                   ),
-                  if (controller.isCurrentUserPlan(index))
-                    buildCurrentPlanBadge(),
+                  // if (controller.isCurrentUserPlan(index))
+                  //   buildCurrentPlanBadge(),
                 ],
               ),
             ),
@@ -98,29 +98,29 @@ class UpdateSubscriptionComponents {
     );
   }
 
-  Widget buildCurrentPlanBadge() {
-    return Positioned(
-      top: -5,
-      right: 8,
-      left: 8,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        decoration: BoxDecoration(
-          color: Colors.green,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Text(
-          'CURRENT PLAN',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 10,
-            fontWeight: FontWeight.w600,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
-  }
+  // Widget buildCurrentPlanBadge() {
+  //   return Positioned(
+  //     top: -5,
+  //     right: 8,
+  //     left: 8,
+  //     child: Container(
+  //       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+  //       decoration: BoxDecoration(
+  //         color: Colors.green,
+  //         borderRadius: BorderRadius.circular(12),
+  //       ),
+  //       child: Text(
+  //         'CURRENT PLAN',
+  //         style: TextStyle(
+  //           color: Colors.white,
+  //           fontSize: 10,
+  //           fontWeight: FontWeight.w600,
+  //         ),
+  //         textAlign: TextAlign.center,
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget buildUpdateButton(BuildContext context) {
     return Padding(

@@ -37,6 +37,7 @@ dependencies:
   firebase_core: ^3.15.2
   firebase_auth: ^5.3.1
   webview_flutter: ^4.4.2
+  app_links: ^6.0.1
   url_launcher: ^6.2.1
   syncfusion_flutter_pdfviewer: ^27.1.50
   share_plus: ^10.0.0
@@ -52,9 +53,13 @@ dependencies:
   timezone: ^0.9.2
   vibration: ^1.8.4
 
+  intl: ^0.18.0
+
   firebase_messaging: ^15.1.3 
   flutter_local_notifications: ^18.0.1
 
+  supabase_flutter: ^2.3.4
+  google_sign_in: ^6.1.5
   # google_sign_in: ^6.2.0
   # shadcn_flutter: ^0.0.26
   http: ^1.1.0
@@ -88,6 +93,7 @@ flutter:
   assets:
       - assets/fonts/
       - assets/settings.svg
+      - assets/onboarding.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

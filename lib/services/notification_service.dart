@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:timeleft_clone/services/api_service.dart';
 import '../models/notification_model.dart';
 import 'core/token_manager.dart';
 
 class NotificationEventService {
-  static const String baseUrl = 'https://149a582761bc.ngrok-free.app/api';
+  static const String baseUrl =
+      'https://circle-app-production-09eb.up.railway.app/api';
 
   static final NotificationEventService _instance =
       NotificationEventService._internal();
@@ -17,34 +19,57 @@ class NotificationEventService {
 
   Stream<String> get notificationStream => _notificationController.stream;
 
+  // static Future<List<AppNotification>> getUserNotifications({
+  //   bool unreadOnly = false,
+  //   int skip = 0,
+  //   int limit = 50,
+  // }) async {
+  //   try {
+  //     final headers = await TokenManager.instance.getAuthHeaders();
+  //     String url = '$baseUrl/notifications/?skip=$skip&limit=$limit';
+  //     if (unreadOnly) {
+  //       url += '&unread_only=true';
+  //     }
+
+  //     final response = await http.get(
+  //       Uri.parse(url),
+  //       headers: headers,
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       final List<dynamic> notificationsJson = jsonDecode(response.body);
+  //       return notificationsJson
+  //           .map((json) => AppNotification.fromJson(json))
+  //           .toList();
+  //     } else {
+  //       final errorData = jsonDecode(response.body);
+  //       throw NotificationException(
+  //           errorData['detail'] ?? 'Failed to load notifications',
+  //           response.statusCode);
+  //     }
+  //   } catch (e) {
+  //     throw NotificationException('Error in getUserNotifications: $e');
+  //   }
+  // }
+
   static Future<List<AppNotification>> getUserNotifications({
     bool unreadOnly = false,
     int skip = 0,
     int limit = 50,
   }) async {
     try {
-      final headers = await TokenManager.instance.getAuthHeaders();
-      String url = '$baseUrl/notifications/?skip=$skip&limit=$limit';
+      // Use the cached API method
+      String endpoint = '/notifications/?skip=$skip&limit=$limit';
       if (unreadOnly) {
-        url += '&unread_only=true';
+        endpoint += '&unread_only=true';
       }
 
-      final response = await http.get(
-        Uri.parse(url),
-        headers: headers,
-      );
+      final notificationsJson = await ApiService.get(endpoint,
+          cacheDuration: ApiService.shortCacheDuration);
 
-      if (response.statusCode == 200) {
-        final List<dynamic> notificationsJson = jsonDecode(response.body);
-        return notificationsJson
-            .map((json) => AppNotification.fromJson(json))
-            .toList();
-      } else {
-        final errorData = jsonDecode(response.body);
-        throw NotificationException(
-            errorData['detail'] ?? 'Failed to load notifications',
-            response.statusCode);
-      }
+      return (notificationsJson as List<dynamic>)
+          .map((json) => AppNotification.fromJson(json))
+          .toList();
     } catch (e) {
       throw NotificationException('Error in getUserNotifications: $e');
     }

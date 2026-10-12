@@ -1,4 +1,6 @@
 // lib/services/core/user_state_manager.dart
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/user_model.dart';
@@ -43,26 +45,17 @@ class UserStateManager {
   /// Load user from storage
   Future<void> loadUserFromStorage() async {
     final prefs = await SharedPreferences.getInstance();
-    final userId = prefs.getString('user_id');
-    final email = prefs.getString('user_email');
-    final name = prefs.getString('user_name');
-    final profilePic = prefs.getString('user_profile_pic');
-    final phone = prefs.getString('user_phone');
-    final isGoogleUser = prefs.getBool('is_google_user') ?? false;
-    final isVerified = prefs.getBool('is_verified') ?? false;
+    final userDataJson = prefs.getString('user_data');
 
-    if (userId != null && email != null && name != null) {
-      final user = AppUser(
-        id: userId,
-        email: email,
-        displayName: name,
-        profilePictureUrl: profilePic,
-        phoneNumber: phone,
-        isGoogleUser: isGoogleUser,
-        isVerified: isVerified,
-      );
-      _currentUser = user;
-      _userNotifier.value = user;
+    if (userDataJson != null) {
+      try {
+        final userMap = jsonDecode(userDataJson) as Map<String, dynamic>;
+        _currentUser = AppUser.fromJson(userMap);
+        _userNotifier.value = _currentUser;
+      } catch (e) {
+        print("Error loading user from storage: $e");
+        await clearUser();
+      }
     }
   }
 
@@ -75,30 +68,18 @@ class UserStateManager {
   /// Private method to save user to storage
   Future<void> _saveUserToStorage(AppUser user) async {
     final prefs = await SharedPreferences.getInstance();
+    // Save the complete user object as JSON
+    await prefs.setString('user_data', jsonEncode(user.toJson()));
+    // Keep user_id for quick checks
     await prefs.setString('user_id', user.id);
-    await prefs.setString('user_email', user.email);
-    await prefs.setString('user_name', user.displayName);
-
-    if (user.phoneNumber != null && user.phoneNumber!.isNotEmpty) {
-      await prefs.setString('user_phone', user.phoneNumber!);
-    } else {
-      await prefs.remove('user_phone');
-    }
-
-    if (user.profilePictureUrl != null && user.profilePictureUrl!.isNotEmpty) {
-      await prefs.setString('user_profile_pic', user.profilePictureUrl!);
-    } else {
-      await prefs.remove('user_profile_pic');
-    }
-
-    await prefs.setBool('is_google_user', user.isGoogleUser);
-    await prefs.setBool('is_verified', user.isVerified);
   }
 
   /// Private method to clear user from storage
   Future<void> _clearUserFromStorage() async {
     final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('user_data');
     await prefs.remove('user_id');
+    // Remove old individual keys if they exist
     await prefs.remove('user_email');
     await prefs.remove('user_name');
     await prefs.remove('user_phone');

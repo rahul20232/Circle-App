@@ -1,7 +1,8 @@
-// lib/screens/Profile/Settings/delete_account_controller.dart
+// lib/screens/Profile/Settings/controllers/delete_account_controller.dart
+
 import 'package:flutter/material.dart';
 import 'package:timeleft_clone/services/auth_service.dart';
-import 'package:timeleft_clone/screens/Auth/login_screen.dart';
+import 'package:timeleft_clone/screens/Onboarding/initial_onboarding_screen.dart'; // Changed from LoginScreen
 
 class DeleteAccountController {
   final VoidCallback onStateChanged;
@@ -19,6 +20,9 @@ class DeleteAccountController {
   bool get isLoading => _isLoading;
   bool get showPassword => _showPassword;
 
+  // Check if current user is a Google user
+  bool get isGoogleUser => AuthService.currentUser?.isGoogleUser ?? false;
+
   void dispose() {
     _passwordController.dispose();
     _confirmationController.dispose();
@@ -35,6 +39,8 @@ class DeleteAccountController {
   }
 
   bool _validatePassword() {
+    // Skip password validation for Google users
+    if (isGoogleUser) return true;
     return _passwordController.text.isNotEmpty;
   }
 
@@ -66,16 +72,31 @@ class DeleteAccountController {
     _setLoading(true);
 
     try {
+      // For Google users, send empty password
+      final password = isGoogleUser ? '' : _passwordController.text;
+
       final success = await AuthService.deleteAccount(
-        _passwordController.text,
+        password,
         _confirmationController.text,
       );
 
       if (success) {
-        // Navigate to login screen and clear all previous screens
+        // Navigate to InitialOnboardingScreen instead of LoginScreen
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => LoginScreen()),
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                InitialOnboardingScreen(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              // Fade transition for account deletion
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            transitionDuration: Duration(milliseconds: 300),
+          ),
           (route) => false,
         );
       }
@@ -91,6 +112,7 @@ class DeleteAccountController {
 
   // Validation helpers
   String? validatePasswordInput(String password) {
+    if (isGoogleUser) return null; // Skip validation for Google users
     if (password.isEmpty) return 'Password is required';
     return null;
   }

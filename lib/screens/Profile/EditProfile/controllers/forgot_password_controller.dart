@@ -9,6 +9,7 @@ class ForgotPasswordController {
   late TextEditingController _emailController;
   bool _isButtonEnabled = true;
   bool _isLinkSent = false;
+  bool _isSending = false;
 
   ForgotPasswordController({
     required this.email,
@@ -21,6 +22,7 @@ class ForgotPasswordController {
   TextEditingController get emailController => _emailController;
   bool get isButtonEnabled => _isButtonEnabled;
   bool get isLinkSent => _isLinkSent;
+  bool get isSending => _isSending;
 
   void dispose() {
     _emailController.dispose();
@@ -33,6 +35,11 @@ class ForgotPasswordController {
 
   void _setLinkSent(bool sent) {
     _isLinkSent = sent;
+    onStateChanged();
+  }
+
+  void _setSending(bool sending) {
+    _isSending = sending;
     onStateChanged();
   }
 
@@ -50,10 +57,12 @@ class ForgotPasswordController {
   Future<void> sendPasswordResetEmail(BuildContext context) async {
     if (!_isButtonEnabled) return;
 
+    _setSending(true);
     _setButtonEnabled(false);
 
     try {
       final message = await AuthService.sendPasswordResetEmail(email);
+      _setSending(false);
       _setLinkSent(true);
 
       if (message != null) {
@@ -62,6 +71,7 @@ class ForgotPasswordController {
         _showSnackBar(context, 'Reset link sent successfully', isError: false);
       }
     } catch (e) {
+      _setSending(false);
       _setButtonEnabled(true);
       _showSnackBar(
         context,
@@ -73,6 +83,7 @@ class ForgotPasswordController {
   void retrySendEmail(BuildContext context) {
     _setButtonEnabled(true);
     _setLinkSent(false);
+    _setSending(false);
     sendPasswordResetEmail(context);
   }
 

@@ -47,6 +47,11 @@ class DeleteAccountComponents {
   }
 
   Widget buildPasswordField() {
+    // Don't show password field for Google users
+    if (controller.isGoogleUser) {
+      return SizedBox.shrink();
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

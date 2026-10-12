@@ -1,5 +1,6 @@
 // lib/screens/Profile/Settings/settings_controller.dart
 import 'package:flutter/material.dart';
+import 'package:timeleft_clone/screens/Onboarding/initial_onboarding_screen.dart';
 import 'package:timeleft_clone/screens/Profile/Settings/delete_account_confirm_screen.dart';
 import 'package:timeleft_clone/screens/Profile/Settings/last_minute_booking_preferences_screen.dart';
 import 'package:timeleft_clone/screens/Auth/login_screen.dart';
@@ -7,6 +8,7 @@ import 'package:timeleft_clone/screens/Profile/Settings/marketing_preferences_sc
 import 'package:timeleft_clone/screens/Profile/Settings/private_policy_screen.dart';
 import 'package:timeleft_clone/screens/Profile/Settings/update_subscription_screen.dart';
 import 'package:timeleft_clone/services/auth_service.dart';
+import 'package:timeleft_clone/services/onboarding_state_service.dart';
 import '../subscription_screen.dart';
 import '../event_alert_screen.dart';
 
@@ -131,11 +133,15 @@ class SettingsController {
     try {
       await AuthService.signOut();
 
+      await OnboardingStateService.clearAllData();
+
       _setLoading(false);
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => InitialOnboardingScreen(clearProgress: true),
+        ),
+        (route) => false,
       );
     } catch (e) {
       _setLoading(false);

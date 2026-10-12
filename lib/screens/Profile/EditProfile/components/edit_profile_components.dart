@@ -110,7 +110,8 @@ class EditProfileComponents {
           "What country are you from?",
           controller.getIdentityValue("What country are you from?"),
         ),
-        buildStaticField("When is your birthday?", "1/1/2001"),
+        buildStaticField("When is your birthday?",
+            controller.getIdentityValue("When is your birthday?")),
       ],
     );
   }

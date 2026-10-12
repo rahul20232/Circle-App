@@ -6,18 +6,17 @@ class ChatDetailComponents {
   // Profile Picture Widget
   static Widget buildProfilePicture(ChatParticipant user,
       {required double radius}) {
+    final hasImage = user.profilePictureUrl != null && user.profilePictureUrl!.isNotEmpty;
     return CircleAvatar(
       radius: radius,
       backgroundColor: const Color(0xFF6B46C1),
-      backgroundImage:
-          user.profilePictureUrl != null && user.profilePictureUrl!.isNotEmpty
-              ? NetworkImage(user.profilePictureUrl!)
-              : null,
-      onBackgroundImageError: (exception, stackTrace) {
-        // Handle image loading error silently
-        print('Failed to load profile image: $exception');
-      },
-      child: user.profilePictureUrl == null || user.profilePictureUrl!.isEmpty
+      backgroundImage: hasImage ? NetworkImage(user.profilePictureUrl!) : null,
+      onBackgroundImageError: hasImage
+          ? (exception, stackTrace) {
+              print('Failed to load profile image: $exception');
+            }
+          : null,
+      child: !hasImage
           ? Text(
               user.displayName.isNotEmpty
                   ? user.displayName[0].toUpperCase()

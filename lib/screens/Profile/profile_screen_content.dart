@@ -6,8 +6,8 @@ import 'package:timeleft_clone/models/user_model.dart';
 import 'package:timeleft_clone/screens/Profile/EditProfile/edit_profile_screen.dart';
 import 'package:timeleft_clone/screens/Profile/webview_screen.dart';
 import '../../services/auth_service.dart';
-import '../bookings_screen.dart';
-import 'settings/settings_screen.dart';
+import 'Bookings/bookings_screen.dart';
+import 'Settings/settings_screen.dart';
 
 class ProfileScreenContent extends StatefulWidget {
   @override
@@ -29,6 +29,7 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
       appBar: AppBar(
         backgroundColor: Color(0xFFFEF1DE),
         elevation: 0,
+        automaticallyImplyLeading: false,
         title: Text(
           'Profile',
           style: TextStyle(

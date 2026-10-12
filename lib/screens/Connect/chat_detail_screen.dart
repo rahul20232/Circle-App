@@ -1,8 +1,8 @@
 // lib/screens/Connect/chat_detail_screen.dart
 import 'package:flutter/material.dart';
 import '../../models/chat_model.dart';
-import './contoller/chat_detail_controller.dart';
-import './chat_detail_components.dart';
+import 'contollers/chat_detail_controller.dart';
+import 'components/chat_detail_components.dart';
 
 class ChatDetailScreen extends StatefulWidget {
   final Chat chat;

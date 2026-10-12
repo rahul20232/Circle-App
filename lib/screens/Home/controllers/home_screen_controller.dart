@@ -6,6 +6,8 @@ import '../../../services/dinner_service.dart';
 import '../../Home/dinner_preferences_screen.dart';
 
 class HomeScreenController extends ChangeNotifier {
+  bool _disposed = false;
+
   // Dinner data
   List<Dinner> _availableDinners = [];
   Dinner? _selectedDinner;
@@ -58,6 +60,8 @@ class HomeScreenController extends ChangeNotifier {
 
   // Load available dinners
   Future<void> loadAvailableDinners() async {
+    if (_disposed) return; // Add check
+
     _setLoading(true);
     _setError(null);
 
@@ -67,11 +71,12 @@ class HomeScreenController extends ChangeNotifier {
         DinnerService.getUserBookings(),
       ]);
 
+      if (_disposed) return; // Add check after async
+
       final dinners = results[0] as List<Dinner>?;
       final userBookings = results[1] as List<Map<String, dynamic>>?;
 
       if (dinners != null) {
-        // Filter out already booked dinners
         final bookedDinnerIds = _getBookedDinnerIds(userBookings);
         final availableDinners = dinners
             .where((dinner) => !bookedDinnerIds.contains(dinner.id))
@@ -91,24 +96,34 @@ class HomeScreenController extends ChangeNotifier {
         _setError("No dinners available at the moment");
       }
     } catch (e) {
-      _setError("Failed to load dinners: ${e.toString()}");
+      if (!_disposed) {
+        _setError("Failed to load dinners: ${e.toString()}");
+      }
     } finally {
-      _setLoading(false);
+      if (!_disposed) {
+        _setLoading(false);
+      }
     }
   }
 
   // Load ratable bookings
   Future<void> loadRatableBookings() async {
+    if (_disposed) return; // Add check
+
     try {
       final ratableBookings = await DinnerService.getRatableBookings();
+
+      if (_disposed) return; // Add check after async
+
       _ratableBookings = ratableBookings ?? [];
       _hasRatableBooking = _ratableBookings.isNotEmpty;
       notifyListeners();
     } catch (e) {
-      // Don't show error to user for rating bookings - just fall back to normal header
-      _ratableBookings = [];
-      _hasRatableBooking = false;
-      notifyListeners();
+      if (!_disposed) {
+        _ratableBookings = [];
+        _hasRatableBooking = false;
+        notifyListeners();
+      }
     }
   }
 
@@ -203,16 +218,19 @@ class HomeScreenController extends ChangeNotifier {
 
   // Private state management methods
   void _setLoading(bool loading) {
+    if (_disposed) return; // Add check
     _isLoading = loading;
     notifyListeners();
   }
 
   void _setError(String? error) {
+    if (_disposed) return; // Add check
     _errorMessage = error;
     notifyListeners();
   }
 
   void _setSubmittingRating(bool submitting) {
+    if (_disposed) return; // Add check
     _isSubmittingRating = submitting;
     notifyListeners();
   }
@@ -227,5 +245,11 @@ class HomeScreenController extends ChangeNotifier {
   // Get ratable booking for header
   Booking? get firstRatableBooking {
     return _ratableBookings.isNotEmpty ? _ratableBookings.first : null;
+  }
+
+  @override
+  void dispose() {
+    _disposed = true; // Set flag before disposing
+    super.dispose();
   }
 }

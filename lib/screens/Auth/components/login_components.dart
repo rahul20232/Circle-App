@@ -1,126 +1,125 @@
-// lib/screens/Auth/login_components.dart
+// lib/screens/Auth/components/login_components.dart
 import 'package:flutter/material.dart';
 import 'package:timeleft_clone/screens/Auth/controllers/login_controller.dart';
-import '../register_screen.dart';
 
 class LoginComponents {
   final LoginController controller;
-
   LoginComponents({required this.controller});
 
-  Widget buildHeader(BuildContext context) {
-    return Column(
-      children: [
-        Icon(
-          Icons.login,
-          size: 64,
-          color: Theme.of(context).primaryColor,
-        ),
-        SizedBox(height: 24),
-        Text(
-          'Welcome Back',
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey.shade800,
-          ),
-        ),
-        SizedBox(height: 8),
-        Text(
-          'Sign in to your account',
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.grey.shade600,
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget buildEmailInput() {
-    return _buildInputField(
-      label: 'Email',
-      controller: controller.emailController,
-      keyboardType: TextInputType.emailAddress,
-      hintText: 'Enter your email',
-      prefixIcon: Icons.email_outlined,
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(28),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: TextField(
+        controller: controller.emailController,
+        keyboardType: TextInputType.emailAddress,
+        style: TextStyle(fontSize: 16),
+        decoration: InputDecoration(
+          hintText: 'Email',
+          hintStyle: TextStyle(
+            color: Colors.grey.shade500,
+            fontSize: 16,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(28),
+            borderSide: BorderSide.none,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(28),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(28),
+            borderSide: BorderSide.none,
+          ),
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+        ),
+      ),
     );
   }
 
   Widget buildPasswordInput() {
-    return _buildInputField(
-      label: 'Password',
-      controller: controller.passwordController,
-      obscureText: true,
-      hintText: 'Enter your password',
-      prefixIcon: Icons.lock_outline,
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(28),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: TextField(
+        controller: controller.passwordController,
+        obscureText: !controller.isPasswordVisible,
+        style: TextStyle(fontSize: 16),
+        decoration: InputDecoration(
+          hintText: 'Password',
+          hintStyle: TextStyle(
+            color: Colors.grey.shade500,
+            fontSize: 16,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(28),
+            borderSide: BorderSide.none,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(28),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(28),
+            borderSide: BorderSide.none,
+          ),
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+          suffixIcon: GestureDetector(
+            onTap: controller.togglePasswordVisibility,
+            child: Padding(
+              padding: EdgeInsets.only(right: 12),
+              child: Icon(
+                controller.isPasswordVisible
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined,
+                color: Colors.grey.shade600,
+                size: 24,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
-  Widget _buildInputField({
-    required String label,
-    required TextEditingController controller,
-    TextInputType? keyboardType,
-    bool obscureText = false,
-    required String hintText,
-    required IconData prefixIcon,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 14,
-            color: Colors.grey.shade700,
-          ),
-        ),
-        SizedBox(height: 8),
-        TextField(
-          controller: controller,
-          keyboardType: keyboardType,
-          obscureText: obscureText,
-          decoration: InputDecoration(
-            hintText: hintText,
-            prefixIcon: Icon(prefixIcon, size: 20),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey.shade300),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey.shade300),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                  color: Colors
-                      .blue), // Using a fixed color since we don't have context here
-            ),
-            filled: true,
-            fillColor: Colors.grey.shade50,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget buildLoginButton(BuildContext context) {
+  Widget buildSignInButton(BuildContext context) {
     return SizedBox(
       width: double.infinity,
+      height: 56,
       child: ElevatedButton(
         onPressed: controller.isLoading
             ? null
             : () => controller.loginWithEmail(context),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Colors.black,
           foregroundColor: Colors.white,
-          padding: EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(28),
           ),
-          elevation: 2,
+          elevation: 0,
         ),
         child: controller.isLoading
             ? SizedBox(
@@ -132,7 +131,7 @@ class LoginComponents {
                 ),
               )
             : Text(
-                'Sign In',
+                'Sign in',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -145,67 +144,76 @@ class LoginComponents {
   Widget buildDivider() {
     return Row(
       children: [
-        Expanded(child: Divider()),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Text(
-            'or',
-            style: TextStyle(color: Colors.grey.shade500),
+        Expanded(
+          child: Container(
+            height: 1,
+            color: Colors.grey.shade400,
           ),
         ),
-        Expanded(child: Divider()),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            'OR CONTINUE WITH',
+            style: TextStyle(
+              color: Colors.grey.shade600,
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0.5,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            height: 1,
+            color: Colors.grey.shade400,
+          ),
+        ),
       ],
     );
   }
 
-  // Commented out Google Sign-In Button for future use
-  // Widget buildGoogleSignInButton(BuildContext context) {
-  //   return SizedBox(
-  //     width: double.infinity,
-  //     child: OutlinedButton.icon(
-  //       onPressed: controller.isLoading ? null : () => controller.signInWithGoogle(context),
-  //       icon: Icon(Icons.login, color: Colors.red.shade600),
-  //       label: Text(
-  //         'Continue with Google',
-  //         style: TextStyle(
-  //           color: Colors.red.shade600,
-  //           fontWeight: FontWeight.w500,
-  //           fontSize: 16,
-  //         ),
-  //       ),
-  //       style: OutlinedButton.styleFrom(
-  //         padding: EdgeInsets.symmetric(vertical: 16),
-  //         shape: RoundedRectangleBorder(
-  //           borderRadius: BorderRadius.circular(8),
-  //         ),
-  //         side: BorderSide(color: Colors.red.shade600),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  Widget buildRegisterButton(BuildContext context) {
+  Widget buildGoogleSignInButton(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: OutlinedButton(
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => RegisterScreen()),
-        ),
-        style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+      height: 56,
+      child: ElevatedButton.icon(
+        onPressed: controller.isLoading
+            ? null
+            : () => controller.signInWithGoogle(context),
+        icon: Container(
+          width: 20,
+          height: 20,
+          decoration: BoxDecoration(
+            color: Colors.red,
+            shape: BoxShape.circle,
           ),
-          side: BorderSide(color: Theme.of(context).primaryColor),
+          child: Center(
+            child: Text(
+              'G',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
         ),
-        child: Text(
-          'Create New Account',
+        label: Text(
+          'Sign in with Google',
           style: TextStyle(
             fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: Theme.of(context).primaryColor,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
           ),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(28),
+            side: BorderSide(color: Colors.grey.shade300, width: 1),
+          ),
+          elevation: 0,
         ),
       ),
     );

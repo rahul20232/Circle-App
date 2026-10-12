@@ -1,7 +1,7 @@
 // lib/controllers/booking_success_controller.dart
 import 'package:flutter/material.dart';
 import '../../../models/dinner_model.dart';
-import '../../../screens/bookings_screen.dart';
+import '../../Profile/Bookings/bookings_screen.dart';
 import '../../../screens/main_screen.dart';
 
 class BookingSuccessController {

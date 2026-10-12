@@ -1,5 +1,6 @@
 // lib/screens/Profile/EditProfile/edit_profile_controller.dart
 import 'dart:io';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:timeleft_clone/models/user_model.dart';
@@ -28,6 +29,7 @@ class EditProfileController {
   String? hasChildren;
   String? industry;
   String? country;
+  DateTime? birthday;
 
   EditProfileController({required this.onStateChanged});
 
@@ -66,6 +68,7 @@ class EditProfileController {
     hasChildren = user.childrenStatus ?? "";
     industry = user.industry ?? "";
     country = user.country ?? "";
+    birthday = user.birthdate;
 
     relController.text = relationshipStatus ?? "";
     childController.text = hasChildren ?? "";
@@ -219,6 +222,12 @@ class EditProfileController {
         return industry ?? "";
       case "What country are you from?":
         return country ?? "";
+      case "When is your birthday?":
+        // Format birthday as DD-MM-YYYY
+        if (birthday != null) {
+          return DateFormat('dd-MM-yyyy').format(birthday!);
+        }
+        return "";
       default:
         return "";
     }

@@ -6,36 +6,86 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timeleft_clone/models/dinner_model.dart';
 import 'package:timeleft_clone/models/notification_model.dart';
 import 'package:timeleft_clone/models/rating_model.dart';
+import 'package:timeleft_clone/services/core/api_cache.dart';
 import '../models/user_model.dart';
 import 'core/token_manager.dart';
 
 /// Pure API service - handles only HTTP requests and responses
 class ApiService {
-  static const String baseUrl = 'https://149a582761bc.ngrok-free.app/api';
+  static const String baseUrl =
+      'https://circle-app-production-09eb.up.railway.app/api';
+
+  static const Duration shortCacheDuration = Duration(seconds: 30);
+  static const Duration mediumCacheDuration = Duration(minutes: 5);
+  static const Duration longCacheDuration = Duration(minutes: 30);
 
   // ================== Auth Endpoints ==================
 
   static Future<String?> registerWithEmail(
-      String email, String password, String displayName) async {
+    String email,
+    String password,
+    String displayName, {
+    String? phoneNumber,
+    Map<String, String>? personalityData,
+    Map<String, String>? identityData,
+  }) async {
     try {
+      print("DEBUG: Starting registration for email: $email");
+      print("DEBUG: Display name: $displayName");
+      print("DEBUG: Phone number: $phoneNumber");
+      print("DEBUG: Has personality data: ${personalityData != null}");
+      print("DEBUG: Has identity data: ${identityData != null}");
+      print("DEBUG: Making request to: $baseUrl/auth/register");
+
+      final Map<String, dynamic> requestBody = {
+        'email': email,
+        'password': password,
+        'display_name': displayName,
+      };
+
+      // Add optional fields if provided
+      if (phoneNumber != null && phoneNumber.isNotEmpty) {
+        requestBody['phone_number'] = phoneNumber;
+      }
+
+      if (personalityData != null && personalityData.isNotEmpty) {
+        // Send Map directly - don't use jsonEncode()
+        requestBody['personality_data'] = personalityData;
+      }
+
+      if (identityData != null && identityData.isNotEmpty) {
+        // Send Map directly - don't use jsonEncode()
+        requestBody['identity_data'] = identityData;
+      }
+
+      print("DEBUG: Request body keys: ${requestBody.keys.toList()}");
+
       final response = await http.post(
         Uri.parse('$baseUrl/auth/register'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'email': email,
-          'password': password,
-          'display_name': displayName,
-        }),
+        body: jsonEncode(
+            requestBody), // This will properly encode the whole object
       );
+
+      print("DEBUG: Response status: ${response.statusCode}");
+      print("DEBUG: Response body: ${response.body}");
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         return data['message'];
       } else {
+        final errorData = jsonDecode(response.body);
         throw ApiException(
-            'Registration failed', response.statusCode, response.body);
+          'Registration failed',
+          response.statusCode,
+          errorData['detail'] ?? response.body,
+        );
       }
     } catch (e) {
+      print("DEBUG: Registration exception: $e");
+      if (e is ApiException) {
+        rethrow;
+      }
       throw ApiException('Registration error: $e');
     }
   }
@@ -66,7 +116,62 @@ class ApiService {
     }
   }
 
-  static Future<AppUser> authenticateWithGoogle(String email,
+  static Future<void> signUpWithGoogleAndOnboardingData({
+    required String email,
+    required String displayName,
+    required String googleId,
+    String? photoUrl,
+    required Map<String, String> personalityData,
+    required Map<String, String> identityData,
+  }) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/auth/google-signup'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'email': email,
+          'display_name': displayName,
+          'google_id': googleId,
+          'profile_picture_url': photoUrl,
+          'personality_data': personalityData,
+          'identity_data': identityData,
+        }),
+      );
+
+      print('DEBUG: Response status: ${response.statusCode}');
+      print('DEBUG: Response body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        print('DEBUG: Google signup successful');
+        return;
+      } else if (response.statusCode == 409) {
+        // Account already exists
+        final errorData = jsonDecode(response.body);
+        final errorMessage = errorData['error']?['message'] ??
+            errorData['detail'] ??
+            'ACCOUNT_EXISTS';
+        throw ApiException(
+          errorMessage,
+          response.statusCode,
+        );
+      } else {
+        final errorData = jsonDecode(response.body);
+        throw ApiException(
+          'Google sign up failed',
+          response.statusCode,
+          errorData['detail'] ?? response.body,
+        );
+      }
+    } catch (e) {
+      print('DEBUG: ApiService error: $e');
+      if (e is ApiException) {
+        rethrow;
+      }
+      throw ApiException('Google sign up error: $e');
+    }
+  }
+
+  static Future<LoginResult> authenticateWithGoogle(String email,
       String displayName, String googleId, String? photoUrl) async {
     try {
       final response = await http.post(
@@ -82,7 +187,12 @@ class ApiService {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        return AppUser.fromJson(data['user']);
+
+        // Return both user and token like the email login
+        return LoginResult(
+          user: AppUser.fromJson(data['user']),
+          token: data['access_token'] ?? data['token'],
+        );
       } else {
         throw ApiException(
             'Google auth failed', response.statusCode, response.body);
@@ -97,7 +207,7 @@ class ApiService {
     String? phoneNumber,
     String? profilePictureUrl,
   }) async {
-    final response = await _authenticatedPost('/auth/profile', {
+    final response = await _authenticatedPut('/auth/profile', {
       'display_name': displayName,
       'phone_number': phoneNumber,
     });
@@ -378,9 +488,20 @@ class ApiService {
     }
   }
 
-  static Future<Map<String, dynamic>> get(String endpoint) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('auth_token');
+  static Future<dynamic> get(String endpoint, {Duration? cacheDuration}) async {
+    final cacheKey = 'get_$endpoint';
+
+    // Try cache first if cacheDuration is specified
+    if (cacheDuration != null) {
+      final cached = ApiCache.get(cacheKey, cacheDuration);
+      if (cached != null) {
+        return cached;
+      }
+    }
+
+    // final prefs = await SharedPreferences.getInstance();
+    final token = await TokenManager.instance.getToken();
+    // final token = prefs.getString('auth_token');
 
     if (token == null) {
       throw Exception("No token found. User may not be logged in.");
@@ -396,7 +517,11 @@ class ApiService {
       );
 
       if (response.statusCode == 200) {
-        return jsonDecode(response.body);
+        final decodedResponse = jsonDecode(response.body);
+        if (cacheDuration != null) {
+          ApiCache.set(cacheKey, decodedResponse);
+        }
+        return decodedResponse; // Now this can be Map OR List
       } else {
         throw Exception("GET request failed: ${response.body}");
       }
@@ -426,6 +551,7 @@ class ApiService {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
+        _invalidateRelatedCache(endpoint);
         return jsonDecode(response.body);
       } else {
         throw Exception("POST request failed: ${response.body}");
@@ -454,6 +580,7 @@ class ApiService {
       );
 
       if (response.statusCode == 200 || response.statusCode == 204) {
+        _invalidateRelatedCache(endpoint);
         return jsonDecode(response.body);
       } else {
         throw Exception("DELETE request failed: ${response.body}");
@@ -462,6 +589,37 @@ class ApiService {
       print('DELETE request error: $e');
       rethrow;
     }
+  }
+
+  static void _invalidateRelatedCache(String endpoint) {
+    if (endpoint.contains('chat')) {
+      ApiCache.clear('get_/chat/');
+    }
+    if (endpoint.contains('notification')) {
+      // Clear both regular and unread-only notification caches
+      ApiCache.clear('get_/notifications/');
+      for (int i = 0; i < 10; i++) {
+        ApiCache.clear('get_/notifications/?skip=${i * 50}&limit=50');
+        ApiCache.clear(
+            'get_/notifications/?skip=${i * 50}&limit=50&unread_only=true');
+      }
+    }
+    if (endpoint.contains('dinner')) {
+      // Clear dinner-related caches
+      ApiCache.clear('get_/dinners/');
+      for (int i = 0; i < 5; i++) {
+        ApiCache.clear('get_/dinners/?skip=${i * 20}&limit=20');
+      }
+    }
+    if (endpoint.contains('connection')) {
+      // Clear connection-related caches
+      ApiCache.clear('get_/connections/');
+    }
+  }
+
+  /// Clear all cache (call after login/logout)
+  static void clearAllCache() {
+    ApiCache.clearAll();
   }
 }
 

@@ -1,6 +1,7 @@
 // lib/screens/Auth/register_controller.dart
 import 'package:flutter/material.dart';
 import '../../../services/auth_service.dart';
+import 'package:http/http.dart' as http;
 
 class RegisterController {
   final VoidCallback onStateChanged;
@@ -45,7 +46,22 @@ class RegisterController {
     );
   }
 
+  Future<void> testNetworkConnection() async {
+    try {
+      print("DEBUG: Testing network connection...");
+      final response = await http.get(
+        Uri.parse('https://circle-app-production-09eb.up.railway.app/health'),
+      );
+      print("DEBUG: Health check status: ${response.statusCode}");
+      print("DEBUG: Health check body: ${response.body}");
+    } catch (e) {
+      print("DEBUG: Network test failed: $e");
+    }
+  }
+
   Future<void> registerWithEmail(BuildContext context) async {
+    await testNetworkConnection();
+
     if (!_validateInputs()) {
       _showSnackBar(context, 'Please fill all fields');
       return;

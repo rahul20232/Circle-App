@@ -55,23 +55,44 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _components.buildInstructionText(),
-                const SizedBox(height: 20),
-                _components.buildEmailField(),
-                SizedBox(height: 575),
-                _components.buildSendResetButton(context),
-              ],
-            ),
-            if (_controller.isLinkSent)
-              _components.buildSuccessOverlay(context),
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Stack(
+            children: [
+              // Use a flexible layout instead of hardcoded spacing
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _components.buildInstructionText(),
+                  const SizedBox(height: 20),
+                  _components.buildEmailField(),
+
+                  // Use Spacer to push button to bottom
+                  const Spacer(),
+
+                  // Button at the bottom with safe area consideration
+                  Padding(
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom > 0
+                          ? MediaQuery.of(context).viewInsets.bottom + 20
+                          : 20,
+                    ),
+                    child: _components.buildSendResetButton(context),
+                  ),
+                ],
+              ),
+
+              // Success overlay - positioned responsively
+              if (_controller.isLinkSent)
+                Positioned(
+                  top: 140,
+                  left: 0,
+                  right: 0,
+                  child: _components.buildSuccessOverlay(context),
+                ),
+            ],
+          ),
         ),
       ),
     );

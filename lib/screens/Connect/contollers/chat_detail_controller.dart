@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import '../../../models/chat_model.dart';
 import '../../../services/chat_service.dart';
+import '../../../services/core/api_cache.dart';
 import '../../../services/auth_service.dart';
 
 class ChatDetailController extends ChangeNotifier {
@@ -63,21 +64,17 @@ class ChatDetailController extends ChangeNotifier {
   // Load messages
   Future<void> loadMessages(int chatId) async {
     try {
-      _setLoading(true);
       _setError(null);
 
+      // First call: may return cached data instantly
       final chatDetail = await ChatService.getChatDetail(chatId);
-
-      // Sort messages by sent time to ensure proper chronological order
       final sortedMessages = chatDetail.messages.toList()
         ..sort((a, b) => a.sentAt.compareTo(b.sentAt));
 
       _messages = sortedMessages;
       _setLoading(false);
-
       notifyListeners();
 
-      // Schedule scroll to bottom
       WidgetsBinding.instance.addPostFrameCallback((_) {
         scrollToBottom();
       });
@@ -189,6 +186,8 @@ class ChatDetailController extends ChangeNotifier {
     try {
       // Send via WebSocket
       _chatService.sendMessage(chatId, content);
+      // Invalidate cache so next open gets fresh messages
+      ApiCache.clear('get_/chat/$chatId?limit=50&offset=0');
     } catch (e) {
       // If sending fails, remove the optimistic message
       _messages.removeWhere((msg) => msg.id == optimisticMessage.id);

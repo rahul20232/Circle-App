@@ -5,7 +5,8 @@ import 'core/token_manager.dart';
 
 /// Service for managing user connections and friend requests
 class ConnectionService {
-  static const String baseUrl = 'https://149a582761bc.ngrok-free.app/api';
+  static const String baseUrl =
+      'https://circle-app-production-09eb.up.railway.app/api';
 
   // ================== Connection Requests ==================
 

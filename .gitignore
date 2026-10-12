@@ -77,3 +77,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Platform build output (Xcode build caches, etc.)
+ios/build/
+macos/build/
+android/build/
+
+# Local Claude Code session data (worktrees, settings)
+.claude/

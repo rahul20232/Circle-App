@@ -7,7 +7,7 @@ import '../../../services/api_service.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/dinner_service.dart';
 import '../../../screens/Home/booking_success_screen.dart';
-import '../../../screens/Profile/settings/subscription_screen.dart';
+import '../../Profile/Settings/subscription_screen.dart';
 import 'package:vibration/vibration.dart';
 
 class DinnerPreferencesController extends ChangeNotifier {

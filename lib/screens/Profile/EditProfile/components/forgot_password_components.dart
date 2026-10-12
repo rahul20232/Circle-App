@@ -37,129 +37,119 @@ class ForgotPasswordComponents {
         ),
         filled: true,
         fillColor: Colors.white,
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
     );
   }
 
   Widget buildSendResetButton(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor:
-            controller.isButtonEnabled ? Colors.black : Colors.grey.shade400,
-        foregroundColor: Colors.white,
-        shape: const StadiumBorder(),
-        minimumSize: const Size(double.infinity, 55),
-        elevation: controller.isButtonEnabled ? 2 : 0,
-      ),
-      onPressed: controller.isButtonEnabled
-          ? () => controller.sendPasswordResetEmail(context)
-          : null,
-      child: controller.isButtonEnabled
-          ? const Text(
-              "Send reset link",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: controller.isLinkSent
+              ? Colors.green
+              : (controller.isButtonEnabled
+                  ? Colors.black
+                  : Colors.grey.shade400),
+          foregroundColor: Colors.white,
+          shape: const StadiumBorder(),
+          minimumSize: const Size(double.infinity, 55),
+          elevation: controller.isButtonEnabled ? 2 : 0,
+        ),
+        onPressed: controller.isButtonEnabled && !controller.isLinkSent
+            ? () => controller.sendPasswordResetEmail(context)
+            : null,
+        child: controller.isSending
+            ? const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    "Sending...",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              )
+            : Text(
+                controller.isLinkSent ? "Sent" : "Send reset link",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            )
-          : Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
-                ),
-                SizedBox(width: 8),
-                Text(
-                  "Sending...",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
+      ),
     );
   }
 
   Widget buildSuccessOverlay(BuildContext context) {
-    return Positioned(
-      top: 140,
-      left: 0,
-      right: 0,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 20),
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          color: Colors.green.shade100,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.green.shade300),
-        ),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                const Icon(
-                  Icons.check_circle,
-                  color: Colors.green,
-                  size: 24,
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    "A reset link has been sent to your email.",
-                    style: TextStyle(
-                      color: Colors.green.shade800,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Colors.green.shade100,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.green.shade300),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.check_circle,
+                color: Colors.green,
+                size: 24,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  "A reset link has been sent to your email.",
+                  style: TextStyle(
+                    color: Colors.green.shade800,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-              ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 15),
+
+          // Only show Resend button, centered
+          Center(
+            child: TextButton(
+              onPressed: () => controller.retrySendEmail(context),
+              child: Text(
+                "Resend",
+                style: TextStyle(
+                  color: Colors.green.shade700,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
-            const SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                  onPressed: () => _navigateToResetScreen(context),
-                  child: Text(
-                    "Enter reset token manually",
-                    style: TextStyle(
-                      color: Colors.green.shade700,
-                      fontWeight: FontWeight.w600,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () => controller.retrySendEmail(context),
-                  child: Text(
-                    "Resend",
-                    style: TextStyle(
-                      color: Colors.green.shade700,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
   Widget buildHelpText() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Row(
         children: [
           Icon(
@@ -167,7 +157,7 @@ class ForgotPasswordComponents {
             color: Colors.grey.shade600,
             size: 16,
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Expanded(
             child: Text(
               "Check your spam folder if you don't receive the email within a few minutes.",
@@ -184,7 +174,7 @@ class ForgotPasswordComponents {
 
   Widget buildEmailPreview() {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.blue.shade50,
         borderRadius: BorderRadius.circular(8),
@@ -197,7 +187,7 @@ class ForgotPasswordComponents {
             color: Colors.blue.shade600,
             size: 20,
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Expanded(
             child: Text(
               "Reset link will be sent to:",
@@ -217,52 +207,8 @@ class ForgotPasswordComponents {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ResetPasswordScreen(),
+        builder: (context) => const ResetPasswordScreen(),
       ),
     );
   }
-
-  // Helper widget for building status messages
-  // Widget buildStatusMessage({
-  //   required String message,
-  //   required IconData icon,
-  //   required Color color,
-  //   VoidCallback? onAction,
-  //   String? actionText,
-  // }) {
-  //   return Container(
-  //     padding: const EdgeInsets.all(12),
-  //     decoration: BoxDecoration(
-  //       color: color.withOpacity(0.1),
-  //       borderRadius: BorderRadius.circular(8),
-  //       border: Border.all(color: color.withOpacity(0.3)),
-  //     ),
-  //     child: Row(
-  //       children: [
-  //         Icon(icon, color: color, size: 20),
-  //         SizedBox(width: 8),
-  //         Expanded(
-  //           child: Text(
-  //             message,
-  //             style: TextStyle(
-  //               color: color.shade700,
-  //               fontSize: 14,
-  //             ),
-  //           ),
-  //         ),
-  //         if (onAction != null && actionText != null)
-  //           TextButton(
-  //             onPressed: onAction,
-  //             child: Text(
-  //               actionText,
-  //               style: TextStyle(
-  //                 color: color.shade700,
-  //                 fontWeight: FontWeight.w600,
-  //               ),
-  //             ),
-  //           ),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

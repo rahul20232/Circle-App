@@ -8,24 +8,39 @@ import 'api_service.dart';
 
 /// Service for dinner-related operations
 class DinnerService {
-  static const String baseUrl = 'https://149a582761bc.ngrok-free.app/api';
+  static const String baseUrl =
+      'https://circle-app-production-09eb.up.railway.app/api';
 
   // ================== Dinner Queries ==================
 
+  // static Future<List<Dinner>> getAvailableDinners() async {
+  //   try {
+  //     final response = await http.get(
+  //       Uri.parse('$baseUrl/dinners/'),
+  //       headers: {'Content-Type': 'application/json'},
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       final List<dynamic> data = jsonDecode(response.body);
+  //       return data.map((json) => Dinner.fromJson(json)).toList();
+  //     } else {
+  //       throw DinnerException(
+  //           'Failed to fetch dinners', response.statusCode, response.body);
+  //     }
+  //   } catch (e) {
+  //     throw DinnerException('Error fetching dinners: $e');
+  //   }
+  // }
+
   static Future<List<Dinner>> getAvailableDinners() async {
     try {
-      final response = await http.get(
-        Uri.parse('$baseUrl/dinners/'),
-        headers: {'Content-Type': 'application/json'},
-      );
+      // Use cached API call
+      final data = await ApiService.get('/dinners/',
+          cacheDuration: ApiService.mediumCacheDuration);
 
-      if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body);
-        return data.map((json) => Dinner.fromJson(json)).toList();
-      } else {
-        throw DinnerException(
-            'Failed to fetch dinners', response.statusCode, response.body);
-      }
+      return (data as List<dynamic>)
+          .map((json) => Dinner.fromJson(json))
+          .toList();
     } catch (e) {
       throw DinnerException('Error fetching dinners: $e');
     }

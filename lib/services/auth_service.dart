@@ -1,8 +1,10 @@
 // lib/services/auth_service.dart
+import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import '../models/user_model.dart';
 import 'api_service.dart';
 import 'core/token_manager.dart';
@@ -43,9 +45,22 @@ class AuthService {
   // ================== Authentication Methods ==================
 
   static Future<String?> registerWithEmail(
-      String email, String password, String displayName) async {
+    String email,
+    String password,
+    String displayName, {
+    String? phoneNumber,
+    Map<String, String>? personalityData,
+    Map<String, String>? identityData,
+  }) async {
     try {
-      return await ApiService.registerWithEmail(email, password, displayName);
+      return await ApiService.registerWithEmail(
+        email,
+        password,
+        displayName,
+        phoneNumber: phoneNumber,
+        personalityData: personalityData,
+        identityData: identityData,
+      );
     } catch (e) {
       throw AuthException('Registration failed: ${e.toString()}');
     }
@@ -65,13 +80,68 @@ class AuthService {
     }
   }
 
+  static Future<bool> checkUserExists(String email) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+            '${ApiService.baseUrl}/auth/check-user-exists?email=${Uri.encodeComponent(email)}'),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data['exists'] == true;
+      } else {
+        throw Exception('Failed to check user existence');
+      }
+    } catch (e) {
+      print('Error checking user existence: $e');
+      throw Exception('Failed to check if user exists');
+    }
+  }
+
+  static Future<void> signUpWithGoogleAndOnboardingData({
+    required String email,
+    required String displayName,
+    required String googleId,
+    String? photoUrl,
+    required Map<String, String> personalityData,
+    required Map<String, String> identityData,
+  }) async {
+    try {
+      print(
+          'DEBUG: AuthService - calling API with personality data size: ${personalityData.length}');
+      print(
+          'DEBUG: AuthService - calling API with identity data size: ${identityData.length}');
+
+      await ApiService.signUpWithGoogleAndOnboardingData(
+        email: email,
+        displayName: displayName,
+        googleId: googleId,
+        photoUrl: photoUrl,
+        personalityData: personalityData,
+        identityData: identityData,
+      );
+
+      print('DEBUG: AuthService - API call completed successfully');
+    } catch (e) {
+      print('DEBUG: AuthService error: $e');
+      throw AuthException(
+          'Google sign up with onboarding data failed: ${e.toString()}');
+    }
+  }
+
   static Future<AppUser> authenticateWithGoogle(String email,
       String displayName, String googleId, String? photoUrl) async {
     try {
-      final user = await ApiService.authenticateWithGoogle(
+      final result = await ApiService.authenticateWithGoogle(
           email, displayName, googleId, photoUrl);
-      await _userManager.updateUser(user);
-      return user;
+
+      // Save token and user state (similar to email login)
+      await _tokenManager.saveToken(result.token);
+      await _userManager.updateUser(result.user);
+
+      return result.user;
     } catch (e) {
       throw AuthException('Google authentication failed: ${e.toString()}');
     }

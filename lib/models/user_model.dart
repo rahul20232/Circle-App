@@ -11,6 +11,7 @@ class AppUser {
   final String? childrenStatus; // Fixed typo: was "chidrenStatus"
   final String? industry;
   final String? country;
+  final DateTime? birthdate;
 
   // Preferences
   final List<String>? dinnerLanguages;
@@ -45,6 +46,7 @@ class AppUser {
     this.childrenStatus, // Fixed typo
     this.industry,
     this.country,
+    this.birthdate,
     this.phoneNumber,
     this.profilePictureUrl,
     this.dinnerLanguages,
@@ -112,6 +114,9 @@ class AppUser {
       childrenStatus: json['children_status'], // Fixed typo
       industry: json['industry'],
       country: json['country'],
+      birthdate: json['birth_date'] != null
+          ? DateTime.tryParse(json['birth_date'])
+          : null,
 
       // Preferences
       dinnerLanguages: dinnerLanguages,
@@ -151,9 +156,10 @@ class AppUser {
       'phoneNumber': phoneNumber,
       'profilePictureUrl': profilePictureUrl,
       'relationship_status': relationshipStatus,
-      'children_status': childrenStatus, // Fixed typo
+      'children_status': childrenStatus,
       'industry': industry,
       'country': country,
+      'birth_date': birthdate?.toIso8601String(),
       'dinner_languages': dinnerLanguages,
       'dinner_budget': dinnerBudget,
       'has_dietary_restrictions': hasDietaryRestrictions,

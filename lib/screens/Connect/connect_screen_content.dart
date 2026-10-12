@@ -313,6 +313,7 @@ class ConnectScreenContentState extends State<ConnectScreenContent>
       appBar: AppBar(
         backgroundColor: Color(0xFFFEF1DE),
         elevation: 0,
+        automaticallyImplyLeading: false,
         title: Text(
           'Connect',
           style: TextStyle(

@@ -7,8 +7,10 @@ import '../models/chat_model.dart';
 import 'api_service.dart';
 
 class ChatService {
-  static const String baseUrl = 'https://149a582761bc.ngrok-free.app/api';
-  static const String wsUrl = 'wss://149a582761bc.ngrok-free.app/api';
+  static const String baseUrl =
+      'https://circle-app-production-09eb.up.railway.app/api';
+  static const String wsUrl =
+      'wss://circle-app-production-09eb.up.railway.app/api';
 
   WebSocketChannel? _channel;
   StreamController<WebSocketMessage>? _messageController;
@@ -220,15 +222,47 @@ class ChatService {
     }
   }
 
-  // Get all chats for current user
+  // static Future<List<Chat>> getUserChats() async {
+  //   try {
+  //     final response = await ApiService.get('/chat/');
+
+  //     // Now response can be either List or Map
+  //     if (response is List<dynamic>) {
+  //       return response
+  //           .map((chatJson) => Chat.fromJson(chatJson as Map<String, dynamic>))
+  //           .toList();
+  //     } else if (response is Map<String, dynamic>) {
+  //       // Handle wrapped response if backend changes
+  //       final List<dynamic> chatsList = response['data'] as List<dynamic>;
+  //       return chatsList
+  //           .map((chatJson) => Chat.fromJson(chatJson as Map<String, dynamic>))
+  //           .toList();
+  //     } else {
+  //       throw Exception('Unexpected response format');
+  //     }
+  //   } catch (e) {
+  //     print('Error getting user chats: $e');
+  //     throw e;
+  //   }
+  // }
+
   static Future<List<Chat>> getUserChats() async {
     try {
-      final response = await ApiService.get('/chat/');
-      if (response['success']) {
-        final List<dynamic> chatsJson = response['data'];
-        return chatsJson.map((json) => Chat.fromJson(json)).toList();
+      // Use cached API call instead of direct HTTP
+      final response = await ApiService.get('/chat/',
+          cacheDuration: ApiService.shortCacheDuration);
+
+      if (response is List<dynamic>) {
+        return response
+            .map((chatJson) => Chat.fromJson(chatJson as Map<String, dynamic>))
+            .toList();
+      } else if (response is Map<String, dynamic>) {
+        final List<dynamic> chatsList = response['data'] as List<dynamic>;
+        return chatsList
+            .map((chatJson) => Chat.fromJson(chatJson as Map<String, dynamic>))
+            .toList();
       } else {
-        throw Exception(response['message'] ?? 'Failed to get chats');
+        throw Exception('Unexpected response format');
       }
     } catch (e) {
       print('Error getting user chats: $e');
@@ -245,11 +279,7 @@ class ChatService {
       );
 
       final response = await ApiService.post('/chat/start', request.toJson());
-      if (response['success']) {
-        return Chat.fromJson(response['data']);
-      } else {
-        throw Exception(response['message'] ?? 'Failed to start chat');
-      }
+      return Chat.fromJson(response);
     } catch (e) {
       print('Error starting chat: $e');
       throw e;
@@ -260,13 +290,11 @@ class ChatService {
   static Future<ChatDetail> getChatDetail(int chatId,
       {int limit = 50, int offset = 0}) async {
     try {
-      final response =
-          await ApiService.get('/chat/$chatId?limit=$limit&offset=$offset');
-      if (response['success']) {
-        return ChatDetail.fromJson(response['data']);
-      } else {
-        throw Exception(response['message'] ?? 'Failed to get chat details');
-      }
+      final response = await ApiService.get(
+        '/chat/$chatId?limit=$limit&offset=$offset',
+        cacheDuration: ApiService.shortCacheDuration,
+      );
+      return ChatDetail.fromJson(response);
     } catch (e) {
       print('Error getting chat details: $e');
       throw e;
@@ -279,12 +307,8 @@ class ChatService {
     try {
       final response =
           await ApiService.get('/chat/$chatId?limit=$limit&offset=$offset');
-      if (response['success']) {
-        final chatDetail = ChatDetail.fromJson(response['data']);
-        return chatDetail.messages;
-      } else {
-        throw Exception(response['message'] ?? 'Failed to load more messages');
-      }
+      final chatDetail = ChatDetail.fromJson(response);
+      return chatDetail.messages;
     } catch (e) {
       print('Error loading more messages: $e');
       throw e;

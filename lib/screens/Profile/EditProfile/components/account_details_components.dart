@@ -10,7 +10,7 @@ class AccountDetailsComponents {
   Widget buildQuestionText(String question) {
     return Text(
       question,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.bold,
       ),
@@ -18,7 +18,7 @@ class AccountDetailsComponents {
     );
   }
 
-  Widget buildInputField(TextInputType inputType) {
+  Widget buildInputField(TextInputType inputType, {String? prefixText}) {
     return TextField(
       controller: controller.textController,
       keyboardType: inputType,
@@ -32,11 +32,25 @@ class AccountDetailsComponents {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.black, width: 2),
+          borderSide: const BorderSide(color: Colors.black, width: 2),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.red.shade300),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Colors.red, width: 2),
         ),
         filled: true,
         fillColor: Colors.white,
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        prefixText: prefixText,
+        prefixStyle: TextStyle(
+          color: Colors.grey.shade600,
+          fontSize: 16,
+        ),
       ),
     );
   }
@@ -46,22 +60,25 @@ class AccountDetailsComponents {
     String buttonText, {
     required VoidCallback onPressed,
   }) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor:
-            controller.isButtonEnabled ? Colors.black : Colors.grey.shade400,
-        foregroundColor: Colors.white,
-        shape: StadiumBorder(),
-        minimumSize: Size(double.infinity, 55),
-        elevation: controller.isButtonEnabled ? 2 : 0,
-      ),
-      onPressed: controller.isButtonEnabled ? onPressed : null,
-      child: Text(
-        buttonText,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor:
+              controller.isButtonEnabled ? Colors.black : Colors.grey.shade400,
+          foregroundColor: Colors.white,
+          shape: const StadiumBorder(),
+          minimumSize: const Size(double.infinity, 55),
+          elevation: controller.isButtonEnabled ? 2 : 0,
+        ),
+        onPressed: controller.isButtonEnabled ? onPressed : null,
+        child: Text(
+          buttonText,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );
@@ -69,7 +86,7 @@ class AccountDetailsComponents {
 
   Widget buildValidationMessage(String message, {bool isError = true}) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         color: isError ? Colors.red.shade50 : Colors.green.shade50,
         borderRadius: BorderRadius.circular(8),
@@ -84,7 +101,7 @@ class AccountDetailsComponents {
             color: isError ? Colors.red.shade600 : Colors.green.shade600,
             size: 20,
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Expanded(
             child: Text(
               message,
@@ -103,13 +120,20 @@ class AccountDetailsComponents {
     TextInputType inputType, {
     String? validationMessage,
     bool showValidation = false,
+    String? prefixText,
+    String? helpText,
   }) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        buildInputField(inputType),
+        buildInputField(inputType, prefixText: prefixText),
         if (showValidation && validationMessage != null) ...[
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           buildValidationMessage(validationMessage),
+        ],
+        if (helpText != null) ...[
+          const SizedBox(height: 8),
+          buildHelpText(helpText),
         ],
       ],
     );
@@ -117,7 +141,7 @@ class AccountDetailsComponents {
 
   Widget buildHelpText(String helpText) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Row(
         children: [
           Icon(
@@ -125,7 +149,7 @@ class AccountDetailsComponents {
             color: Colors.grey.shade600,
             size: 16,
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Expanded(
             child: Text(
               helpText,
@@ -136,6 +160,76 @@ class AccountDetailsComponents {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  // New responsive layout widget
+  Widget buildResponsiveLayout({
+    required BuildContext context,
+    required String question,
+    required TextInputType inputType,
+    required String buttonText,
+    required VoidCallback onButtonPressed,
+    String? validationMessage,
+    String? helpText,
+    String? prefixText,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        buildQuestionText(question),
+        const SizedBox(height: 20),
+
+        buildInputWithValidation(
+          inputType,
+          validationMessage: validationMessage,
+          showValidation: validationMessage != null,
+          prefixText: prefixText,
+          helpText: helpText,
+        ),
+
+        const Spacer(),
+
+        // Button with keyboard-aware padding
+        Padding(
+          padding: const EdgeInsets.only(
+            bottom: 20,
+          ),
+          child: buildConfirmButton(
+            context,
+            buttonText,
+            onPressed: onButtonPressed,
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Widget for building the entire screen with SafeArea
+  Widget buildScreenLayout({
+    required BuildContext context,
+    required String question,
+    required TextInputType inputType,
+    required String buttonText,
+    required VoidCallback onButtonPressed,
+    String? validationMessage,
+    String? helpText,
+    String? prefixText,
+  }) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: buildResponsiveLayout(
+          context: context,
+          question: question,
+          inputType: inputType,
+          buttonText: buttonText,
+          onButtonPressed: onButtonPressed,
+          validationMessage: validationMessage,
+          helpText: helpText,
+          prefixText: prefixText,
+        ),
       ),
     );
   }

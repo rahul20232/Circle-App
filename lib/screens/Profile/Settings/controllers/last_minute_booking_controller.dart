@@ -87,8 +87,18 @@ class LastMinuteBookingController {
   }
 
   Future<void> saveAndNavigateBack(BuildContext context) async {
-    await saveSettings(context);
+    if (!context.mounted) return;
+
+    // Navigate back immediately (optimistic update)
     Navigator.pop(context);
+
+    // Save in background
+    try {
+      await saveSettings(context);
+    } catch (e) {
+      print('Error saving settings: $e');
+      // Could show a global notification here if you have that setup
+    }
   }
 
   void _showSnackBar(BuildContext context, String message,

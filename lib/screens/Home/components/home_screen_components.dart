@@ -332,7 +332,7 @@ class HomeScreenComponents {
   }) {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.only(top: 20, bottom: 20),
+      margin: const EdgeInsets.only(top: 0, bottom: 20),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -389,6 +389,7 @@ class HomeScreenComponents {
   static Widget buildContentContainer({
     required Widget child,
     required ScrollController scrollController,
+    Widget? stickyFooter,
   }) {
     return Container(
       decoration: const BoxDecoration(
@@ -398,12 +399,23 @@ class HomeScreenComponents {
           topRight: Radius.circular(24),
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(30),
-        child: SingleChildScrollView(
-          controller: scrollController,
-          child: child,
-        ),
+      child: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+              child: SingleChildScrollView(
+                controller: scrollController,
+                child: child,
+              ),
+            ),
+          ),
+          if (stickyFooter != null)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
+              child: stickyFooter,
+            ),
+        ],
       ),
     );
   }
@@ -425,6 +437,13 @@ class HomeScreenComponents {
   }) {
     return buildContentContainer(
       scrollController: scrollController,
+      stickyFooter: (!isLoading && errorMessage == null && availableDinners.isNotEmpty)
+          ? buildBookButton(
+              canBook: canBook,
+              buttonText: bookButtonText,
+              onPressed: onBookPressed,
+            )
+          : null,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -441,18 +460,13 @@ class HomeScreenComponents {
               errorMessage: errorMessage,
               onRetry: onRetry,
             )
-          else if (availableDinners.isNotEmpty) ...[
+          else if (availableDinners.isNotEmpty)
             buildDinnerList(
               dinners: availableDinners,
               selectedDinner: selectedDinner,
               onDinnerSelected: onDinnerSelected,
-            ),
-            buildBookButton(
-              canBook: canBook,
-              buttonText: bookButtonText,
-              onPressed: onBookPressed,
-            ),
-          ] else
+            )
+          else
             buildEmptyState(),
         ],
       ),
@@ -468,9 +482,11 @@ class HomeScreenComponents {
     if (!hasRatableBooking || hasAvailableDinners) {
       return Expanded(
         child: DraggableScrollableSheet(
-          initialChildSize: hasRatableBooking ? 0.4 : 0.7,
+          initialChildSize: hasRatableBooking ? 0.5 : 0.85,
+          minChildSize: 0.5,
+          maxChildSize: 0.95,
           snap: true,
-          snapSizes: const [0.3],
+          snapSizes: const [0.85, 0.95],
           builder: (context, scrollController) {
             return child;
           },
